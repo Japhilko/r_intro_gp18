@@ -327,11 +327,11 @@ str(b) # b is a numeric vector
 ```
 
 
-## Functions in base-package
+## Funktionen in base-Paket
 
 |Function |Meaning            |Example   |
 |:--------|:------------------|:---------|
-|str()    |Object structure   |str(b) |
+|str()    |Object structure   |str(b)    |
 |max()    |Maximum            |max(b)    |
 |min()    |Minimum            |min(b)    |
 |sd()     |Standard deviation |sd(b)     |
@@ -339,13 +339,13 @@ str(b) # b is a numeric vector
 |mean()   |Mean               |mean(b)   |
 |median() |Median             |median(b) |
 
-These functions only need one argument.
+Diese Funktionen benötigen nur ein Argument.
 
-## Functions with more arguments
+## Funktionen mit mehr Argumenten
 
-### Other functions need more arguments:
+### Andere Funktionen benötigen mehr Argumente:
 
-|Argument   |Meaning           |Example        |
+|Argument   |Bedeutung         |Beispiel       |
 |:----------|:-----------------|:--------------|
 |quantile() |90 % Quantile     |quantile(b,.9) |
 |sample()   |Draw a sample     |sample(b,1)    |
@@ -357,7 +357,7 @@ quantile(b,.9)
 sample(b,1) 
 ```
 
-### Examples - Functions with more than one argument
+### Beispiele - Funktionen mit mehr als einem Argument
 
 ```{r}
 max(b)
@@ -366,7 +366,7 @@ sd(b)
 var(b)
 ```
 
-### Functions with one argument
+### Funktionen mit einem Argument
 
 ```{r}
 mean(b)
