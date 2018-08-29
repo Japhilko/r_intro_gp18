@@ -21,6 +21,16 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,warning = F,message = F)
 GESIS <- T
+library(magrittr)
+library(kableExtra)
+library(dplyr)
+library(flextable)
+```
+
+```{r,eval=F}
+install.packages("kableExtra")
+# https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
+install.packages("flextable")
 ```
 
 
@@ -218,10 +228,20 @@ misscodes <- c(-11,-22,-33,-44,-55,-66,-77,-88,-99,-111)
 missvallab <- c("Not invited","Not in panel","Unit nonresponse","Missing by m.o.p.","Missing by technical error","Missing by design","Not reached","Missing by filter","Item nonresponse","Ambiguous answer")
 missremark <- c("only in recruitment waves as long as the respective profile survey is not yet finished","not willing to join the panel after recruitment interview or actively signing off the panel","invited but not participating in corresponding wave","mode of participation (m.o.p.): online or offline","e.g. questionnaire programming error","experimental variation","only in online mode: panelist has not seen the item","filtered item","due to nonresponse by the respondent","ambiguous answers in questionnaire")
 
-kable(data.frame(Value=misscodes,"Value label"=missvallab,Remark=missremark),row.names = F)
+missremark2 <- c("only in recruitment waves - when profile survey not finished","not willing to join the panel after recruitment or signing off","invited but not participating in corresponding wave","mode of participation (m.o.p.): online or offline","e.g. questionnaire programming error","experimental variation","only in online mode: panelist has not seen the item","filtered item","due to nonresponse by the respondent","ambiguous answers in questionnaire")
+
+df <- data.frame(Value=misscodes,"Value label"=missvallab,Remark=missremark2)
 ```
 
+```{r,eval=T}
+kable(df,row.names = F)   %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), font_size = 7)
+```
 
+```{r,eval=F}
+df %>% regulartable() %>% autofit() %>% 
+width(j=~Value,width=1) %>% width(j=~Value.label,width=1)%>% width(j=~Remark,width=1)
+```
 
 <!--
 ## Variablennamen im GESIS Panel
@@ -244,12 +264,17 @@ names(att_dat)
 ```
 -->
 
+```{r}
+xname <- "a11c019a"
+ind_xname <- which(att_dat$names==xname)
+```
 
-## Satisfaction life in place of residence (a11c019a)
+
+
+## `r att_dat$var.labels[ind_xname]` (`r xname`)
 
 ```{r,eval=T,echo=F}
 library(lattice)
-xname <- "a11c019a"
 # att_dat$var.labels[which(att_dat$names==xname)]
 barchart(table(dat$a11c019a),col=c("#228B22"))
 ```
@@ -260,12 +285,12 @@ lname <- att_dat$var.labels[which(att_dat$names==xname)]
 ## `r lname`
 ```
 
-## The codebook
+## Das Codebuch
 
-- You can get the codebook [**here**](https://www.gesis.org/gesis-panel/documentation/)
+- Das Codebuch kann man [**hier**](https://www.gesis.org/gesis-panel/documentation/) bekommen.
 
 ![](figure/cdb_bbak102a.PNG)
 
-##  A3A Exercise - Downloading the GESIS Panel data
+##  A3A Aufgabe - Download der GESIS Panel Daten
 
-- Please download `.csv`, `.sav` and `**14.dta` of the GESIS Panel Campus file.
+- Die `**14.dta` Datei des GESIS Panel Campus file herunterladen.

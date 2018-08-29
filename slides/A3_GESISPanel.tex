@@ -35,12 +35,6 @@
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{longtable,booktabs}
-\usepackage{caption}
-% These lines are needed to make table captions work with longtable:
-\makeatletter
-\def\fnum@table{\tablename~\thetable}
-\makeatother
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -157,24 +151,23 @@
   baai124a - Schwierigkeit Fragebogen zu verstehen
 \end{itemize}
 
-\begin{longtable}[]{@{}llll@{}}
-\toprule
-bbzc022a & bfam051a & bfzi023a & baai124a\tabularnewline
-\midrule
-\endhead
-Täglich weniger als eine Stunde & Eher selten & 7 Stimme voll und ganz
-zu & Etwas schwierig\tabularnewline
-Täglich weniger als eine Stunde & Eher oft & 6 & Überhaupt nicht
-schwierig\tabularnewline
-Täglich weniger als eine Stunde & Eher selten & 2 & Etwas
-schwierig\tabularnewline
-Einmal im Monat oder seltener & Eher oft & 7 Stimme voll und ganz zu &
-Überhaupt nicht schwierig\tabularnewline
-Täglich weniger als eine Stunde & Eher oft & 3 & Überhaupt nicht
-schwierig\tabularnewline
-Einmal in der Woche & Not reached & 4 & Etwas schwierig\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{tabular}{l|l|l|l}
+\hline
+bbzc022a & bfam051a & bfzi023a & baai124a\\
+\hline
+Täglich weniger als eine Stunde & Eher selten & 7 Stimme voll und ganz zu & Etwas schwierig\\
+\hline
+Täglich weniger als eine Stunde & Eher oft & 6 & Überhaupt nicht schwierig\\
+\hline
+Täglich weniger als eine Stunde & Eher selten & 2 & Etwas schwierig\\
+\hline
+Einmal im Monat oder seltener & Eher oft & 7 Stimme voll und ganz zu & Überhaupt nicht schwierig\\
+\hline
+Täglich weniger als eine Stunde & Eher oft & 3 & Überhaupt nicht schwierig\\
+\hline
+Einmal in der Woche & Not reached & 4 & Etwas schwierig\\
+\hline
+\end{tabular}
 
 \end{frame}
 
@@ -192,19 +185,23 @@ Einmal in der Woche & Not reached & 4 & Etwas schwierig\tabularnewline
   Die ersten beiden Buchstaben enthalten die Welle:
 \end{itemize}
 
-\begin{longtable}[]{@{}rll@{}}
-\toprule
-year & waves & numbers\tabularnewline
-\midrule
-\endhead
-2013 & aa,ab,ac,ad,ae,af & 1-6\tabularnewline
-2014 & ba,bb,bc,bd,be,bf & 7-12\tabularnewline
-2015 & ca,cb,cc,cd,ce,cf & 13-18\tabularnewline
-2016 & da,db,dc,dd,de,df & 19-24\tabularnewline
-2017 & ea,eb,ec,ed,ee,ef & 25-30\tabularnewline
-2018 & fa,fb,fc,fd,fe,ff & 31-36\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{tabular}{r|l|l}
+\hline
+year & waves & numbers\\
+\hline
+2013 & aa,ab,ac,ad,ae,af & 1-6\\
+\hline
+2014 & ba,bb,bc,bd,be,bf & 7-12\\
+\hline
+2015 & ca,cb,cc,cd,ce,cf & 13-18\\
+\hline
+2016 & da,db,dc,dd,de,df & 19-24\\
+\hline
+2017 & ea,eb,ec,ed,ee,ef & 25-30\\
+\hline
+2018 & fa,fb,fc,fd,fe,ff & 31-36\\
+\hline
+\end{tabular}
 
 \begin{itemize}
 \tightlist
@@ -293,60 +290,64 @@ year & waves & numbers\tabularnewline
 
 \begin{frame}{Die Missing Codes im GESIS Panel}
 
-\begin{longtable}[]{@{}rll@{}}
-\toprule
-Value & Value.label & Remark\tabularnewline
-\midrule
-\endhead
--11 & Not invited & only in recruitment waves as long as the respective
-profile survey is not yet finished\tabularnewline
--22 & Not in panel & not willing to join the panel after recruitment
-interview or actively signing off the panel\tabularnewline
--33 & Unit nonresponse & invited but not participating in corresponding
-wave\tabularnewline
--44 & Missing by m.o.p. & mode of participation (m.o.p.): online or
-offline\tabularnewline
--55 & Missing by technical error & e.g.~questionnaire programming
-error\tabularnewline
--66 & Missing by design & experimental variation\tabularnewline
--77 & Not reached & only in online mode: panelist has not seen the
-item\tabularnewline
--88 & Missing by filter & filtered item\tabularnewline
--99 & Item nonresponse & due to nonresponse by the
-respondent\tabularnewline
--111 & Ambiguous answer & ambiguous answers in
-questionnaire\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{table}[H]
+\centering\begingroup\fontsize{7}{9}\selectfont
+
+\begin{tabular}{r|l|l}
+\hline
+Value & Value.label & Remark\\
+\hline
+-11 & Not invited & only in recruitment waves - when profile survey not finished\\
+\hline
+-22 & Not in panel & not willing to join the panel after recruitment or signing off\\
+\hline
+-33 & Unit nonresponse & invited but not participating in corresponding wave\\
+\hline
+-44 & Missing by m.o.p. & mode of participation (m.o.p.): online or offline\\
+\hline
+-55 & Missing by technical error & e.g. questionnaire programming error\\
+\hline
+-66 & Missing by design & experimental variation\\
+\hline
+-77 & Not reached & only in online mode: panelist has not seen the item\\
+\hline
+-88 & Missing by filter & filtered item\\
+\hline
+-99 & Item nonresponse & due to nonresponse by the respondent\\
+\hline
+-111 & Ambiguous answer & ambiguous answers in questionnaire\\
+\hline
+\end{tabular}\endgroup{}
+\end{table}
 
 \end{frame}
 
-\begin{frame}{Satisfaction life in place of residence (a11c019a)}
+\begin{frame}{Zufriedenheit Leben in Wohnort (a11c019a)}
 
-\includegraphics{A3_GESISPanel_files/figure-beamer/unnamed-chunk-17-1.pdf}
+\includegraphics{A3_GESISPanel_files/figure-beamer/unnamed-chunk-21-1.pdf}
 
 \end{frame}
 
-\begin{frame}{The codebook}
+\begin{frame}{Das Codebuch}
 
 \begin{itemize}
 \tightlist
 \item
-  You can get the codebook
-  \href{https://www.gesis.org/gesis-panel/documentation/}{\textbf{here}}
+  Das Codebuch kann man
+  \href{https://www.gesis.org/gesis-panel/documentation/}{\textbf{hier}}
+  bekommen.
 \end{itemize}
 
 \includegraphics{figure/cdb_bbak102a.PNG}
 
 \end{frame}
 
-\begin{frame}[fragile]{A3A Exercise - Downloading the GESIS Panel data}
+\begin{frame}[fragile]{A3A Aufgabe - Download der GESIS Panel Daten}
 
 \begin{itemize}
 \tightlist
 \item
-  Please download \texttt{.csv}, \texttt{.sav} and \texttt{**14.dta} of
-  the GESIS Panel Campus file.
+  Die \texttt{**14.dta} Datei des GESIS Panel Campus file herunterladen.
 \end{itemize}
 
 \end{frame}
