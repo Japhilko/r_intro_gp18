@@ -1,0 +1,46 @@
+---
+title: "Das GESIS Panel kennen lernen"
+author: "Jan-Philipp Kolb"
+date: "30 August 2018"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## 
+
+```{r}
+library(gpdataprocessing)
+```
+
+```{r}
+wave <- "ee"
+```
+
+## Den aktuellen Wellenpfad ermitteln:
+
+```{r}
+  # general path:
+data_path_g <- "J:/Work/GESISPanel_DATA/01_post_processing/c01/_#awave#__#year#/_#wave#/02_master/data/STATA14/"
+```
+
+
+```{r}
+  # wave specific path:
+data_path <- getrightpath(data_path_g,wave)
+```
+
+```{r}
+setwd(data_path)
+dirnamen <- dir()
+dirnamen <- dirnamen[grep(".dta",dirnamen)]
+dat <- readstata13::read.dta13(dirnamen[which.min(nchar(dirnamen))])
+```
+
+
+```{r}
+dat <- apply(dat,2,transform_miss)
+```
+

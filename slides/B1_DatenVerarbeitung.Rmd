@@ -1,0 +1,828 @@
+---
+title: "B1 - Data Processing"
+author: "Kolb"
+date: "07 August 2018"
+output:
+  beamer_presentation:
+    colortheme: beaver
+    fig_caption: no
+    fonttheme: structurebold
+    highlight: tango
+    theme: CambridgeUS
+  pdf_document:
+    toc: yes
+  html_document:
+    keep_md: yes
+  slidy_presentation:
+    keep_md: yes
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = T,message=F,warning = F,cache=T)
+showSolution=F
+```
+
+
+```{r,echo=F,eval=F}
+library("readstata13")
+dat <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
+dat <- dat[1:100,]
+save(dat,file="../data/ZA5666_v1-0-0_medium.RData")
+
+datf <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
+                   convert.factors = F)
+
+datf <- datf[1:100,]
+save(datf,file="../data/ZA5666_v1-0-0_medium_fac.RData")
+```
+
+## Inhalt dieses Abschnitts
+
+```{r,echo=F,eval=F}
+library(knitr)
+sched <- xlsx::read.xlsx2("../orga/schedule.xlsx",1)
+dats <- sched[9:15,c(1,4,5)]
+dats <- dats[-which(dats$Part=="Break"),]
+
+kable(dats,row.names = F)
+```
+
+- Wie bekommt man einen Überblick über die Daten
+- Indizieren von Vektoren, Datensätzen und Listen
+- Wie geht man mit fehlenden Werten um
+- Schleifen und Funktionen
+- Zusammenhänge zwischen Variablen
+
+## `data.frame`'s
+
+```{r,echo=F}
+load("../data/ZA5666_v1-0-0_medium.RData")
+load("../data/ZA5666_v1-0-0_medium_fac.RData")
+```
+
+
+- Beispieldaten importieren:
+
+```{r,eval=F}
+library("readstata13")
+dat <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
+```
+
+```{r,eval=F,echo=F}
+library(foreign)
+dat<-read.dta("https://github.com/Japhilko/RSocialScience/
+              raw/master/data/GPanel.dta")
+```
+
+
+```{r}
+typeof(dat)
+```
+
+
+```{r}
+head(names(dat))
+```
+
+
+## Anzahl Zeilen und Spalten
+
+<!--
+- Transfer data to a `data.frame`:
+
+```{r}
+gpdat <- data.frame(dat)
+```
+-->
+
+- Anzahl der Zeilen/Spalten ermitteln
+
+```{r}
+nrow(gpdat) # Zeilen
+ncol(gpdat) # Spalten
+```
+
+## Die Daten ansehen
+
+- Die ersten Zeilen sehen:
+
+```{r,eval=F}
+head(gpdat) # erste Zeilen
+tail(gpdat) # letzte Zeilen
+```
+
+- Einen Überblick mit Rstudio bekommen:
+
+![](figure/DatenAnschauen.PNG)
+
+
+## Indizierung eines `data.frame`
+
+- Beispiel-Datensatz:
+
+```{r}
+load("../data/mydata.RData")
+```
+
+
+```{r}
+mydata[1,1] # das Element oben links bekommen
+```
+
+```{r}
+mydata[2,] # nur die zweite Zeile sehen
+```
+
+```{r}
+mydata[,1] # sich nur die erste Spalte anzeigen lassen 
+```
+
+## Indizierung eines `data.frame` II
+
+
+```{r}
+mydata[1:2,] # getting the first two rows
+```
+
+<!--
+## Get a subset of the dataset 
+
+- These operators are good for restricting records
+
+```{r,echo=T}
+duration <- as.numeric(gpdat$bazq020a)
+head(gpdat[duration>20,])
+```
+-->
+
+
+## Indizierung
+
+- Das Dollarzeichen kann auch zur Adressierung einzelner Spalten verwendet werden.
+
+```{r}
+head(datf$a11c019a)
+
+datf$a11c019a[1:10]
+```
+
+## Zugriff auf Spalten
+
+- Wie bereits beschrieben, können Sie über Zahlen auf die Spalten zugreifen.
+
+
+```{r,eval=T}
+head(datf[,5])
+head(datf[,"a11c019a"]) # dasselbe Ergebnis
+```
+
+
+
+
+## Logische Operatoren
+
+```{r}
+(a <- 1:7) # Beispieldaten - numerisch
+```
+
+```{r}
+a>4
+a>=4
+a<3
+```
+
+## Logische Operatoren II 
+
+```{r}
+(b <- letters[1:7]) # Beispieldaten - Strings
+b=="e"
+b %in% c("e","f")
+```
+
+
+## GESIS Panel Variable - Estimated duration (bazq020a)
+
+### Wie lange haben Sie den Fragebogen ausgefüllt?
+
+```{r}
+duration <- as.numeric(datf$bazq020a)
+```
+
+```{r}
+summary(duration)
+```
+
+
+## [Missing values ](http://faculty.nps.edu/sebuttre/home/R/missings.html)
+
+- Missing values are defined as `NA` in R
+- Math functions usually have a way to exclude missing values in their calculations.
+- `mean(), median(), colSums(), var(), sd(), min()` und `max() all take the na.rm argument.
+
+```{r}
+mean(duration)
+```
+
+```{r}
+mean(duration,na.rm=T)
+```
+
+## Find the missing values:
+
+```{r}
+is.na(head(duration))
+```
+
+```{r}
+which(is.na(duration))
+```
+
+```{r}
+table(is.na(duration))
+```
+
+
+## Recode missing values
+
+```{r}
+summary(duration)
+```
+
+```{r}
+gpdat$bazq020a[gpdat$bazq020a==-99] <- NA
+```
+
+- [**Quick-R about missing values**](http://www.statmethods.net/input/missingdata.html)
+
+- [**Recode missing values**](http://uc-r.github.io/na_recode)
+
+## Writing a simple function
+
+```{r}
+tail(duration,n=10)
+```
+
+```{r}
+transform_miss <- function(x){
+  x[x==-99] <- NA
+  return(x)
+}
+```
+
+```{r}
+duration <- transform_miss(duration)
+tail(duration,n=10)
+```
+
+
+## B1A Exercise  - enhance the function
+
+- Extend the function so that it also serves its purpose when the value labels are written out (Item nonresponse, Missing by filter, etc.).
+
+
+## The command `complete.cases()`
+
+### Example data
+
+```{r}
+mydata <- data.frame(A=c(1,NA,9,6),B=c("A","B",1,NA))
+```
+
+
+### The command `complete.cases()` 
+
+- returns a logical vector indicating which cases are complete.
+
+```{r,eval=T}
+# list rows of data that have missing values 
+mydata[complete.cases(mydata),]
+```
+
+## [Specify different types of missing values (NAs)](https://stackoverflow.com/questions/16074384/specify-different-types-of-missing-values-nas)
+
+```{r,eval=F,echo=F}
+install.packages("memisc")
+```
+
+- Specify different types of missings with the package `memisc` 
+- Use the command `include.missings()` to do so
+
+```{r,eval=F}
+library(memisc)
+?include.missings
+```
+
+- It is also possible to create codebook entries with `memisc`.
+
+```{r,eval=F}
+codebook(dat$a11c019a)
+```
+
+<!--
+## Another function
+
+```{r}
+name1 <- tolower(c("DEEPAYAN","SARKAR"))
+```
+
+```{r}
+firstup <- function(x) {
+   substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+    return(x)
+}
+```
+
+```{r}
+firstup(name1)
+```
+-->
+
+<!--
+## Restrict with the `tidyverse` package
+
+```{r}
+head(datf[duration>20,1:4])
+```
+
+- the same with a command from `tidyverse` package
+
+```{r,eval=F}
+library(tidyverse)
+filter(datf, duration>20)
+```
+
+```{r,echo=F,eval=F}
+library(tidyverse)
+head(filter(datf, duration>20))
+```
+
+
+```{r,eval=F,echo=F}
+install.packages("tidyverse")
+```
+-->
+
+## Subsetting dataset
+
+<!--
+-->
+
+```{r}
+SEX <- gpdat$a11d054a
+table(SEX)
+```
+
+```{r,eval=F}
+gpdat[SEX=="Männlich",]
+# same result:
+gpdat[SEX!="Weiblich",]
+```
+
+
+```{r,echo=F,eval=F}
+head(gpdat[SEX=="Männlich",])
+# same result
+head(gpdat[SEX!="Weiblich",])
+```
+
+
+## Other important options
+
+- save result to an object
+
+
+```{r}
+subDat <- gpdat[duration>20,]
+```
+
+- multiple conditions can be linked with &
+
+
+```{r,eval=F}
+gpdat[duration>18 & SEX=="Männlich",]
+```
+
+```{r,echo=F,eval=F}
+gpdat[duration>18 & SEX=="Männlich",1:4]
+```
+
+- the or argument - one of the two conditions must be fullfilled
+
+```{r,eval=F}
+gpdat[duration>18 | SEX=="Männlich",]
+```
+
+
+## The use of sequences in indexing
+
+```{r,eval=F}
+library("readstata13")
+datf <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
+                   convert.factors = F)
+```
+
+```{r}
+datf[15:23,10:14]
+```
+
+
+
+## [Variable labels](https://stackoverflow.com/questions/2151147/using-stata-variable-labels-in-r)
+
+```{r,eval=F}
+library(foreign)
+dat <- read.dta("../data/ZA5666_v1-0-0_Stata12.dta")
+```
+
+```{r,eval=F}
+attributes(dat)
+```
+
+
+
+```{r,eval=T}
+var.labels <- attr(dat,"var.labels")
+```
+
+- The same applies to the `haven` package
+
+```{r,eval=F,echo=T}
+library(haven)
+dat2 <- read_dta("../data/ZA5666_v1-0-0_Stata14.dta")
+var.labels2 <- attr(dat,"var.labels")
+```
+
+## Rename the column names
+
+- With the command `colnames` you get the column names
+
+```{r,eval=F}
+colnames(dat)
+```
+
+- We can rename the column names:
+
+```{r,eval=F}
+colnames(dat) <- var.labels
+```
+
+- The same applies to the row names
+
+```{r,eval=F}
+rownames(dat)
+```
+
+## Private internet usage (a11c034a)
+
+> The Internet is constantly growing in significance for society. Therefore, we
+are interested whether you yourself use the Internet at least occasionally
+for private purposes?
+
+```{r}
+table(dat$a11c034a)
+```
+
+
+## Levals of a factor
+
+
+```{r}
+str(dat$a11c034a)
+levels(dat$a11c034a)
+levels(dat$a11c034a)[2:4] <- c("yes","no","don`t know")
+levels(dat$a11c034a)
+```
+
+
+## Excursus - how to use labels 
+
+> Tools for Working with Categorical Variables (Factors) 
+
+```{r}
+library("forcats") 
+```
+
+- `fct_collapse` -  to summarize factor levels
+- `fct_count` - to count the entries in a factor
+- `fct_drop`	- Take out unused levels
+
+## The command `fct_count`
+
+### Leisure time frequency: Read books (a11c026a)
+
+```{r,echo=F}
+dat$a11c026a<-as.factor(dat$a11c026a)
+```
+
+
+```{r}
+fct_count(f = dat$a11c026a)
+```
+
+## The command `fct_collapse`
+
+```{r}
+a11c026a <- fct_collapse(.f = dat$a11c026a,
+    Mehrmals=c("Mehrmals die Woche","Mehrmals im Monat"))
+```
+
+```{r}
+fct_count(a11c026a)
+```
+
+## [`recode`](https://www.r-bloggers.com/recoding-variables-in-r-pedagogic-considerations/) command in package `car`
+
+```{r,echo=F,eval=F}
+install.packages("car")
+```
+
+
+
+```{r}
+library(car)
+```
+
+```{r,eval=T}
+head(dat$a11c020a)
+head(recode(dat$a11c020a,"'Eher unzufrieden'='A';else='B'"))
+```
+
+
+
+## B1B Exercise  - recode value labels
+
+- Translate the German value labels of the variable `bbzc022a` to english (You can use https://www.deepl.com/ for that)
+- Recode that GESIS Panel variable that you end up with the English value lasbels.
+
+
+
+## [Loops in R ](https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r)
+
+- the command `for()` indicates the start of a loop
+- in brackets, we have a index and the number of runs (in this case the loop runs from 1 until the number of columns in `dat`)
+- in the curly brakets `{}` it is speciefied what happens for one iteration
+
+```{r,eval=F}
+for (i in 1:ncol(dat)){
+  dat[,i] <- as.character(dat[,i])
+}
+```
+
+
+## Loops - keeping results
+
+- we can save the results in a container 
+- that can be a vector or a list
+
+```{r,eval=F}
+erg1 <- vector()
+erg2 <- list()
+
+for (i in 1:ncol(dat)){
+  tab <- table(dat[,i])
+  erg[i] <- length(tab)
+  erg[[i]] <- tab
+  cat(i, "\n")
+}
+```
+
+## B1C Exercise  - [Scripting loops](https://www.r-exercises.com/2016/06/01/scripting-loops-in-r/)
+
+### Exercise from www.r-exercises.com
+
+
+- The `repeat{}` loop processes a block of code until the condition specified by the `break` statement, (that is mandatory within the `repeat{}` loop), is met.
+
+- The structure of a `repeat{}` loop is:
+
+```{r,eval=F}
+repeat {
+commands
+if(condition) {
+break
+}
+}
+```
+
+- For this exercise, write a `repeat{}` loop that prints all the even numbers from 2 – 10, via incrementing the variable, `i <- 0`.
+
+
+## B1D Exercise  - [A while loop](https://www.r-exercises.com/2016/06/01/scripting-loops-in-r/)
+
+
+### Exercise from www.r-exercises.com
+
+
+`while()` loop will repeat a group of commands until the condition ceases to apply. The structure of a `while()` loop is:
+
+```{r,eval=F}
+while(condition) {
+commands
+}
+```
+
+
+- With, `i <- 1`, write a `while()` loop that prints the odd numbers from 1 through 7.
+
+
+## The `apply` family
+
+```{r}
+(ApplyDat <- cbind(1:4,runif(4),rnorm(4))) # Example data set
+```
+
+```{r}
+apply(ApplyDat,1,mean)
+apply(ApplyDat,2,mean)
+```
+
+
+
+## The command `apply()`
+
+```{r}
+apply(ApplyDat,1,var)
+apply(ApplyDat,1,sd)
+apply(X = ApplyDat,MARGIN = 1,FUN = range)
+```
+
+## The arguments of the command `apply()`
+
+- If `MARGIN=1` the function `mean` is applied for rows,
+
+- If `MARGIN=2` the function `mean` is applied for columns,
+
+- Instead of `mean` you could also use `var`, `sd` or `length`.
+
+## The command `tapply()`
+
+```{r}
+ApplyDat <- data.frame(Income=rnorm(5,1400,200),
+                       Sex=sample(c(1,2),5,replace=T))
+```
+
+
+### Example command `tapply()`
+
+```{r}
+tapply(ApplyDat$Income,
+       ApplyDat$Sex,function(x)x)
+```
+
+- Other commands can also be used..... also self-scripted commands
+
+
+## B1E Exercise  - using the `tapply()` command
+
+- Find out which variable contains information about age
+
+```{r,echo=showSolution,eval=showSolution}
+dat <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
+```
+
+- Calculate the average duration (variable `bfzq020a`) by age group
+
+
+```{r,echo=showSolution,eval=showSolution}
+dat$Dauer <- as.numeric(dat$bfzq020a)
+dat$Dauer[dat$bfzq020a %in% c(-77,-22,-33,-77.-99)] <- NA
+tapply(dat$Dauer,dat$bfzh070z,mean,na.rm=T)
+```
+
+## [The `reshape` package](https://www.statmethods.net/management/reshape.html)
+
+```{r,echo=F,eval=F}
+install.packages("reshape")
+```
+
+
+### Example dataset 
+
+```{r}
+(mydata <- data.frame(id=rep(1:2,each=2), # sample dataset
+                     time=rep(c(1,2),2),
+                     x1 = c(5,3,6,2),
+                     x2 = c(6,5,1,4)))
+```
+
+
+## Example of command `melt`
+
+```{r}
+library(reshape)
+melt(mydata, id=c("id","time")) #  
+```
+
+
+## The package `tibble`
+
+```{r,eval=F,echo=F}
+install.packages("tibble")
+```
+
+### Difference between tibble and data.frame
+
+- There are three key differences between tibbles and data frames: printing, subsetting, and recycling rules.
+
+
+```{r}
+library(tibble)
+(gpanel1 <- as_tibble(dat))
+```
+
+
+
+## Edgar Anderson's Iris dataset
+
+```{r}
+data(iris)
+head(iris)
+```
+
+- petal length and width 
+
+- sepal length and width
+
+- [**Wikipedia Article for the IRIS dataset**](https://en.wikipedia.org/wiki/Iris_flower_data_set)
+
+## Relationship between continuous variables
+
+```{r}
+# Pearson correlation coefficient
+cor(iris$Sepal.Length,iris$Petal.Length)
+```
+
+- Correlation between petal length and petal length 0.87
+- The Pearson's correlation coefficient is the default method in `cor()`.
+
+
+## Various correlation coefficients
+
+
+```{r}
+# Pearson correlation coefficient
+cor(iris[,1:4]) 
+```
+
+```{r}
+# Kendall's tau (rank correlation)
+cor(iris[,1:4], method = "kendall") 
+```
+
+```{r}
+# Spearman's rho (rank correlation)
+cor(iris[,1:4], method = "spearman") 
+```
+
+
+## Relationship between categorial variables
+
+- `chisq.test()` tests whether two categorial features are stochastically independent.
+- The test is performed against the null hypothesis of equal distribution
+
+
+<!--
+https://support.minitab.com/de-de/minitab/18/help-and-how-to/modeling-statistics/regression/how-to/fit-binary-logistic-model/methods-and-formulas/diagnostic-measures/
+-->
+
+## B1F Exercise - make a interactive table
+
+- Download the dataset `dat_cf2.RData` from ILIAS
+- Import dataset into R 
+- Create an interactive table using the following commands
+
+```{r,eval=F}
+library(DT)
+DT::datatable(dat_cf2)
+```
+
+- See which additional arguments of the function `datatable` are valuable
+
+
+
+## Shiny App for quick explorative data analysis
+
+https://pharmacometrics.shinyapps.io/ggplotwithyourdata/
+
+![](figure/ggquickeda.PNG)
+
+
+## Further Links
+
+- [**Tidy data**](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) - the package `tidyr`
+
+- Homepage for [**the `tidyverse` collection**](http://tidyverse.org/)
+
+- [**Data wrangling with R and RStudio**](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/)
+
+
+```{r,eval=F,echo=F}
+# https://github.com/BAAQMD/copydat
+devtools::install_github("BAAQMD/copydat")
+install.packages("questionr")
+devtools::install_github("ThinkR-open/littleboxes") # https://github.com/ThinkR-open/littleboxes
+```
+
+- Hadley Wickham - [**Tidy Data**](http://vita.had.co.nz/papers/tidy-data.pdf)
+- Hadley Wickham - [**Advanced R**](http://adv-r.had.co.nz/)
+- Colin Gillespie and Robin Lovelace [**Efficient R programming**](https://csgillespie.github.io/efficientR/)
