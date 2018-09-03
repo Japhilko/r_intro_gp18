@@ -215,6 +215,34 @@ waves <- substr(cnames,1,2)
 table(waves)
 ```
 
+## Studien im Campus File
+
+```{r,eval=F}
+studies <- unique(substr(cnames,3,4))
+```
+
+```{r,eval=F}
+setwd("J:/Work/GESISPanel/02_panel/04_studies/")
+stud_dat <- xlsx::read.xlsx2("study_overview.xlsx",1)
+```
+
+```{r,eval=F}
+setwd("D:/Daten/GitLab/GesisPanel/data/")
+studies_dat <- xlsx::read.xlsx2("Studies.xlsx",1)
+```
+
+
+
+```{r}
+library(knitr)
+ind_study <- match(studies,studies_dat$Studycode)
+studies_df <- data.frame(Name=as.character(studies_dat$Studytitle[ind_study]),
+                         Code=studies)
+studies_df <- studies_df[complete.cases(studies_df),]
+kable(studies_df)
+```
+
+
 
 ## Die Missing Codes im GESIS Panel
 

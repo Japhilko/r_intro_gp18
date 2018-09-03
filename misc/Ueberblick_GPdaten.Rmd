@@ -9,7 +9,7 @@ output: beamer_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## 
+## Das Paket zur Bearbeitung von GESIS Panel Daten laden
 
 ```{r}
 library(gpdataprocessing)
@@ -23,13 +23,14 @@ wave <- "ee"
 
 ```{r}
   # general path:
-data_path_g <- "J:/Work/GESISPanel_DATA/01_post_processing/c01/_#awave#__#year#/_#wave#/02_master/data/STATA14/"
+wave_path_g <- "J:/Work/GESISPanel_DATA/01_post_processing/c01/_#awave#__#year#/_#wave#/"
 ```
 
 
 ```{r}
   # wave specific path:
-data_path <- getrightpath(data_path_g,wave)
+wave_path <- getrightpath(wave_path_g,wave)
+data_path <- paste0(wave_path,"02_master/data/STATA14/")
 ```
 
 ```{r}
@@ -39,8 +40,107 @@ dirnamen <- dirnamen[grep(".dta",dirnamen)]
 dat <- readstata13::read.dta13(dirnamen[which.min(nchar(dirnamen))])
 ```
 
+```{r}
+att_dat <- attributes(dat)
+```
+
+## Codebook Daten einlesen
 
 ```{r}
-dat <- apply(dat,2,transform_miss)
+cdb_path <- paste0(wave_path,"/03_codebook/data/")
+setwd(cdb_path)
+dirnamen <- dir()
+ind_dir <- agrep("_Codebook+Scheme_",dirnamen)
+dirnamen2 <- dirnamen[ind_dir]
+ind_dir2 <- grep(".dta",dirnamen2)
+cdb_dat <- readstata13::read.dta13(dirnamen2[ind_dir2])
 ```
+
+## Informationen zu Studie einlesen
+
+```{r}
+setwd("J:/Work/GESISPanel/02_panel/04_studies/")
+stud_dat <- xlsx::read.xlsx2("study_overview.xlsx",1)
+```
+
+```{r}
+as.character(stud_dat$content)
+```
+
+```{r}
+ind_cve <- which(stud_dat$content=="Between Civil Engagement and Skepticism towards Refugees in Germany")
+
+stud_dat$study[ind_cve]
+```
+
+
+
+```{r}
+  # Fast Track Studie lief in Welle ce
+ind_apol <- which(stud_dat$content=="Asyl- und Flüchtlingspolitik")
+stud_dat$study[ind_apol]
+```
+
+## Überblick über die Wellen bekommen
+
+```{r}
+cnamen <- colnames(dat)
+waves_i <- substr(cnamen,1,2)
+table(waves_i)
+cnamen[waves_i=="z0"]
+```
+
+
+
+## Fehlende Werte transformieren
+
+```{r}
+list_tab <- list()
+
+for (i in 1:ncol(dat)){
+  dat[,i] <- transform_miss(dat[,i])
+  list_tab[[i]] <- table(dat[,i])
+  cat(att_dat$var.labels[i], "\n")
+}
+
+```
+
+
+```{r}
+llt <- unlist(lapply(list_tab,length))
+numvars_aus1 <- att_dat$var.labels[llt>1000]
+
+numvars_ind <- which(llt>100)
+ind_timest <- agrep("relative timestamp for page",att_dat$var.labels)
+ind_client <- agrep("Client para data for page ",att_dat$var.labels)
+ind_atmp <- agrep("Absolute timestamp since",att_dat$var.labels)
+ind_zv <- which(att_dat$var.labels%in%c("Befragten ID","Personen ID","Vercodungs ID","Listla","Page history"))
+
+
+num_var <- rep(F,nrow(dat))
+num_var[numvars_ind] <- T
+num_var[ind_timest] <- F
+num_var[ind_client] <- F
+num_var[ind_atmp] <- F
+num_var[ind_zv] <- F
+
+
+att_dat$var.labels[num_var]
+table(dat[,3191])
+```
+
+
+```{r}
+which(att_dat$var.labels=="Klimagerechtigkeit")
+```
+
+
+
+
+```{r,eval=F}
+# https://cran.r-project.org/web/packages/wordcloud/wordcloud.pdf
+library(wordcloud)
+wordcloud(att_dat$var.labels)
+```
+
 
