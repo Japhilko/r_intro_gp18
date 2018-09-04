@@ -215,9 +215,10 @@ summary(duration)
 
 ## [Missing values ](http://faculty.nps.edu/sebuttre/home/R/missings.html)
 
-- Missing values are defined as `NA` in R
-- Math functions usually have a way to exclude missing values in their calculations.
-- `mean(), median(), colSums(), var(), sd(), min()` und `max() all take the na.rm argument.
+- Fehlende Werte sind in R als `NA` definiert
+- Bei mathematische Funktionen gibt es in der Regel eine Möglichkeit, fehlende Werte auszuschließen.
+- Bei `mean(), median(), colSums(), var(), sd(), min()` und `max()` gibt es das Argument `na.rm`.
+
 
 ```{r}
 mean(duration)
@@ -227,7 +228,7 @@ mean(duration)
 mean(duration,na.rm=T)
 ```
 
-## Find the missing values:
+## Die fehlenden Werte finden
 
 ```{r}
 is.na(head(duration))
@@ -242,7 +243,7 @@ table(is.na(duration))
 ```
 
 
-## Recode missing values
+## Die fehlenden Werte rekodieren
 
 ```{r}
 summary(duration)
@@ -252,11 +253,11 @@ summary(duration)
 gpdat$bazq020a[gpdat$bazq020a==-99] <- NA
 ```
 
-- [**Quick-R about missing values**](http://www.statmethods.net/input/missingdata.html)
+- [**Quick-R zu fehlenden Werten**](http://www.statmethods.net/input/missingdata.html)
 
-- [**Recode missing values**](http://uc-r.github.io/na_recode)
+- [**Fehlende Werte rekodieren**](http://uc-r.github.io/na_recode)
 
-## Writing a simple function
+## Eine einfache Funktion schreiben
 
 ```{r}
 tail(duration,n=10)
@@ -275,26 +276,26 @@ tail(duration,n=10)
 ```
 
 
-## B1A Exercise  - enhance the function
+## B1A Aufgabe  - eine Funktion erweitern
 
-- Extend the function so that it also serves its purpose when the value labels are written out (Item nonresponse, Missing by filter, etc.).
+- Erweitern Sie die Funktion so, dass sie auch dann ihren Zweck erfüllt, wenn die Value Labels ausgegeben werden (Item nonresponse, Missing by filter, etc.).
 
 
-## The command `complete.cases()`
+## Der Befehl `complete.cases()`
 
-### Example data
+### Beispiel Datensatz
 
 ```{r}
 mydata <- data.frame(A=c(1,NA,9,6),B=c("A","B",1,NA))
 ```
 
 
-### The command `complete.cases()` 
+### Der Befehl `complete.cases()` 
 
-- returns a logical vector indicating which cases are complete.
+- gibt einen logischen Vektor zurück, der angibt, welche Fälle vollständig sind.
 
 ```{r,eval=T}
-# list rows of data that have missing values 
+# Datenzeilen mit fehlenden Werten auflisten 
 mydata[complete.cases(mydata),]
 ```
 
