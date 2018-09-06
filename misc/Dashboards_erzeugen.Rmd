@@ -1,0 +1,22 @@
+---
+title: "Dashboards erzeugen"
+author: "Jan-Philipp Kolb"
+date: "3 September 2018"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## [`flexdashboard`](https://rmarkdown.rstudio.com/flexdashboard/)
+
+
+```{r,eval=F}
+install.packages("flexdashboard")
+```
+
+```{r}
+library(flexdashboard)
+```
+

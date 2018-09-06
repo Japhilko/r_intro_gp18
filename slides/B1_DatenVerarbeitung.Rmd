@@ -55,7 +55,7 @@ kable(dats,row.names = F)
 
 ## `data.frame`'s
 
-```{r,echo=F}
+```{r,echo=F,eval=F}
 load("../data/ZA5666_v1-0-0_medium.RData")
 load("../data/ZA5666_v1-0-0_medium_fac.RData")
 ```
@@ -72,6 +72,14 @@ dat <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
 library(foreign)
 dat<-read.dta("https://github.com/Japhilko/RSocialScience/
               raw/master/data/GPanel.dta")
+```
+
+```{r,echo=F}
+dat <- readstata13::read.dta13("D:/Daten/GitLab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta")
+```
+
+```{r,echo=F}
+datf <- readstata13::read.dta13("D:/Daten/GitLab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta",convert.factors = F)
 ```
 
 
@@ -118,31 +126,39 @@ tail(gpdat) # letzte Zeilen
 
 ## Indizierung eines `data.frame`
 
-- Beispiel-Datensatz:
-
 ```{r}
-load("../data/mydata.RData")
+dat[1,1] # das Element oben links bekommen
+```
+
+```{r,eval=F}
+dat[2,] # nur die zweite Zeile sehen
+```
+
+```{r,echo=F}
+dat[2,1:4] # nur die zweite Zeile sehen
 ```
 
 
-```{r}
-mydata[1,1] # das Element oben links bekommen
+```{r,eval=F}
+dat[,1] # sich nur die erste Spalte anzeigen lassen 
 ```
 
-```{r}
-mydata[2,] # nur die zweite Zeile sehen
+```{r,echo=F}
+head(dat[,1]) # sich nur die erste Spalte anzeigen lassen 
 ```
 
-```{r}
-mydata[,1] # sich nur die erste Spalte anzeigen lassen 
-```
 
 ## Indizierung eines `data.frame` II
 
 
-```{r}
-mydata[1:2,] # getting the first two rows
+```{r,eval=F}
+dat[1:2,] # getting the first two rows
 ```
+
+```{r,echo=F}
+head(dat[1:2,]) # getting the first two rows
+```
+
 
 <!--
 ## Get a subset of the dataset 
@@ -299,21 +315,21 @@ mydata <- data.frame(A=c(1,NA,9,6),B=c("A","B",1,NA))
 mydata[complete.cases(mydata),]
 ```
 
-## [Specify different types of missing values (NAs)](https://stackoverflow.com/questions/16074384/specify-different-types-of-missing-values-nas)
+## [Verschiedene Arten von fehlenden Werten (NAs) spezifizieren](https://stackoverflow.com/questions/16074384/specify-different-types-of-missing-values-nas)
 
 ```{r,eval=F,echo=F}
 install.packages("memisc")
 ```
 
-- Specify different types of missings with the package `memisc` 
-- Use the command `include.missings()` to do so
+- Spezifiziere verschiedene Arten von Fehlern mit dem Paket `memisc`. 
+- Benutze dazu den Befehl `include.missings()`
 
 ```{r,eval=F}
 library(memisc)
 ?include.missings
 ```
 
-- It is also possible to create codebook entries with `memisc`.
+- Es ist auch möglich, Codebuch-Einträge mit `memisc` zu erstellen.
 
 ```{r,eval=F}
 codebook(dat$a11c019a)
@@ -363,7 +379,7 @@ install.packages("tidyverse")
 ```
 -->
 
-## Subsetting dataset
+## Datensatz indizieren
 
 <!--
 -->
@@ -387,16 +403,16 @@ head(gpdat[SEX!="Weiblich",])
 ```
 
 
-## Other important options
+## Weitere wichtige Optionen
 
-- save result to an object
+- Speichern des Ergebnisses in einem Objekt
 
 
 ```{r}
 subDat <- gpdat[duration>20,]
 ```
 
-- multiple conditions can be linked with &
+- mehrere Bedingungen können mit `&` verknüpft werden
 
 
 ```{r,eval=F}
@@ -407,14 +423,14 @@ gpdat[duration>18 & SEX=="Männlich",]
 gpdat[duration>18 & SEX=="Männlich",1:4]
 ```
 
-- the or argument - one of the two conditions must be fullfilled
+- das oder das Argument - eine der beiden Bedingungen muss erfüllt sein
 
 ```{r,eval=F}
 gpdat[duration>18 | SEX=="Männlich",]
 ```
 
 
-## The use of sequences in indexing
+## Die Verwendung von Sequenzen bei der Indizierung
 
 ```{r,eval=F}
 library("readstata13")
@@ -428,7 +444,7 @@ datf[15:23,10:14]
 
 
 
-## [Variable labels](https://stackoverflow.com/questions/2151147/using-stata-variable-labels-in-r)
+## [Variablen Labels](https://stackoverflow.com/questions/2151147/using-stata-variable-labels-in-r)
 
 ```{r,eval=F}
 library(foreign)
@@ -445,7 +461,7 @@ attributes(dat)
 var.labels <- attr(dat,"var.labels")
 ```
 
-- The same applies to the `haven` package
+- Das Gleiche gilt für das `haven`-Paket
 
 ```{r,eval=F,echo=T}
 library(haven)
@@ -453,38 +469,38 @@ dat2 <- read_dta("../data/ZA5666_v1-0-0_Stata14.dta")
 var.labels2 <- attr(dat,"var.labels")
 ```
 
-## Rename the column names
+## Umbenennen der Spaltennamen
 
-- With the command `colnames` you get the column names
+- Mit dem Befehl `Colnames` erhält man die Spaltennamen
 
 ```{r,eval=F}
 colnames(dat)
 ```
 
-- We can rename the column names:
+- Wir können die Spaltennamen umbenennen:
 
 ```{r,eval=F}
 colnames(dat) <- var.labels
 ```
 
-- The same applies to the row names
+- Das gleiche gilt für die Zeilennamen
 
 ```{r,eval=F}
 rownames(dat)
 ```
 
-## Private internet usage (a11c034a)
+## Private Internetnutzung (a11c034a)
 
-> The Internet is constantly growing in significance for society. Therefore, we
-are interested whether you yourself use the Internet at least occasionally
-for private purposes?
+> Das Internet gewinnt eine immer größere Bedeutung in der Gesellschaft.
+Deshalb interessiert uns, ob Sie selbst zumindest gelegentlich das Internet
+für private Zwecke nutzen?
 
 ```{r}
 table(dat$a11c034a)
 ```
 
 
-## Levals of a factor
+## Faktorstufen
 
 
 ```{r}
@@ -495,21 +511,21 @@ levels(dat$a11c034a)
 ```
 
 
-## Excursus - how to use labels 
+## Exkurs - Wie man Labels verwendet 
 
-> Tools for Working with Categorical Variables (Factors) 
+### Werkzeuge für das Arbeiten mit kategorischen Variablen (Faktoren) 
 
 ```{r}
 library("forcats") 
 ```
 
-- `fct_collapse` -  to summarize factor levels
-- `fct_count` - to count the entries in a factor
-- `fct_drop`	- Take out unused levels
+- `fct_collapse` -  um Faktorstufen zu verdichten
+- `fct_count` - um die Einträge in einem Faktor zu zählen
+- `fct_drop`	- Entferne unbenutzte Levels
 
-## The command `fct_count`
+## Der Befehl `fct_count`
 
-### Leisure time frequency: Read books (a11c026a)
+### Freizeit Häufigkeit: Bücher lesen (a11c026a)
 
 ```{r,echo=F}
 dat$a11c026a<-as.factor(dat$a11c026a)
@@ -520,7 +536,7 @@ dat$a11c026a<-as.factor(dat$a11c026a)
 fct_count(f = dat$a11c026a)
 ```
 
-## The command `fct_collapse`
+## Der Befehl `fct_collapse`
 
 ```{r}
 a11c026a <- fct_collapse(.f = dat$a11c026a,
@@ -531,7 +547,7 @@ a11c026a <- fct_collapse(.f = dat$a11c026a,
 fct_count(a11c026a)
 ```
 
-## [`recode`](https://www.r-bloggers.com/recoding-variables-in-r-pedagogic-considerations/) command in package `car`
+## [`recode`](https://www.r-bloggers.com/recoding-variables-in-r-pedagogic-considerations/) Befehl im Paket `car`
 
 ```{r,echo=F,eval=F}
 install.packages("car")
@@ -550,10 +566,10 @@ head(recode(dat$a11c020a,"'Eher unzufrieden'='A';else='B'"))
 
 
 
-## B1B Exercise  - recode value labels
+## B1B Aufgabe  - Value Labels neu kodieren
 
-- Translate the German value labels of the variable `bbzc022a` to english (You can use https://www.deepl.com/ for that)
-- Recode that GESIS Panel variable that you end up with the English value lasbels.
+- Übersetze die Deutschen Werte Labels der Variablen `bbzc022a` ins Englische (Man kann dafür https://www.deepl.com/ verwenden).
+- Kodiere die GESIS-Panel-Variable, die amn als englisches Value Label erhält.
 
 
 
