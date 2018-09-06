@@ -22,31 +22,32 @@ knitr::opts_chunk$set(echo = TRUE,message=F,warning = F,cache=T)
 ```
 
 
-## A plot says more than 1000 words
+## Eine Graphik sagt mehr als 1000 Worte.
 
-### Statements on graphs in R
+### Aussagen zu Graphen in R
 
-- Graphical data analysis is great
-- Good plots can contribute to a better understanding
-- Generating a plot is easy
-- Making a good plot can take very long
-- Generating plots with R is fun
-- Plots created with R have high quality
-- Almost every plot type is supported by R
-- A large number of export formats are available in R
+- Die grafische Datenanalyse ist großartig.
+- Gute Graphiken können zu einem besseren Verständnis beitragen.
+- Die Erzeugung eines Plot ist einfach.
+- Einen guten Plot zu erstellen, kann sehr lange dauern.
+- Das Erstellen von Plots mit R macht Spaß.
+- Mit R erstellte Diagramme haben eine hohe Qualität.
+- Fast jedes Graphikformat wird von R unterstützt.
+- Eine große Anzahl von Exportformaten ist in R verfügbar.
 
-## Not all plots are the same
 
-- The base package already includes a large number of plot functions
-- Other packages like `lattice`, `ggplot2`, etc extend this functionality
+## Nicht alle Diagramme sind gleich.
 
-### Manuals that go far beyond this introduction:
+- Das Basispaket enthält bereits eine Vielzahl von Plotfunktionen.
+- Andere Pakete wie `lattice`, `ggplot2`, etc. erweitern diese Funktionalität.
+
+### Handbücher, die weit über diese Einführung hinausgehen:
 
 - Murrell, P (2006): R Graphics.
-- R Development Core Group [**Graphics with R**](https://csg.sph.umich.edu/docs/R/graphics-1.pdf)
-- Wiki on [**R Programming/Graphics**](https://en.wikibooks.org/wiki/R_Programming/Graphics)
+- R Development Core Group [**Graphiken mit R**](https://csg.sph.umich.edu/docs/R/graphics-1.pdf)
+- Wiki zu [**R Programmierung/Graphiken**](https://en.wikibooks.org/wiki/R_Programming/Graphics)
 - Martin Meermeyer [**Creating Reproducible Publication Quality Graphics with R: A Tutorial**](http://elpub.bib.uni-wuppertal.de/edocs/dokumente/fbb/wirtschaftswissenschaft/sdp/sdp15/sdp15006.pdf)
-- Institute For Quantitative Social Science at Harvard - [**R graphics tutorial**](https://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html)
+- Institute for Quantitative Social Science at Harvard - [**R Graphik Tutorial**](https://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html)
 
 
 <!--
@@ -57,7 +58,7 @@ to specific:
 https://www.stat.auckland.ac.nz/~paul/R/graphicsqc.pdf
 -->
 
-##  Task View for [graphics](https://cran.r-project.org/web/views/Graphics.html)
+##  Task View für [Graphiken](https://cran.r-project.org/web/views/Graphics.html)
 
 
 ![](figure/ctv_graphics.PNG)
@@ -66,7 +67,7 @@ https://www.stat.auckland.ac.nz/~paul/R/graphicsqc.pdf
 https://cran.r-project.org/web/views/Graphics.html
 
 
-## Import GESIS Panel data
+## GESIS Panel Daten importieren
 
 ```{r,echo=F}
 dat <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")

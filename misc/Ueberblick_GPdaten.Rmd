@@ -144,3 +144,10 @@ wordcloud(att_dat$var.labels)
 ```
 
 
+## 
+
+```{r}
+research_var <- "bfzq020a"
+which(cdb_dat$varname==research_var)
+```
+
