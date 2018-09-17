@@ -18,7 +18,7 @@ output:
 ---
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,message=F,warning = F,cache=T)
+knitr::opts_chunk$set(echo = TRUE,message=F,warning = F,cache=F, fig.height=4)
 ```
 
 
@@ -70,6 +70,11 @@ https://cran.r-project.org/web/views/Graphics.html
 ## GESIS Panel Daten importieren
 
 ```{r,echo=F}
+dat <- readstata13::read.dta13("D:/Daten/GitLab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta")
+```
+
+
+```{r,echo=F,eval=F}
 dat <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
 dat$duration <- as.numeric(dat$bfzq020a)
 dat$duration[dat$bfzq020a %in% c(-77,-22,-33,-77.-99)] <- NA
@@ -79,9 +84,14 @@ dat$duration[dat$bfzq020a %in% c(-77,-22,-33,-77.-99)] <- NA
 dat <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
 ```
 
-```{r,eval=T}
+```{r,eval=T,echo=F}
 datf <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
                                 convert.factors = F)
+```
+
+
+```{r,eval=F}
+datf <- readstata13::read.dta13("D:/Daten/GitLab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta",convert.factors = F)
 ```
 
 
@@ -108,24 +118,28 @@ data(Chem97)
 - [gcsecnt] Average GCSE score of individual, centered at mean.
 -->
 
-## Estimated duration (bfzq020a)
+## Geschätzte Dauer (bfzq020a)
 
-### How long did it take you to fill in the questionnaire?
+### Wie lange haben Sie gebraucht, um den Fragebogen auszufüllen?
 
 ```{r,eval=F}
 dat <- readstata13::read.dta13("ZA5666_v1-0-0_Stata14.dta")
-dat$duration <- as.numeric(dat$bfzq020a)
 summary(dat$duration)
 ```
+
+```{r}
+dat$duration <- as.numeric(dat$bfzq020a)
+```
+
 
 ```{r,echo=F}
 summary(dat$duration)
 ```
 
 
-## Histogram - The `hist()` function
+## Histogramm - Die Funktion `hist()` 
 
-We create a histogram of the variable `duration`:
+Wir erstellen ein Histogramm der Variablen `Dauer`:
 
 ```{r,eval=F}
 ?hist
@@ -135,8 +149,9 @@ We create a histogram of the variable `duration`:
 ```{r,eval=F}
 hist(dat$duration)
 ```
-
+<!--
 ![](figure/hist_duration.PNG)
+-->
 
 ## Export with Rstudio
 
@@ -178,10 +193,10 @@ hist(dat$duration,col="blue",
      xlab="Duration")
 ```
 
-
+<!--
 ## Histogram
-
-```{r,echo=F}
+-->
+```{r,echo=F,eval=F}
 hist(dat$duration,col="blue",
      main="Duration of interview",ylab="Frequency", xlab="Duration")
 ```
@@ -213,7 +228,11 @@ hist(dat$duration,col="blue",
 
 ```
 
+
+
+<!--
 ![](figure/xlimargument.PNG)
+-->
 
 ## The `breaks` argument
 
@@ -227,8 +246,9 @@ hist(dat$duration,col="red",
 
 - with `breaks` you can control the number of bars...
 
+<!--
 ![](figure/breaksargument.PNG)
-
+-->
 ## Tabulate and `barplot`
 
 ```{r}
@@ -249,9 +269,11 @@ tab_sex <- table(sex)
 barplot(tab_sex)
 ```
 
+
+
 ## More colour:
 
-```{r}
+```{r,eval=T}
 barplot(tab_sex,col=rgb(0,0,1))
 ```
 
@@ -273,6 +295,7 @@ barplot(tab_sex,col=rgb(1,0,0))
 ```{r}
 barplot(tab_sex,col=rgb(1,0,0,.3))
 ```
+
 
 
 ## A two dimensional table
@@ -312,13 +335,18 @@ Inetfriends <- as.character(transform_miss(dat$bbzc024a))
 barplot(tab2dim,col=1:2)
 ```
 
+<!--
 ![](figure/condtable.PNG)
+-->
+
 
 ```{r,eval=F}
 barplot(tab2dim,col=3:4,beside=T)
 ```
 
+<!--
 ![](figure/barplotbeside.PNG)
+-->
 
 ## Horizontal `boxplot`
 
@@ -330,7 +358,9 @@ barplot(tab2dim,col=3:4,beside=T)
 boxplot(dat$duration,horizontal=TRUE)
 ```
 
+<!--
 ![](figure/boxplot.PNG)
+-->
 
 ## Grouped boxplots
 
@@ -342,7 +372,10 @@ boxplot(dat$duration,horizontal=TRUE)
 boxplot(dat$duration~sex,horizontal=TRUE)
 ```
 
+<!--
 ![](figure/boxplot_sex.PNG)
+-->
+
 
 ## Boxplot alternatives - `vioplot` 
 
@@ -360,7 +393,10 @@ library(vioplot)
 vioplot(na.omit(dat$duration))
 ```
 
+<!--
 ![](figure/vioplot.PNG)
+-->
+
 
 ```{r,message=F,eval=F,echo=F}
 library(vioplot)
@@ -397,12 +433,13 @@ beanplot(dat$duration~dat$a11d054a,data=dat,col="orange")
 install.packages("mlmRev")
 ```
 
-```{r,eval=F}
+```{r,eval=T}
 plot(runif(100),rnorm(100))
 ```
 
+<!--
 ![](figure/scatterplot.PNG)
-
+-->
 
 ## B2A Exercise - simple graphics
 
@@ -542,13 +579,14 @@ xyplot(Sepal.Length + Sepal.Width ~ Petal.Length + Petal.Width
        auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-```{r,eval=F}
+```{r,eval=T}
 xyplot(Sepal.Length+Sepal.Width~Petal.Length+Petal.Width 
        | Species,data = iris, auto.key = T)
 ```
 
+<!--
 ![](figure/lattice_xyplot.PNG)
-
+-->
 
 ## Relationship between variables - `pairs` plot
 
@@ -559,7 +597,7 @@ pairs(iris[,1:4])
 
 ## Enhanced multivariate plots
 
-```{r,eval=F}
+```{r,eval=T}
 library("psych")
 pairs.panels(iris[,1:4],
              bg=c("red","yellow","blue")[iris$Species],
@@ -567,8 +605,9 @@ pairs.panels(iris[,1:4],
 
 ```
 
+<!--
 ![](figure/psychplot.PNG)
-
+-->
 
 
 ## Multivariate plots - `splom`
@@ -609,14 +648,15 @@ head(BankWages)
 
 - `education` in years
 
-```{r,message=F,eval=F}
+```{r,message=F,eval=T}
 library("lattice")
 levelplot(table(BankWages$education,BankWages$job),
           xlab="education",ylab="job")
 ```
 
+<!--
 ![](figure/levelplotBankWages.PNG)
-
+-->
 
 ## Social network usage: Facebook (bbzc041a)
 
@@ -644,7 +684,9 @@ levelplot(table(facebook,twitter),col.regions=
             colorRampPalette(c("blue","white","red")))
 ```
 
+
 ![](figure/levelplot_twitterfacebook.PNG)
+
 
 ## Internet use (GESIS Panel)
 
@@ -670,9 +712,12 @@ tab2 <- table(internet,smartphone)
 
 ## Relationship - categorial variables
 
-```{r}
+
+```{r,eval=F}
 mosaicplot(tab2, color = TRUE,main="")
 ```
+
+![](figure/mosaicplot_internet.PNG)
 
 <!--
 ## Making the plot clearer
@@ -729,13 +774,15 @@ Grouping can be represented by color, symbol, size, and transparency. The creati
 ## A first example `ggplot2`
 
 
-```{r,eval=F}
+```{r,eval=T}
 library(ggplot2)
 ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width)) + 
   geom_point()
 ```
 
+<!--
 ![](figure/ggplot2ex.PNG)
+-->
 
 ## Some nice Rstudio Addins
 
