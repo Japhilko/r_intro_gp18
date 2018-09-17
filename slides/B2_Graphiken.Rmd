@@ -19,6 +19,8 @@ output:
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=F,warning = F,cache=F, fig.height=4)
+GESIS <- F
+athome <- !GESIS
 ```
 
 
@@ -69,8 +71,14 @@ https://cran.r-project.org/web/views/Graphics.html
 
 ## GESIS Panel Daten importieren
 
-```{r,echo=F}
+- Zum importieren nutzen wir die Funktion `read.dta13` aus dem Paket `readstata13`
+
+```{r,echo=F,eval=GESIS}
 dat <- readstata13::read.dta13("D:/Daten/GitLab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta")
+```
+
+```{r,echo=F,eval=athome}
+dat <- readstata13::read.dta13("D:/gitlab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta")
 ```
 
 
@@ -81,16 +89,22 @@ dat$duration[dat$bfzq020a %in% c(-77,-22,-33,-77.-99)] <- NA
 ```
 
 ```{r,eval=F}
-dat <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
+dat <- readstata13::read.dta13(
+  "../data/ZA5666_v1-0-0_Stata14.dta")
 ```
 
-```{r,eval=T,echo=F}
+```{r,eval=GESIS,echo=F}
 datf <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
                                 convert.factors = F)
 ```
 
+```{r,echo=F,eval=athome}
+datf <- readstata13::read.dta13("D:/gitlab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta",
+                                convert.factors = F)
+```
 
-```{r,eval=F}
+
+```{r,eval=F,echo=F}
 datf <- readstata13::read.dta13("D:/Daten/GitLab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta",convert.factors = F)
 ```
 
@@ -146,21 +160,21 @@ Wir erstellen ein Histogramm der Variablen `Dauer`:
 ```
 
 
-```{r,eval=F}
+```{r,eval=T}
 hist(dat$duration)
 ```
 <!--
 ![](figure/hist_duration.PNG)
 -->
 
-## Export with Rstudio
+## Export mit Rstudio
 
 ![](figure/saveGraphic.PNG)
 
 
-## Command to save graphic
+## Befehl zum Speichern der Grafik
 
-- Alternatively also with the commands `png`, `pdf` or `jpeg` for example
+- Alternativ auch mit den Befehlen `png`, `pdf` oder `jpeg` zum Beispiel.
 
 ```{r,eval=F}
 png("Histogramm.png")
@@ -181,11 +195,11 @@ dev.off()
 ```
 
 
-## Histogram
+## Histogramm
 
-- Command `hist()` plots a histogram
-- At least one observation vector must be passed to the function
-- `hist()` has many more arguments, which all have (meaningful) default values
+- Der Befehl `hist()` zeichnet ein Histogramm.
+- Mindestens ein Beobachtungsvektor muss an die Funktion übergeben werden.
+- `hist()` hat viele weitere Argumente, die alle (sinnvolle) Standardwerte haben.
 
 ```{r,eval=F}
 hist(dat$duration,col="blue",
@@ -201,7 +215,7 @@ hist(dat$duration,col="blue",
      main="Duration of interview",ylab="Frequency", xlab="Duration")
 ```
 
-## Rstudio addin colourpicker
+## Rstudio Addin `colourpicker`
 
 ```{r,eval=F}
 install.packages("colourpicker")
@@ -209,7 +223,7 @@ install.packages("colourpicker")
 
 ![](figure/colourpicker.PNG)
 
-## Further arguments:
+## Weitere Argumente:
 
 ```{r,eval=F}
 ?plot
@@ -219,9 +233,9 @@ install.packages("colourpicker")
 
 ![](figure/helppagepar.PNG)
 
-## The `xlim` argument
+## Das `xlim` Argument
 
-```{r,eval=F}
+```{r,eval=T}
 hist(dat$duration,col="blue",
      main="Duration interview",ylab="Freq", xlab="Duration",
      xlim=c(0,90))
@@ -234,9 +248,9 @@ hist(dat$duration,col="blue",
 ![](figure/xlimargument.PNG)
 -->
 
-## The `breaks` argument
+## Das `breaks` Argument
 
-- While the previous arguments are valid for many graphics functions, the following apply mainly to histogrames:
+- Während die vorherigen Argumente für viele Grafikfunktionen gelten, gilt das Folgende hauptsächlich für Histogramme:
 
 ```{r,eval=F}
 hist(dat$duration,col="red",
@@ -244,12 +258,12 @@ hist(dat$duration,col="red",
      xlim=c(0,90),breaks=60)
 ```
 
-- with `breaks` you can control the number of bars...
+- Mit `breaks` kann man die Zahl der Balken kontrollieren:
 
 <!--
 ![](figure/breaksargument.PNG)
 -->
-## Tabulate and `barplot`
+## Tabelieren und `barplot`
 
 ```{r}
 sex <- as.character(dat$a11d054a)
@@ -257,8 +271,8 @@ sex[dat$a11d054a=="Männlich"] <- "m"
 sex[dat$a11d054a=="Weiblich"] <- "f"
 ```
 
-- The command `barplot()` generates a barplot from a frequency table
-- We get the frequency table with the following command:
+- Der Befehl `barplot()` erzeugt einen Barplot aus einer Frequenztabelle.
+- Wir erhalten die Tabelle mit dem folgenden Befehl:
 
 ```{r}
 tab_sex <- table(sex)
@@ -271,19 +285,19 @@ barplot(tab_sex)
 
 
 
-## More colour:
+## Mehr Farbe:
 
 ```{r,eval=T}
 barplot(tab_sex,col=rgb(0,0,1))
 ```
 
-## Green colour 
+## Grüne Farbe 
 
 ```{r}
 barplot(tab_sex,col=rgb(0,1,0))
 ```
 
-## Red colour
+## Rote Farbe
 
 ```{r}
 barplot(tab_sex,col=rgb(1,0,0))
@@ -298,19 +312,19 @@ barplot(tab_sex,col=rgb(1,0,0,.3))
 
 
 
-## A two dimensional table
+## Eine zweidimensionale Tabelle
 
-### Internet search for information: Friends (bbzc024a) and gender (a11d054a)
+Internet-Suche nach Informationen: Freunde (bbzc024a) und Geschlecht (a11d054a)
 
 
 ```{r}
 table(dat$bbzc024a,sex)
 ```
 
-- If the passed table object is two-dimensional, a conditional barplot is created
+- Wenn das übergebene Tabellenobjekt zweidimensional ist, wird ein bedingter Barplot erstellt.
 
 
-## Recode the missing values
+## Fehlende Werte rekodieren
 
 ```{r}
 transform_miss <- function(x){
@@ -329,7 +343,7 @@ Inetfriends <- as.character(transform_miss(dat$bbzc024a))
 
 
 
-## Conditional `barplot`
+## Bedingter `barplot`
 
 ```{r,eval=F}
 barplot(tab2dim,col=1:2)
@@ -340,7 +354,7 @@ barplot(tab2dim,col=1:2)
 -->
 
 
-```{r,eval=F}
+```{r,eval=T}
 barplot(tab2dim,col=3:4,beside=T)
 ```
 
@@ -348,13 +362,17 @@ barplot(tab2dim,col=3:4,beside=T)
 ![](figure/barplotbeside.PNG)
 -->
 
-## Horizontal `boxplot`
+## Horizontaler Boxplot
 
-- A simple [**boxplot**](http://edoc.hu-berlin.de/dissertationen/gruenwald-andreas-2005-01-17/HTML/chapter2.html) can be created with `boxplot()`
-- For the command `boxplot()` at least one observation vector must be passed
+- Ein einfacher [**boxplot**](http://edoc.hu-berlin.de/dissertationen/gruenwald-andreas-2005-01-17/HTML/chapter2.html) kann mit `boxplot()` erstellt werden.
+- Für den Befehl `boxplot()` muss mindestens ein Beobachtungsvektor übergeben werden.
 
 ```{r,eval=F}
 ?boxplot
+```
+
+
+```{r,eval=T}
 boxplot(dat$duration,horizontal=TRUE)
 ```
 
@@ -362,13 +380,13 @@ boxplot(dat$duration,horizontal=TRUE)
 ![](figure/boxplot.PNG)
 -->
 
-## Grouped boxplots
+## Gruppierte Boxplots
 
-- A very simple way to get a first impression of conditional distributions is via so-called grouped notched boxplots
-- To do this, a so-called formula object must be passed to the `boxplot()` function.
-- The conditional variable is located on the right side of a tilde
+- Ein sehr einfacher Weg, sich einen ersten Eindruck von bedingten Verteilungen zu verschaffen, ist über sogenannte gruppierte Boxplots.
+- Dazu muss ein sogenanntes Formelobjekt an die Funktion `boxplot()` übergeben werden.
+- Die bedingte Variable befindet sich auf der rechten Seite einer Tilde.
 
-```{r,eval=F}
+```{r,eval=T}
 boxplot(dat$duration~sex,horizontal=TRUE)
 ```
 
@@ -377,18 +395,18 @@ boxplot(dat$duration~sex,horizontal=TRUE)
 -->
 
 
-## Boxplot alternatives - `vioplot` 
+## Boxplot Alternativen - `vioplot` 
 
-- Builds on Boxplot - additional information about data density 
-- Density is calculated using the kernel method.
-- The further the expansion, the higher the density at this point. 
-- White dot - median
+- Baut auf dem `boxplot` auf  - Zusatzinformationen zur Dichte 
+- Die Dichte wird mit der Kernel-Methode berechnet.
+- Je weiter die Ausdehnung, desto höher ist die Dichte an dieser Stelle. 
+- Weißer Punkt - Medianwert
 
 ```{r,echo=F,eval=F}
 install.packages("vioplot")
 ```
 
-```{r,eval=F}
+```{r,eval=T}
 library(vioplot)
 vioplot(na.omit(dat$duration))
 ```
@@ -407,7 +425,7 @@ vioplot(y, col="cyan", horizontal=FALSE, at=-4,
         add=TRUE,lty=2)
 ```
 
-## Alternatives `boxplot()`
+## Alternativen zum `boxplot()`
 
 ```{r,echo=F,eval=F}
 install.packages("beanplot")
@@ -421,13 +439,14 @@ boxplot(dat$duration~dat$a11d054a,data=dat,col="blue")
 beanplot(dat$duration~dat$a11d054a,data=dat,col="orange")
 ```
 
-## Conditional, bi- and multivariate distribution graphics - scatterplots
+## Bedingte, bi- und multivariate Graphiken - Scatterplots
 
-- A simple two-way scatterplot can be created with the `plot()` function
-- To create a scatterplot x and y observation vector must be passed
-- Argument `col` to specify the color (color as character or numeric)
-- Argument `pch` to specify plot symbols (plotting character) (character or numeric)
-- The labels are defined with `xlab` and `ylab`.
+- Ein einfacher Zwei-Wege-Streudiagramm kann mit der Funktion `plot()` erstellt werden.
+- Um ein Scatterplot zu erstellen, müssen x und y als Beobachtungsvektoren übergeben werden.
+- Argument `col` zur Angabe der Farbe (Farbe als Zeichen oder numerisch)
+- Argument `pch` zur Angabe von Plotsymbolen (Zeichen oder numerisch)
+- Achsenbeschriftung - mit `xlab` und `ylab` definiert.
+
 
 ```{r,eval=F,echo=F}
 install.packages("mlmRev")
