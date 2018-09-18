@@ -1,6 +1,6 @@
 ---
 title: "A3 The GESIS Panel data"
-author: "Kolb / Murray-Watters"
+author: "Jan-Philipp Kolb"
 date: "06 August 2018"
 output:
   beamer_presentation:

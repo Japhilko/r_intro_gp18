@@ -19,7 +19,7 @@ output:
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=F,warning = F,cache=F, fig.height=4)
-GESIS <- F
+GESIS <- T
 athome <- !GESIS
 ```
 
@@ -443,8 +443,8 @@ beanplot(dat$duration~dat$a11d054a,data=dat,col="orange")
 
 - Ein einfacher Zwei-Wege-Streudiagramm kann mit der Funktion `plot()` erstellt werden.
 - Um ein Scatterplot zu erstellen, müssen x und y als Beobachtungsvektoren übergeben werden.
-- Argument `col` zur Angabe der Farbe (Farbe als Zeichen oder numerisch)
-- Argument `pch` zur Angabe von Plotsymbolen (Zeichen oder numerisch)
+- Argument `col` - Farbe als Zeichen oder numerisch
+- Argument `pch` - Plotsymbol als Zeichen oder numerisch
 - Achsenbeschriftung - mit `xlab` und `ylab` definiert.
 
 
@@ -460,9 +460,9 @@ plot(runif(100),rnorm(100))
 ![](figure/scatterplot.PNG)
 -->
 
-## B2A Exercise - simple graphics
+## B2A Übung - einfache Grafiken
 
-- Load the dataset `VADeaths` and create the following plot:
+- Laden Sie den Datensatz `VADeaths` und erstellen Sie die folgende Darstellung:
 
 ```{r,echo=F}
 library(datasets)
@@ -472,19 +472,19 @@ barplot(VADeaths, border = "dark blue",beside=T,
 ```
 
 
-## The `lattice`-Package
+## Das `lattice`-Paket
 
-### [**Definition of a lattice graphic**](http://stat.ethz.ch/R-manual/R-devel/library/lattice/html/Lattice.html)
+### [**Definition eine `lattice` Graphik**](http://stat.ethz.ch/R-manual/R-devel/library/lattice/html/Lattice.html)
 
 > It is designed to meet most typical graphics needs with minimal tuning, but can also be easily extended to handle most nonstandard requirements. 
 
-### Examples for `lattice` graphics
+### Beispiele für `lattice` Graphiken
 
 ![](figure/latticeexamples.PNG)
 
-## [A addin for RStudio](https://github.com/homerhanumat/addinplots/)
+## [Ein weiteres Addin für RStudio](https://github.com/homerhanumat/addinplots/)
 
-- install the addinplots package - mark the dataset you want to visualize and choose a plot type:
+- das `addinplots`-Paket installieren - den Datensatz markieren, der visualisiert werden soll, und einen  Plottyp wählen:
 
 ```{r,eval=F}
 devtools::install_github("homerhanumat/addinplots")
@@ -492,18 +492,15 @@ devtools::install_github("homerhanumat/addinplots")
 
 ![](figure/addinplots.PNG)
 
-## User interface of `addinplots`
+## Benutzer Interface für `addinplots`
 
 ![](figure/HistogramCodeHelper.PNG)
 
 ```{r,eval=F}
-iris # example dataset used
+iris # Beispieldatensatz
 ```
 
-
-
-
-## The dataset - Scores on A-level Chemistry in 1997
+## Ein Beispieldatensatz - Testergebnisse bei A-level Chemie Test aus dem Jahr 1997
 
 ```{r}
 library("mlmRev")
@@ -518,29 +515,31 @@ kable(c97dat)
 ```
 
 
-## Histogram with `lattice`
+## Histogramm mit `lattice`
 
 ```{r,message=F}
 library("lattice")
 histogram(~ gcsescore, data = Chem97)
 ```
 
-## More histograms with `lattice`
+
+
+## Mehr Histogramme mit `lattice`
 
 ```{r}
 histogram(~ gcsescore | score,data = Chem97)
 ```
 
-## Plotting the density with a legend
+## Die Dichte plotten mit einer Legende
 
 ```{r}
 densityplot(~ gcsescore | score, Chem97, 
 	groups=gender,auto.key=TRUE)
 ```
 
-[Introduction to the `lattice` package](http://www.isid.ac.in/~deepayan/R-tutorials/labs/04_lattice_lab.pdf)
+[**Einführung in das `lattice` Paket**](http://www.isid.ac.in/~deepayan/R-tutorials/labs/04_lattice_lab.pdf)
 
-## Creating a boxplot with `lattice`
+## Einen Boxplot mit `lattice` erzeugen
 
 ```{r,echo=T,eval=T}
 Chem97$score <- as.factor(Chem97$score)
@@ -550,7 +549,7 @@ Chem97$score <- as.factor(Chem97$score)
 bwplot(score ~ gcsescore | gender, Chem97)
 ```
 
-## Plotting a boxplot with `lattice`
+## Bedingte Boxplots mit `lattice` erzeugen
 
 ```{r}
 bwplot(gcsescore ~ gender | score, Chem97,
@@ -577,7 +576,7 @@ barchart(gcsescore ~ lea | school, data = Chem97,groups = gender, stack = TRUE,
 -->
 
 
-## A `densityplot`
+## Ein `densityplot`
 
 ```{r}
 densityplot(~height|voice.part,data=singer,layout = c(2,4),
@@ -590,7 +589,7 @@ densityplot(~height|voice.part,data=singer,layout = c(2,4),
 qq(gender ~ gcsescore | score, Chem97)
 ```
 
-## Scatterplot with `lattice` - `xyplot`
+## Scatterplot mit `lattice` - `xyplot`
 
 ```{r,eval=F,echo=F}
 xyplot(Sepal.Length + Sepal.Width ~ Petal.Length + Petal.Width 
@@ -607,14 +606,14 @@ xyplot(Sepal.Length+Sepal.Width~Petal.Length+Petal.Width
 ![](figure/lattice_xyplot.PNG)
 -->
 
-## Relationship between variables - `pairs` plot
+## Zusammenhang zwischen Variablen - `pairs` Plot
 
 ```{r}
 pairs(iris[,1:4])
 ```
 
 
-## Enhanced multivariate plots
+## Den `pairs`Plot erweitert
 
 ```{r,eval=T}
 library("psych")
@@ -629,7 +628,7 @@ pairs.panels(iris[,1:4],
 -->
 
 
-## Multivariate plots - `splom`
+## Multivariate Plots - `splom`
 
 ```{r}
 splom(~iris[,1:4], groups = Species, data = iris)
@@ -648,7 +647,7 @@ splom(~iris[1:4], groups = Species, data = iris,
 ```
 
 
-## The dataset `BankWages`
+## Der Beispieldatensatz `BankWages`
 
 ```{r,echo=T,eval=F}
 install.packages("AER")
@@ -665,7 +664,7 @@ head(BankWages)
 
 ## `levelplot`
 
-- `education` in years
+- `education` in Jahren
 
 ```{r,message=F,eval=T}
 library("lattice")
@@ -677,18 +676,18 @@ levelplot(table(BankWages$education,BankWages$job),
 ![](figure/levelplotBankWages.PNG)
 -->
 
-## Social network usage: Facebook (bbzc041a)
+## Nutzung sozialer Netzwerke: Facebook (bbzc041a)
 
-- 1 - No, I am no member; 2 - Yes, but never using it; 3 - Yes, use it sometimes; 4 - Yes, use it a lot
+- 1 - Nein, bin kein Mitglied; 2 - Ja, nutze es aber nie; 3 - Ja, nutze es manchmal; 4 - Ja, nutze es oft
 
 ```{r}
 facebook <- transform_miss(datf$bbzc041a)
 table(facebook)
 ```
 
-## Social network usage: Twitter (bbzc042a)
+## Nutzung sozialer Netzwerke: Twitter (bbzc042a)
 
-- 1 - No, I am no member; 2 - Yes, but never using it; 3 - Yes, use it sometimes; 4 - Yes, use it a lot
+- 1 - Nein, bin kein Mitglied; 2 - Ja, nutze es aber nie; 3 - Ja, nutze es manchmal; 4 - Ja, nutze es oft
 
 ```{r}
 twitter <- as.character(transform_miss(datf$bbzc042a))
@@ -696,45 +695,44 @@ table(twitter)
 ```
 
 
-## `levelplot` with GESIS Panel data
+## `levelplot` mit GESIS Panel Daten
 
 ```{r,message=F,eval=F}
-levelplot(table(facebook,twitter),col.regions=
-            colorRampPalette(c("blue","white","red")))
+levelplot(table(facebook,twitter),
+col.regions=colorRampPalette(c("blue","white","red")))
 ```
-
 
 ![](figure/levelplot_twitterfacebook.PNG)
 
+## Internet Nutzung (GESIS Panel)
 
-## Internet use (GESIS Panel)
-
-- a11c035a: Frequency private Internet usage: PC
+- a11c035a: Häufigkeit private Internetnutzung: Tischcomputer
 
 ```{r}
 internet <- transform_miss(datf$a11c035a)
 ```
 
 
-- a11c037a: Frequency private Internet usage: smart phone
+- a11c037a: Häufigkeit private Internetnutzung: Smartphone
 
 ```{r}
 smartphone <- transform_miss(datf$a11c037a)
 ```
 
-1 - Several times a day; 2 - About twice a day; 3 - More than once a week; 4 - About once a week; 5 - Rarer; 6 - Never; 98 - Don’t know
+1 - Mehrmals täglich; 2 - Etwa einmal täglich; 3 - Mehrmals die Woche; 4 - Etwa einmal die Woche; 5 - Seltener; 6 - Nie; 98 - Weiß nicht
 
 
 ```{r}
 tab2 <- table(internet,smartphone)
 ```
 
-## Relationship - categorial variables
+## Zusammenhang - kategoriale Variablen
 
 
 ```{r,eval=F}
 mosaicplot(tab2, color = TRUE,main="")
 ```
+
 
 ![](figure/mosaicplot_internet.PNG)
 
@@ -755,9 +753,9 @@ dat$a11c036a <- as.character(dat$a11c036a)
 -->
 
 
-## Surfaces are shaded according to the residuals:
+## Die Flächen werden anhand der Residuen eingefärbt:
 
-```{r}
+```{r,eval=F}
 mosaicplot(tab2, main=F,shade = TRUE)
 ```
 
@@ -777,20 +775,20 @@ $$
 parallelplot(~iris[,1:4] | Species, iris)
 ```
 
-## The `ggplot2` package
+## Das `ggplot2` Paket
 
-### [Introduction `ggplot2`](https://www.statmethods.net/advgraphs/ggplot2.html)
+### [**Einführung `ggplot2`**](https://www.statmethods.net/advgraphs/ggplot2.html)
 
 > The ggplot2 package, created by Hadley Wickham, offers a powerful graphics language for creating elegant and complex plots. Its popularity in the R community has exploded in recent years. Origianlly based on Leland Wilkinson's The Grammar of Graphics, ggplot2 allows you to create graphs that represent both univariate and multivariate numerical and categorical data in a straightforward manner. 
 
 <!--
 Grouping can be represented by color, symbol, size, and transparency. The creation of trellis plots (i.e., conditioning) is relatively simple. 
 -->
-### Examples `ggplot2` graphics
+### Beispiele `ggplot2` Graphiken
 
 ![](figure/examples_ggplot2.PNG)
 
-## A first example `ggplot2`
+## Ein erstes Beispiel `ggplot2`
 
 
 ```{r,eval=T}
@@ -803,9 +801,9 @@ ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width)) +
 ![](figure/ggplot2ex.PNG)
 -->
 
-## Some nice Rstudio Addins
+## Einige schöne Rstudio Addins
 
-- A `ggplot` graphic has to be marked in source code, to use the following addins
+- Eine `ggplot` Grafik muss im Quellcode markiert werden, um die folgenden Addins zu verwenden
 
 
 ```{r,eval=F}
@@ -821,7 +819,7 @@ install.packages('ggedit')
 
 ![](figure/ggedit.PNG)
 
-## `ggplot2` builder addin for RStudio
+## RStudio Addin zum Erzeugen von `ggplot2` Graphiken
 
 ```{r,eval=F}
 devtools::install_github("dreamRs/esquisse")
@@ -829,7 +827,7 @@ devtools::install_github("dreamRs/esquisse")
 
 ![](figure/ggplot2builder.PNG)
 
-## Shiny App - R graphs catalogue
+## Shiny App - R Graphik Katalog
 
 http://shinyapps.stat.ubc.ca/r-graph-catalog/
 
@@ -849,7 +847,7 @@ http://www.michalm.net/shiny/easyPlot/
 http://www.michalm.net/shiny/easyPlot/
 -->
 
-## [Add some interactivity](https://moderndata.plot.ly/interactive-r-visualizations-with-d3-ggplot2-rstudio/)
+## [Interactivität hinzufügen](https://moderndata.plot.ly/interactive-r-visualizations-with-d3-ggplot2-rstudio/)
 
 
 ```{r,eval=F}

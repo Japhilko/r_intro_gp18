@@ -1,0 +1,123 @@
+---
+title: "GESIS Panel Daten kennenlernen"
+author: "Jan-Philipp Kolb"
+date: "18 September 2018"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(gpdataprocessing)
+wave <- "ef"
+```
+
+## 
+
+```{r}
+data_path <- getrightpath("J:/Work/GESISPanel_DATA/01_post_processing/c01/_#awave#__#year#/_#wave#/",wave)
+```
+
+```{r}
+wav_data_path <- paste0(data_path,"02_master/data/STATA14/")
+setwd(wav_data_path)
+dirnamen <- dir()
+dirnamen <- dirnamen[agrep(".dta",dirnamen)]
+dat <- readstata13::read.dta13(dirnamen[which.min(nchar(dirnamen))])
+```
+
+## Die Anzahl der Kinder
+
+```{r}
+anz_kinder <- gpdataprocessing::transform_miss(as.numeric(dat$a11d095a))
+hist(anz_kinder,breaks=20)
+```
+
+```{r}
+table(anz_kinder)
+```
+
+## Dauer nächste Urlaubsreise in Tagen - offen
+
+```{r}
+anz_urlaub <- gpdataprocessing::transform_miss(as.numeric(dat$bcan115b))
+table(anz_urlaub)
+```
+
+```{r}
+library(lattice)
+histogram(anz_urlaub,breaks=30)
+```
+
+## Vorfreude nächste Urlaubsreise - bcan114a
+
+```{r, echo=F}
+transform_miss <- function(x){
+  x <- as.character(x)
+  x[x%in%c(-11,-22,-33,-44,-55,-66,-77,-88,-99,-111)] <- NA
+  x[x%in%c("Item nonresponse","Not reached","Unit nonresponse","Not in panel","Not invited","Ambiguous answer","Missing by design","Missing by filter")] <- NA
+  return(x)
+}
+```
+
+
+
+```{r}
+vorfreude <- transform_miss(dat$bcan114a)
+table(vorfreude)
+```
+
+
+```{r}
+histogram(~ anz_urlaub | vorfreude)
+```
+
+
+## Erwerbssituation
+
+```{r}
+erwerb <- transform_miss(dat$bezh087b)
+
+table(erwerb)
+histogram(~ anz_urlaub | erwerb)
+
+```
+
+
+## Dauer nächste Urlaubsreise in Tagen - offen - bcan115b
+
+### Wie lange wird Ihre Urlaubsreise voraussichtlich dauern?
+
+Bitte tragen Sie die Anzahl der Tage in das Feld ein. Falls Sie mehrere Reisen
+geplant haben, denken Sie bitte an Ihre längste Urlaubsreise.
+
+```{r, echo=F}
+transform_miss <- function(x){
+  x <- as.character(x)
+  x[x%in%c(-11,-22,-33,-44,-55,-66,-77,-88,-99,-111)] <- NA
+  x[x%in%c("Item nonresponse","Not reached","Unit nonresponse","Not in panel","Not invited","Ambiguous answer","Missing by design","Missing by filter")] <- NA
+  return(x)
+}
+```
+
+
+```{r}
+anz_urlaub <- transform_miss(as.numeric(dat$bcan115b))
+summary(anz_urlaub)
+```
+
+
+
+## Erwerbssituation - bezh087b
+
+### Welche Erwerbssituation passt für Sie?
+
+Unter Erwerbstätigkeit verstehen wir jede bezahlte oder mit einem Einkommen
+verbundene Tätigkeit. Unabhängig davon, ob Sie angestellt sind oder
+selbständig arbeiten. Wenn Sie mehr als eine Tätigkeit ausüben, beantworten
+Sie bitte die folgenden Fragen für die Tätigkeit, in der Sie die meisten
+Stunden arbeiten.
+
+```{r}
+erwerbsit <- transform_miss(dat$bezh087b)
+table(erwerbsit)
+```
