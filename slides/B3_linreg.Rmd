@@ -35,11 +35,11 @@ datf <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
 
 
 
-## Good literature for linear regression in R
+## Gute Literatur für lineare Regression in R
 
-### Useful PDF document:
+### Nützliches PDF-Dokument:
 
-J H Maindonald - [Using R for Data Analysis and Graphics
+> J H Maindonald - [Using R for Data Analysis and Graphics
 Introduction, Code and Commentary](https://cran.r-project.org/doc/contrib/usingR.pdf)
 
 -  Introduction to R 
@@ -52,9 +52,9 @@ Introduction, Code and Commentary](https://cran.r-project.org/doc/contrib/usingR
 -  ...
 
 
-## Variables of the `mtcars` dataset
+## Variablen im `mtcars` Datensatz
 
-Help for the `roller` dataset:
+Hilfe File für den `roller` Datensatz:
 
 ```{r,eval=F}
 ?mtcars
@@ -62,20 +62,11 @@ Help for the `roller` dataset:
 <!--
 displacement - Hubraum
 -->
--	 mpg -	 Miles/(US) gallon
--	 cyl -	 Number of cylinders
--	 disp	- Displacement (cu.in.)
--	 hp	- Gross horsepower
--	 drat -	 Rear axle ratio
-- wt	- Weight (1000 lbs)
--	 qsec	- 1/4 mile time
--	 vs	- Engine (0 = V-shaped, 1 = straight)
--	 am	-  Transmission (0 = automatic, 1 = manual)
--	 gear	-  Number of forward gears
--	 carb -	 Number of carburetors
+-	 mpg -	 Meilen/(US) Gallone
+-	 cyl -	 Anzahl der Zylinder
 
 
-## Dataset `mtcars`
+## Datensatz `mtcars`
 
 ```{r,echo=F}
 library(knitr)
