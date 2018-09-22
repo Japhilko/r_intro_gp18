@@ -20,7 +20,7 @@ output:
 
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,warning=F,message=F,eval=T)
+knitr::opts_chunk$set(echo = TRUE,warning=F,message=F,eval=T, fig.height=4)
 pres <- F
 ```
 
@@ -83,42 +83,42 @@ plot(density(mtcars$wt)); plot(density(mtcars$mpg))
 
 
 
-## A simple regression model
+## Ein einfaches Regressionsmodell
 
-### Dependent variable - miles per gallon (mpg)
+### Abhängige Variable - Meilen pro Gallone (`mpg`)
 
-### Independent variable - weight (wt)
+### Unabhängige Variable - Gewicht (`wt`)
 
 ```{r}
 m1 <- lm(mpg ~ wt,data=mtcars)
 m1
 ```
 
-## Get the model summary 
+## Die Modell Zusammenfassung:
 
 ```{r}
 summary(m1) 
 ```
 
-## The model formula
+## Die Modellformel
 
-### Model without intercept
+### Modell ohne Achsenabschnitt
 
 ```{r}
 m2 <- lm(mpg ~ - 1 + wt,data=mtcars)
 summary(m2)$coefficients
 ```
 
-### Adding further variables
+### Weitere Variablen hinzufügen
 
 ```{r}
 m3 <- lm(mpg ~ wt + cyl,data=mtcars)
 summary(m3)$coefficients
 ```
 
-## [Further possibilities to specify the formula](https://cran.r-project.org/web/packages/Formula/vignettes/Formula.pdf)
+## [**Weitere Möglichkeiten, die Formel zu spezifizieren**](https://cran.r-project.org/web/packages/Formula/vignettes/Formula.pdf)
 
-### Interaction effect
+### Interaktionseffekt
 
 ```{r}
 # effect of cyl and interaction effect:
@@ -140,7 +140,7 @@ summary(m3c)
 ```
 
 
-### Take the logarithm
+### Den Logarithmus nehmen
 
 ```{r,eval=F}
 m3d<-lm(mpg~log(wt),data=mtcars) 
@@ -153,9 +153,9 @@ https://www.r-bloggers.com/r-tutorial-series-regression-with-interaction-variabl
 https://www.r-bloggers.com/interpreting-interaction-coefficient-in-r-part1-lm/
 -->
 
-## A model with interaction effect
+## Ein Modell mit Interaktionseffekt
 
--`disp`	-  Displacement (cu.in.)
+-`disp`	-  Hubraum
 
 <!--
 drat - Hinterachsenübersetzung
@@ -170,7 +170,7 @@ m3dsum$coefficients
 
 
 
-## [Exploring interactions](https://cran.r-project.org/web/packages/jtools/vignettes/interactions.html)
+## [**Interaktionen untersuchen**](https://cran.r-project.org/web/packages/jtools/vignettes/interactions.html)
 
 ```{r,eval=F}
 install.packages("jtools")
@@ -181,9 +181,11 @@ library(jtools)
 interact_plot(m3d, pred = "wt", modx = "disp")
 ```
 
-- With a continuous moderator (in our case `disp`) you get three lines — 1 standard deviation above and below the mean and the mean itself. 
+- Mit einem kontinuierlichen Moderator (in unserem Fall `disp`) erhält man drei Linien -  Standardabweichung über und unter dem Mittelwert und dem Mittelwert selbst. 
 
+<!--
 ![](figure/mtcars_model_interact.PNG)
+-->
 
 ```{r,eval=F,echo=F}
 library(jtools)
@@ -194,7 +196,7 @@ interact_plot(fitiris, pred = "Petal.Width", modx = "Species")
 
 
 
-## The package `interplot`
+## Das R-Paket `interplot`
 
 
 
@@ -208,15 +210,17 @@ interplot(m = m3d, var1 = "disp", var2 = "wt", hist = TRUE) +
   geom_hline(yintercept = 0, linetype = "dashed")
 ```
 
-- effect plotted on the y axis - `wt` plotted on the x-axis
+- Der Effekt wird auf der y Achse abgetragen - `wt` auf der x-Achse
 
-```{r,eval=F}
+```{r,eval=T}
 interplot(m = m3a, var1 = "wt", var2 = "disp", hist = TRUE)  
 ```
 
+<!--
 ![](figure/interplot_wt_disp.PNG)
+-->
 
-- A more detailed explanation is available in the [**`interplot` vignette**](https://cran.r-project.org/web/packages/interplot/vignettes/interplot-vignette.html)
+- Eine detailliertere Erklärung finden Sie in der  [**`Interplot`**](https://cran.r-project.org/web/packages/interplot/vignettes/interplot-vignette.html) Vignette
 
 
 ## Example: object orientation

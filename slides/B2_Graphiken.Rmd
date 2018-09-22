@@ -441,7 +441,7 @@ beanplot(dat$duration~dat$a11d054a,data=dat,col="orange")
 
 ## Bedingte, bi- und multivariate Graphiken - Scatterplots
 
-- Ein einfacher Zwei-Wege-Streudiagramm kann mit der Funktion `plot()` erstellt werden.
+- Ein einfaches Streudiagramm kann mit der Funktion `plot()` erstellt werden.
 - Um ein Scatterplot zu erstellen, müssen x und y als Beobachtungsvektoren übergeben werden.
 - Argument `col` - Farbe als Zeichen oder numerisch
 - Argument `pch` - Plotsymbol als Zeichen oder numerisch
