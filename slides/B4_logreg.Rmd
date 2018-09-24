@@ -1,6 +1,6 @@
 ---
-title: "B4 - Generalized Linear Models with R"
-author: "Kolb / Murray-Watters"
+title: "B4 - Generalisierte lineare Modelle mit R"
+author: "Jan-Philipp Kolb"
 date: "07 August 2018"
 output:
   beamer_presentation:
@@ -20,6 +20,7 @@ output:
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,warning=F,message=F,eval=T)
+athome <- T
 ```
 
 ```{r,echo=F}
@@ -28,33 +29,33 @@ showsolut=F
 
 
 
-```{r,echo=F}
-dat <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
-datf <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
+```{r,echo=F,eval=athome}
+dat <- readstata13::read.dta13("D:/gitlab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta")
+datf <- readstata13::read.dta13("D:/gitlab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta",
                   convert.factors = F)
 
 ```
 
 
-## Agresti - [Categorical Data Analysis
- (2002)](https://mathdept.iut.ac.ir/sites/mathdept.iut.ac.ir/files/AGRESTI.PDF)
+## Agresti - [**Categorical Data Analysis
+ (2002)**](https://mathdept.iut.ac.ir/sites/mathdept.iut.ac.ir/files/AGRESTI.PDF)
 
 ![](figure/CDAagresti.PNG)
 
-- Very intuitively written book
-- Very detailed accompanying script by [**Laura A. Thompson**](http://statweb.stanford.edu/~owen/courses/306a/Splusdiscrete2.pdf)
-- The paper deals with categorical data analysis in general.
+- Sehr intuitiv geschriebenes Buch 
+- Sehr detailliertes Skript von [**Laura A. Thompson**](http://statweb.stanford.edu/~owen/courses/306a/Splusdiscrete2.pdf)
+- Das Buch behandelt grundsätzlich die kategoriale Datenanalyse.
 
-## Faraway books on regression with R
+## Faraway Bücher zum Thema Regression
 
 ![](figure/extendinglinearmodel.PNG)
 
--  Logistic regression intuitively explained
--  Examples with R-code
+-  Logistische Regression eingängi erklärt
+-  Beispiel mit R-Code
     - Faraway - [**Extending the linear model with R**](http://www.maths.bath.ac.uk/~jjf23/ELM/scripts2/index.html)
     - Faraway - [**Practical Regression and Anova using R**](https://cran.r-project.org/doc/contrib/Faraway-PRA.pdf)
     
-## Import the GESIS Panel dataset again
+## Importieren des GESIS Panels Datensatzes
 
 ```{r,eval=F}
 library(readstata13)
@@ -62,11 +63,11 @@ datf <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
                   convert.factors = F)
 ```
 
-The argument `convert.factors`:
+Das Argument `convert.factors`:
 
-- logical. If TRUE, factors from Stata value labels are created.
+- `logical`. Wenn TRUE, werden Faktoren aus dem Stata Werte Labeln erzeugt.
 
-## A function to recode the missing values
+## Eine Funktion um fehlende Werte zu rekodieren
 
 ```{r,echo=T}
 code_miss <- function(var){
@@ -77,9 +78,9 @@ code_miss <- function(var){
 ```
 
 
-## Variables for `glm`'s
+## Variablen für das `glm`
 
-- a11d056z: age group 
+- a11d056z: Altersgruppe 
 
 ```{r}
 table(datf$a11d056z)
@@ -96,12 +97,12 @@ table(age)
 ```
 
 
-## GP variable a11d094a: Children under 16 years
+## GP Variable a11d094a: Kinder unter 16 Jahre
 
-Does your household include children under 16?
+Gibt es in Ihrem Haushalt Kinder unter 16 Jahren?
 
-- 1 Yes
-- 2 No
+- 1 Ja
+- 2 Nein
 
 ```{r}
 children <- as.factor(code_miss(datf$a11d094a))
@@ -118,11 +119,11 @@ cdplot(children ~ age, data = dat)
 
 
 
-## Binary independent variables with `glm`
+## Binäre abhängige Variablen im `glm`
 
--  The [logistic regression](http://data.princeton.edu/R/glms.html) belongs to the class of generalized linear models (GLM)
--  The function for estimating a model of this class in is called `glm()`
--  `glm()` 
+-  Die [**logistische Regression**](http://data.princeton.edu/R/glms.html) ghört zur Klasse der  generalisierten linearen Modellen (GLM)
+-  Die Funktion zur Schätzung eines Modells dieser Klasse heißt `glm()`
+
 
 ### Specifying a `glm`
 
