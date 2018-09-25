@@ -74,7 +74,7 @@ kable(mtcars)
 ```
 
 
-## Distributions of two variables of `mtcars`
+## Verteilungen von zwei Variablen aus dem Datensatz `mtcars`
 
 ```{r}
 par(mfrow=c(1,2))

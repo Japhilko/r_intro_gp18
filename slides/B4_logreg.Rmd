@@ -21,21 +21,28 @@ output:
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,warning=F,message=F,eval=T)
 athome <- T
+GESIS <- !athome
 ```
 
 ```{r,echo=F}
 showsolut=F
 ```
 
+```{r,eval=GESIS,echo=F}
+gpdata_path <- "D:/Daten/GitLab/IntroDataAnalysis/"
+```
+
+```{r,eval=athome,echo=F}
+gpdata_path <- "D:/Daten/GitLab/IntroDataAnalysis/"
+```
 
 
-```{r,echo=F,eval=athome}
-dat <- readstata13::read.dta13("D:/gitlab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta")
-datf <- readstata13::read.dta13("D:/gitlab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta",
+```{r,echo=F}
+dat <- readstata13::read.dta13(paste0(gpdata_path,"/data/ZA5666_v1-0-0_Stata14.dta"))
+datf <- readstata13::read.dta13(paste0(gpdata_path,"/data/ZA5666_v1-0-0_Stata14.dta"),
                   convert.factors = F)
 
 ```
-
 
 ## Agresti - [**Categorical Data Analysis
  (2002)**](https://mathdept.iut.ac.ir/sites/mathdept.iut.ac.ir/files/AGRESTI.PDF)
@@ -125,16 +132,16 @@ cdplot(children ~ age, data = dat)
 -  Die Funktion zur Schätzung eines Modells dieser Klasse heißt `glm()`
 
 
-### Specifying a `glm`
+### Ein `glm` spezifizieren
 
-- formula object 
-- the class (binomial, gaussian, gamma) 
-- including link function (logit, probit, cauchit, log, cloglog)
+- Formul Objekt 
+- die Klasse (binomial, gaussian, gamma) 
+- mit einer Link Funktion (logit, probit, cauchit, log, cloglog)
 
-must be specified 
+muss spezifiziert 
 
 
-## [Logistic regression](http://ww2.coastal.edu/kingw/statistics/R-tutorials/logistic.html) with R
+## [Logistische Regression](http://ww2.coastal.edu/kingw/statistics/R-tutorials/logistic.html) mit R
 
 ```{r}
 glm_1 <- glm(children ~ age, 
@@ -149,34 +156,38 @@ sum_glm1$coefficients
 <!--
 -->
 
-## [Interpreting the coefficients](https://www.sfu.ca/~jackd/Stat302/Wk12-2_Full.pdf)
+## [**Die Koeffizienten interpretieren**](https://www.sfu.ca/~jackd/Stat302/Wk12-2_Full.pdf)
 
-Consider the logistic model of children in household as a function of age.
+Wir betrachten das logistische Modell der Kinder im Haushalt als eine Funktion des Alters.
+
+```{r}
+sum_glm1$coefficients
+```
+
+- Die Schätzungen und Standardfehler werden mit Log Odds angegeben, nicht mit der Wahrscheinlichkeit.
+
+- Die p-Werte bedeuten das Gleiche, wie bei der linearen Regression.
+
+## Der inverse Logit
 
 ```{r}
 sum_glm1$coefficients
 ```
 
-- The estimates and standard errors are given in terms of log 
-odds, not in terms of probability.
-
-- The p-values mean the same thing they always have.
-
-## The inverse logit
-
-```{r}
-sum_glm1$coefficients
+```{r,eval=F,echo=F}
+install.packages("faraway")
 ```
+
 
 ```{r,echo=F}
 library(faraway)
 ```
 
 
-- The coefficients can’t be interpreted as simply as ‘the children in household at age group 0’. 
-We have to use the inverse logit in order to find that.
+- Die Koeffizienten können nicht so einfach wie "die Kinder im Haushalt in der Altersgruppe 0" interpretiert werden. 
+Wir müssen den inversen Logit verwenden, um etwas auszusagen.
 
-Log-odds of `r sum_glm1$coefficients[1,1]`  is the same as probability 
+Werte für die Log-odds von `r sum_glm1$coefficients[1,1]`  sind das Gleiche, wie die Wahrscheinlichkeit: 
 `r ilogit(sum_glm1$coefficients[1,1])`.
 
 ```{r}
