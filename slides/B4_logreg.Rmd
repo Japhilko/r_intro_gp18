@@ -202,18 +202,17 @@ ilogit(sum_glm1$coefficients[1,1])
 - E.g. a log-odds of 0 translates to a probability of 
 0.5.
 
-## Log-odds and the probability
+## Log-odds und die Wahrscheinlichkeit
 
-- Log-odds always increases as probability increases. 
+- Die Log-odds steigen an, wenn die Wahrscheinlichkeit auch ansteigt.
 
 Therefore...
 
-- A positive slope coefficient means that the response increases 
-with the associated explanatory variable.
+- Ein postivier Steigungskoeffizeint bedeutet, dass der Response-Wert mit zunehmenden Wert für die erklärende Variable auch zunimmt. 
 
-- In this case, the probability of children in the household increases with age.
+- In unserem Fall heißt das: Die Wahrscheinlichkeit, dass sich im Haushalt Kinder befinden steigt mit dem Alter des Befragten.
 
-## Plotting the result
+## Das Ergebnis graphisch darstellen
 
 
 
@@ -226,9 +225,10 @@ ggplot(aes(x=age, y=fit_prob))  +
   geom_line(aes(x=age, y=fit_prob))
 ```
 
-but it increases by the sigmoid curve, not at a constant rate.
+es steigt in einer Sigmoid-Kurve an, nicht mit einer konstanten Rate
 
 ![](figure/sigmoid.PNG)
+
 
 <!--
 http://www.shizukalab.com/toolkits/plotting-logistic-regression-in-r
