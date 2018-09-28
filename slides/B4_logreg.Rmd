@@ -1,7 +1,7 @@
 ---
 title: "B4 - Generalisierte lineare Modelle mit R"
 author: "Jan-Philipp Kolb"
-date: "07 August 2018"
+date: "16 Oktober 2018"
 output:
   beamer_presentation:
     colortheme: beaver
@@ -33,7 +33,7 @@ gpdata_path <- "D:/Daten/GitLab/IntroDataAnalysis/"
 ```
 
 ```{r,eval=athome,echo=F}
-gpdata_path <- "D:/Daten/GitLab/IntroDataAnalysis/"
+gpdata_path <- "D:/gitLab/IntroDataAnalysis/"
 ```
 
 
@@ -195,18 +195,18 @@ library(faraway)
 ilogit(sum_glm1$coefficients[1,1])
 ```
 
-## About the intercept in a logistic model
+## Zum Achsenabschnitt in einem logistischen Modell
 
-- It is possible to get an intercept of less than 0.
-- This means that the log-odds are negative, NOT the probability.
-- E.g. a log-odds of 0 translates to a probability of 
+- Es ist möglich, dass der Schätzwert für den Achsenabschnitt kleiner als null ist.
+- Das bedeuted, dass die log-odds negativ sind und NICHT die Wahrscheinlichkeit.
+- Ein Log-Odd Wert von 0 bedeuted eine Wahrscheinlichkeit von 
 0.5.
 
 ## Log-odds und die Wahrscheinlichkeit
 
 - Die Log-odds steigen an, wenn die Wahrscheinlichkeit auch ansteigt.
 
-Therefore...
+Daraus folgt...
 
 - Ein postivier Steigungskoeffizeint bedeutet, dass der Response-Wert mit zunehmenden Wert für die erklärende Variable auch zunimmt. 
 
@@ -234,15 +234,15 @@ es steigt in einer Sigmoid-Kurve an, nicht mit einer konstanten Rate
 http://www.shizukalab.com/toolkits/plotting-logistic-regression-in-r
 -->
 
-## Logistic regression model formula
+## Logistische Regressionsformel
 
-Logistic models have regression formulas. This model’s formula is:
+Logistische Modelle haben Regressionsformeln. Diese Formel ist:
 
-Log-Odds( Children) =  `r sum_glm1$coefficients[1,1]` + `r sum_glm1$coefficients[2,1]`(Age) + error
+Log-Odds( Children) =  `r sum_glm1$coefficients[1,1]` + `r sum_glm1$coefficients[2,1]`(Age) + Fehler
 
-We can plug age values into this formula to get predicted log-odds at different ages.
+Wir können die Alterswerte in die Formel einsetzen um die vorhergesagten Log-Odds für unterschiedliches Alter zu bekommen.
 
-Log-odds for age group 5
+Log-Odds für die Altersgruppe 5
 
 ```{r,echo=F}
 res1 <- sum_glm1$coefficients[1,1] + sum_glm1$coefficients[2,1]*5
@@ -252,14 +252,14 @@ res1 <- sum_glm1$coefficients[1,1] + sum_glm1$coefficients[2,1]*5
 `r sum_glm1$coefficients[1,1]` + `r sum_glm1$coefficients[2,1]`*(5) =  `r res1`
 
 
-Children probability in age group 5
+Wahrscheinlichkeit für Kinder in der Altersgruppe 5
 
 ```{r}
 ilogit(0.3935251)
 ```
 
 
-## [Interpreting the results](https://www.r-bloggers.com/how-to-perform-a-logistic-regression-in-r/)
+## [**Die Ergebnisse interpretieren**](https://www.r-bloggers.com/how-to-perform-a-logistic-regression-in-r/)
 
 ```{r}
 anova(glm_1, test="Chisq")
@@ -308,24 +308,24 @@ https://www.stat.ubc.ca/~rollin/teach/536w10/lec16.pdf
 ## Place of living and satisfaction
 -->
 
-## Distance between residential area and large city
+## Großstadtnähe Wohngegend
 
-### How far is it from where you live to the center of the nearest large city?
+### Wie weit ist es von Ihrer Wohnung bis ins Zentrum der nächsten Großstadt?
 
-- 1 - In the center of a big city
-- 6 - 60 km and more
+- 1 - Im Großstadtzentrum
+- 6 - 60 km und mehr
 
 ```{r}
 region <- code_miss(datf$bczd001a)
 table(region)
 ```
 
-## Satisfaction life in place of residence
+## Zufriedenheit Leben in Wohnort
 
-### How satisfied are you - all in all - with your life in [place of residence] at the moment?
+### Alles in allem, wie zufrieden sind Sie mit dem Leben in [Wohnort]?
 
-- 1 - Very satisfied
-- 5 - Very dissatisfied
+- 1 - Sehr zufrieden
+- 5 - Sehr unzufrieden
 
 ```{r}
 satisfactionplace <- datf$a11c019a
@@ -333,7 +333,7 @@ table(satisfactionplace)
 ```
 
 
-## Another model
+## Ein anderes Modell
 
 ```{r,eval=T,echo=T}
 glm_2 <- glm(children ~ age + satisfactionplace*region, 
@@ -351,9 +351,9 @@ pseudor2["McFadden"]
 ```
 
 
-## Another variable in the Gesis Panel data
+## Eine weitere Variable aus dem GESIS Panel Datensatz
 
-- Number of tattoos:
+- Anzahl Tattoos:
 
 ```{r}
 Tatoos <- code_miss(datf$bdao067a)
@@ -372,22 +372,22 @@ table(datf$bczd001a)
 ```
 
 
-## Generalized regression with R - more functions
+## Generalisierte Regression mit R - Mehr Funktionen
 
-- Logistic model with Probit link:
+- Logistisches Modell mit einem Probit Link:
 
 ```{r}
 probitmod <- glm(children ~ age, 
 	family=binomial(link=probit))
 ```
 
-- Regression with count data:
+- Regression mit Zähldaten:
 
 ```{r}
 modp <- glm(Tatoos ~ age,family=poisson)
 ```
 
-- Proportional odds logistic regression in library `MASS`:
+- Proportional Odds logistic Regression aus dem Paket `MASS`:
 
 ```{r}
 library("MASS")
@@ -404,15 +404,15 @@ mod_plr<-polr(a11c020a ~ a11d096b ,data=dat)
 ```
 -->
 
-## Linklist - logistic regression
+## Linkliste - logistische Regression
 
--  Introduction to [**logistic regression**](http://ww2.coastal.edu/kingw/statistics/R-tutorials/logistic.html)
+-  Einführung in die [**logistische Regression**](http://ww2.coastal.edu/kingw/statistics/R-tutorials/logistic.html)
 
 ![](figure/Rtutorials.PNG)
 
--  [**Code for the book of Faraway**](http://www.maths.bath.ac.uk/~jjf23/ELM/scripts/binary.R)
+-  [**Code zum Buch von Faraway**](http://www.maths.bath.ac.uk/~jjf23/ELM/scripts/binary.R)
 
 ![](figure/orings.PNG)
 
-- [**Categorical data:**](http://homepage.univie.ac.at/herbert.nagel/KategorialeDaten.pdf) - [**How to perform a Logistic Regression in R**](https://www.r-bloggers.com/how-to-perform-a-logistic-regression-in-r/)
+- [**Kategoriale Daten:**](http://homepage.univie.ac.at/herbert.nagel/KategorialeDaten.pdf) - [**Wie man eine logistische Regression in R durchführt**](https://www.r-bloggers.com/how-to-perform-a-logistic-regression-in-r/)
 
