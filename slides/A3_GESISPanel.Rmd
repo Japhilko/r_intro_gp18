@@ -217,16 +217,16 @@ table(waves)
 
 ## Studien im Campus File
 
-```{r,eval=F}
+```{r,eval=GESIS}
 studies <- unique(substr(cnames,3,4))
 ```
 
-```{r,eval=F}
+```{r,eval=GESIS}
 setwd("J:/Work/GESISPanel/02_panel/04_studies/")
 stud_dat <- xlsx::read.xlsx2("study_overview.xlsx",1)
 ```
 
-```{r,eval=F}
+```{r,eval=GESIS}
 setwd("D:/Daten/GitLab/GesisPanel/data/")
 studies_dat <- xlsx::read.xlsx2("Studies.xlsx",1)
 ```
