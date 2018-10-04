@@ -1,6 +1,6 @@
 ---
 title: "B3 - Linear Regression"
-author: "Jan_philipp Kolb"
+author: "Jan-Philipp Kolb"
 date: "16 Oktober 2018"
 output:
   beamer_presentation:
@@ -37,9 +37,10 @@ datf <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
 
 ## Gute Literatur für lineare Regression in R
 
+<!--
 ### Nützliches PDF-Dokument:
-
-> J H Maindonald - [Using R for Data Analysis and Graphics
+-->
+### J H Maindonald - [Using R for Data Analysis and Graphics
 Introduction, Code and Commentary](https://cran.r-project.org/doc/contrib/usingR.pdf)
 
 -  Introduction to R 
@@ -172,16 +173,19 @@ m3dsum$coefficients
 
 ## [**Interaktionen untersuchen**](https://cran.r-project.org/web/packages/jtools/vignettes/interactions.html)
 
-```{r,eval=F}
+### `jtools` -  Analysis and Presentation of Social Scientific Data
+
+```{r,eval=F,echo=F}
 install.packages("jtools")
 ```
 
-```{r,eval=F,echo=T}
+```{r,eval=T,echo=T}
 library(jtools)
 interact_plot(m3d, pred = "wt", modx = "disp")
 ```
 
-- Mit einem kontinuierlichen Moderator (in unserem Fall `disp`) erhält man drei Linien -  Standardabweichung über und unter dem Mittelwert und dem Mittelwert selbst. 
+- Wenn Interaktions-Variable stetig (hier `disp`) erhält man drei Linien: 
+- 1 - (mw), 2 - (mw - sd) und (mw + sd) 
 
 <!--
 ![](figure/mtcars_model_interact.PNG)
@@ -204,7 +208,7 @@ library(interplot)
 
 - Eine detailliertere Erklärung findet man in der [**`Interplot`**](https://cran.r-project.org/web/packages/interplot/vignettes/interplot-vignette.html) Vignette
 
-
+![](figure/interplot_vignette.PNG)
 
 ## Das R-Paket `interplot`
 

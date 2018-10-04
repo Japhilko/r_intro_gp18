@@ -20,7 +20,7 @@ output:
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,warning=F,message=F,eval=T)
-athome <- T
+athome <- F
 GESIS <- !athome
 ```
 
@@ -64,9 +64,9 @@ datf <- readstata13::read.dta13(paste0(gpdata_path,"/data/ZA5666_v1-0-0_Stata14.
     
 ## Importieren des GESIS Panels Datensatzes
 
-```{r,eval=F}
+```{r,eval=GESIS}
 library(readstata13)
-datf <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
+datf <- read.dta13("D:/Daten/GitLab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta",
                   convert.factors = F)
 ```
 
@@ -191,8 +191,7 @@ Werte für die Log-odds von `r sum_glm1$coefficients[1,1]`  sind das Gleiche, wi
 `r ilogit(sum_glm1$coefficients[1,1])`.
 
 ```{r}
-library(faraway)
-ilogit(sum_glm1$coefficients[1,1])
+faraway::ilogit(sum_glm1$coefficients[1,1])
 ```
 
 ## Zum Achsenabschnitt in einem logistischen Modell
@@ -264,6 +263,28 @@ ilogit(0.3935251)
 ```{r}
 anova(glm_1, test="Chisq")
 ```
+
+
+## Die Devianz
+
+<!--
+https://www.tu-chemnitz.de/hsw/psychologie/professuren/method/homepages/ts/methodenlehre/LogReg.pdf
+-->
+
+### Abweichung vom Idealwert
+
+- Zweimal die Differenz zwischen der maximalen Log-Likelihood $\ell^{(M)}$ und dem Wert für das angepasste Modell
+
+
+<!--
+https://stat.ethz.ch/~stahel/courses/regcourse/sccourse2.pdf
+-->
+
+```{r}
+sum_glm1 <- summary(glm_1)
+sum_glm1$deviance
+```
+
 
 
 ## [Mc Fadden’s $R^2$](https://www.r-bloggers.com/evaluating-logistic-regression-models/

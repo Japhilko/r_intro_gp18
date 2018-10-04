@@ -734,15 +734,15 @@ tapply(ApplyDat$Income,
 - Other commands can also be used..... also self-scripted commands
 
 
-## B1E Exercise  - using the `tapply()` command
+## B1E Übung  - `tapply()` Befehl verwenden
 
-- Find out which variable contains information about age
+- Finde heraus, welche Variable Informationen über das Alter enthält.
 
 ```{r,echo=showSolution,eval=showSolution}
 dat <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
 ```
 
-- Calculate the average duration (variable `bfzq020a`) by age group
+- Berechne die durchschnittliche Dauer für die Beantwortung des Fragebogens nach Geschlecht (Variable `bfzq020a`).
 
 
 ```{r,echo=showSolution,eval=showSolution}
@@ -751,14 +751,14 @@ dat$Dauer[dat$bfzq020a %in% c(-77,-22,-33,-77.-99)] <- NA
 tapply(dat$Dauer,dat$bfzh070z,mean,na.rm=T)
 ```
 
-## [The `reshape` package](https://www.statmethods.net/management/reshape.html)
+## [Das `reshape` Paket](https://www.statmethods.net/management/reshape.html)
 
 ```{r,echo=F,eval=F}
 install.packages("reshape")
 ```
 
 
-### Example dataset 
+### Beispiel Datensatz 
 
 ```{r}
 (mydata <- data.frame(id=rep(1:2,each=2), # sample dataset
@@ -768,15 +768,15 @@ install.packages("reshape")
 ```
 
 
-## Example of command `melt`
+## Beispiel mit dem Befehl `melt`
 
 ```{r}
 library(reshape)
 melt(mydata, id=c("id","time")) #  
 ```
 
-
-## The package `tibble`
+<!--
+## Das Paket `tibble`
 
 ```{r,eval=F,echo=F}
 install.packages("tibble")
@@ -792,33 +792,33 @@ library(tibble)
 (gpanel1 <- as_tibble(dat))
 ```
 
+-->
 
-
-## Edgar Anderson's Iris dataset
+## Edgar Anderson's Iris Datensatz
 
 ```{r}
 data(iris)
 head(iris)
 ```
 
-- petal length and width 
+- petal length and width - Länge und Breite der Blütenblätter
 
-- sepal length and width
+- sepal length and width - Kelchlänge und -breite
 
-- [**Wikipedia Article for the IRIS dataset**](https://en.wikipedia.org/wiki/Iris_flower_data_set)
+- [**Wikipedia Artikel zum IRIS Datensatz**](https://en.wikipedia.org/wiki/Iris_flower_data_set)
 
-## Relationship between continuous variables
+## Zusammenhang zwischen kontinuierliche Variablen
 
 ```{r}
 # Pearson correlation coefficient
 cor(iris$Sepal.Length,iris$Petal.Length)
 ```
 
-- Correlation between petal length and petal length 0.87
-- The Pearson's correlation coefficient is the default method in `cor()`.
+- Zusammenhang zwischen Blütenblattlänge und Blütenblattlänge ist 0,87
+- Der Pearson-Korrelationskoeffizient ist die Standardmethode in `cor()`.
 
 
-## Various correlation coefficients
+## Verschiedene Korrelationskoeffizienten
 
 
 ```{r}
@@ -837,45 +837,45 @@ cor(iris[,1:4], method = "spearman")
 ```
 
 
-## Relationship between categorial variables
+## Beziehung zwischen kategorialen Variablen
 
-- `chisq.test()` tests whether two categorial features are stochastically independent.
-- The test is performed against the null hypothesis of equal distribution
+- `chisq.test()`prüft, ob zwei kategoriale Merkmale stochastisch unabhängig sind.
+- Der Test wird gegen die Nullhypothese der Gleichverteilung durchgeführt.
 
 
 <!--
 https://support.minitab.com/de-de/minitab/18/help-and-how-to/modeling-statistics/regression/how-to/fit-binary-logistic-model/methods-and-formulas/diagnostic-measures/
 -->
 
-## B1F Exercise - make a interactive table
+## B1F Übung - eine interaktive Tabelle
 
-- Download the dataset `dat_cf2.RData` from ILIAS
-- Import dataset into R 
-- Create an interactive table using the following commands
+- Lade den Datensatz `dat_cf2.RData` vom [**Github Verzeichnis**](https://github.com/Japhilko/r_intro_gp18) herunter.
+- Importiere den Datensatz in R 
+- Erstelle eine interaktive Tabelle mit den folgenden Befehlen:
 
 ```{r,eval=F}
 library(DT)
 DT::datatable(dat_cf2)
 ```
 
-- See which additional arguments of the function `datatable` are valuable
+- Prüfe, welche zusätzlichen Argumente der Funktion `datatable` für Dich nützlich sind.
 
 
 
-## Shiny App for quick explorative data analysis
+## Shiny App für eine schnelle explorative Datenanalyse
 
 https://pharmacometrics.shinyapps.io/ggplotwithyourdata/
 
 ![](figure/ggquickeda.PNG)
 
 
-## Further Links
+## Weitere Links
 
-- [**Tidy data**](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) - the package `tidyr`
+- [**Tidy data**](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) - das Paket `tidyr`
 
-- Homepage for [**the `tidyverse` collection**](http://tidyverse.org/)
+- Homepage für: [**the `tidyverse` collection**](http://tidyverse.org/)
 
-- [**Data wrangling with R and RStudio**](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/)
+- [**Data wrangling mit R und RStudio**](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/)
 
 
 ```{r,eval=F,echo=F}

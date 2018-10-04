@@ -1,7 +1,7 @@
 ---
 title: "B2 - Graphics intro"
-author: "Kolb / Murray-Watters"
-date: "07 August 2018"
+author: "Jan-Philipp Kolb"
+date: "16 Oktober 2018"
 output:
   beamer_presentation:
     colortheme: beaver
@@ -104,7 +104,7 @@ datf <- readstata13::read.dta13("D:/gitlab/IntroDataAnalysis/data/ZA5666_v1-0-0_
 ```
 
 
-```{r,eval=F,echo=F}
+```{r,eval=GESIS,echo=F}
 datf <- readstata13::read.dta13("D:/Daten/GitLab/IntroDataAnalysis/data/ZA5666_v1-0-0_Stata14.dta",convert.factors = F)
 ```
 
@@ -263,7 +263,7 @@ hist(dat$duration,col="red",
 <!--
 ![](figure/breaksargument.PNG)
 -->
-## Tabelieren und `barplot`
+## Tabellieren und `barplot`
 
 ```{r}
 sex <- as.character(dat$a11d054a)
@@ -314,15 +314,14 @@ barplot(tab_sex,col=rgb(1,0,0,.3))
 
 ## Eine zweidimensionale Tabelle
 
-Internet-Suche nach Informationen: Freunde (bbzc024a) und Geschlecht (a11d054a)
+Internet-Suche nach Infos: Freunde (bbzc024a) und Geschlecht (a11d054a)
+
+- Wenn das übergebene Tabellenobjekt zweidimensional ist, wird ein bedingter Barplot erstellt.
 
 
 ```{r}
 table(dat$bbzc024a,sex)
 ```
-
-- Wenn das übergebene Tabellenobjekt zweidimensional ist, wird ein bedingter Barplot erstellt.
-
 
 ## Fehlende Werte rekodieren
 
@@ -445,8 +444,10 @@ beanplot(dat$duration~dat$a11d054a,data=dat,col="orange")
 - Um ein Scatterplot zu erstellen, müssen x und y als Beobachtungsvektoren übergeben werden.
 - Argument `col` - Farbe als Zeichen oder numerisch
 - Argument `pch` - Plotsymbol als Zeichen oder numerisch
-- Achsenbeschriftung - mit `xlab` und `ylab` definiert.
+- Achsenbeschriftung wird mit `xlab` und `ylab` definiert.
 
+
+## Scatterplot
 
 ```{r,eval=F,echo=F}
 install.packages("mlmRev")
@@ -474,7 +475,7 @@ barplot(VADeaths, border = "dark blue",beside=T,
 
 ## Das `lattice`-Paket
 
-### [**Definition eine `lattice` Graphik**](http://stat.ethz.ch/R-manual/R-devel/library/lattice/html/Lattice.html)
+### [**Definition einer `lattice` Graphik**](http://stat.ethz.ch/R-manual/R-devel/library/lattice/html/Lattice.html)
 
 > It is designed to meet most typical graphics needs with minimal tuning, but can also be easily extended to handle most nonstandard requirements. 
 
@@ -491,6 +492,12 @@ devtools::install_github("homerhanumat/addinplots")
 ```
 
 ![](figure/addinplots.PNG)
+
+```{r,eval=F,echo=F}
+iris
+```
+
+
 
 ## Benutzer Interface für `addinplots`
 
@@ -634,6 +641,7 @@ pairs.panels(iris[,1:4],
 splom(~iris[,1:4], groups = Species, data = iris)
 ```
 
+## Mehr Argumente im `splom` Befehl
 
 ```{r,eval=F}
 super.sym <- trellis.par.get("superpose.symbol")
@@ -643,7 +651,8 @@ splom(~iris[1:4], groups = Species, data = iris,
                  columns = 3, 
                  points = list(pch = super.sym$pch[1:3],
                  col = super.sym$col[1:3]),
-                 text = list(c("Setosa", "Versicolor", "Virginica"))))
+                 text = list(c("Setosa", "Versicolor", 
+                               "Virginica"))))
 ```
 
 
@@ -697,12 +706,14 @@ table(twitter)
 
 ## `levelplot` mit GESIS Panel Daten
 
-```{r,message=F,eval=F}
+```{r,message=F,eval=GESIS}
 levelplot(table(facebook,twitter),
 col.regions=colorRampPalette(c("blue","white","red")))
 ```
 
+<!--
 ![](figure/levelplot_twitterfacebook.PNG)
+-->
 
 ## Internet Nutzung (GESIS Panel)
 
@@ -729,12 +740,13 @@ tab2 <- table(internet,smartphone)
 ## Zusammenhang - kategoriale Variablen
 
 
-```{r,eval=F}
+```{r,eval=GESIS}
 mosaicplot(tab2, color = TRUE,main="")
 ```
 
-
+<!--
 ![](figure/mosaicplot_internet.PNG)
+-->
 
 <!--
 ## Making the plot clearer
@@ -755,7 +767,7 @@ dat$a11c036a <- as.character(dat$a11c036a)
 
 ## Die Flächen werden anhand der Residuen eingefärbt:
 
-```{r,eval=F}
+```{r,eval=GESIS}
 mosaicplot(tab2, main=F,shade = TRUE)
 ```
 
@@ -847,17 +859,80 @@ http://www.michalm.net/shiny/easyPlot/
 http://www.michalm.net/shiny/easyPlot/
 -->
 
-## [Interactivität hinzufügen](https://moderndata.plot.ly/interactive-r-visualizations-with-d3-ggplot2-rstudio/)
+## Ein Beispieldatensatz zu Diamanten
 
+> A dataset containing the prices and other attributes of almost 54,000 diamonds.
+
+- price - price in US dollars (\$326–\$18,823)
+
+- carat - weight of the diamond (0.2–5.01)
+
+- cut - quality of the cut (Fair, Good, Very Good, Premium, Ideal)
+
+- color - diamond colour, from J (worst) to D (best)
+
+- clarity - a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
+
+<!--
+- x - length in mm (0–10.74)
+
+- y - width in mm (0–58.9)
+
+- z - depth in mm (0–31.8)
+
+- depth - total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43–79)
+
+- table - width of top of diamond relative to widest point (43–95)
+-->
+
+```{r}
+data(diamonds)
+```
+
+- Der Datensatz ist zu groß für unsere Anwendungszwecke:
+
+```{r}
+d <- diamonds[sample(nrow(diamonds), 1000), ]
+```
+
+
+## Das Paket `plotly`
+
+> Create Interactive Web Graphics via 'plotly.js'
+
+```{r}
+library(plotly)
+```
+
+
+![](figure/Beispiele_plotly.PNG)
+
+## [Interaktivität hinzufügen](https://moderndata.plot.ly/interactive-r-visualizations-with-d3-ggplot2-rstudio/)
 
 ```{r,eval=F}
-library(plotly)
-d <- diamonds[sample(nrow(diamonds), 1000), ]
 p <- ggplot(data = d, aes(x = carat, y = price)) +
-  geom_point(aes(text = paste("Clarity:", clarity)), size = 4) +
+  geom_point(aes(text = clarity,size = 4)) +
+  geom_smooth(aes(colour = cut, fill = cut))+ 
+  facet_wrap(~ cut)
+```
+
+
+### Es wird eine ggplot Graphik erzeugt
+
+```{r,eval=F,echo=F}
+p <- ggplot(data = d, aes(x = carat, y = price)) +
+  geom_point(aes(text = paste("Clarity:",clarity)),size = 4) +
   geom_smooth(aes(colour = cut, fill = cut)) + facet_wrap(~ cut)
 (gg <- ggplotly(p))
 ```
+
+
+## Das Ergebnis - eine interaktive Graphik
+
+```{r,eval=F}
+ggplotly(p)
+```
+
 
 ![](figure/plotly_diamonds.PNG)
 
