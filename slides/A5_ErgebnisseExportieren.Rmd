@@ -1,7 +1,7 @@
 ---
 title: "A5 Ergebnisse exportieren"
-author: "Kolb"
-date: "09 Oktober 2018"
+author: "Jan-Philipp Kolb"
+date: "15 Oktober 2018"
 output:
   beamer_presentation:
     colortheme: beaver

@@ -1,0 +1,831 @@
+\documentclass[ignorenonframetext,]{beamer}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+\usetheme[]{CambridgeUS}
+\usecolortheme{beaver}
+\usefonttheme{structurebold}
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\newif\ifbibliography
+\hypersetup{
+            pdftitle={A1 Erste Schritte mit R},
+            pdfauthor={Jan-Philipp Kolb},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{caption}
+% These lines are needed to make table captions work with longtable:
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight0.8\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+
+\AtBeginPart{
+  \let\insertpartnumber\relax
+  \let\partname\relax
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \let\insertsubsectionnumber\relax
+  \let\subsectionname\relax
+  \frame{\subsectionpage}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+
+\title{A1 Erste Schritte mit R}
+\author{Jan-Philipp Kolb}
+\date{15 Oktober 2018}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Disclaimer/ Informationen vorab}
+
+Normalerweise gibt es große Unterschiede in den Kenntnissen und
+Fähigkeiten der Teilnehmer - bitte gebt Bescheid, wenn es zu schnell
+oder zu langsam geht oder etwas unklar geblieben ist.
+
+\begin{itemize}
+\tightlist
+\item
+  Wenn es Fragen gibt - immer fragen
+\item
+  In diesem Kurs gibt es viele
+  \href{http://web.math.ku.dk/~helle/R-intro/exercises.pdf}{\textbf{Übungen}},
+  denn das Programmieren lernt man am Ende nur allein.
+\item
+  Ich habe viele \href{https://www.showmeshiny.com/}{\textbf{Beispiele}}
+  - probiert sie aus
+\item
+  R macht mehr Spaß zusammen - arbeitet zusammen!
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Gründe R zu nutzen\ldots{}}
+
+\begin{itemize}
+\item
+  \ldots{} R ist eine
+  \href{https://stackoverflow.com/questions/1546583/what-is-the-definition-of-an-open-source-programming-language}{\textbf{quelloffene
+  Sprache}}
+\item
+  \ldots{} hervorragende
+  \href{http://matthewlincoln.net/2014/12/20/adjacency-matrix-plots-with-r-and-ggplot2.html}{\textbf{Grafiken}},
+  \href{https://www.r-bloggers.com/3d-plots-with-ggplot2-and-plotly\%20/}{\textbf{Grafiken}},
+  \href{https://procomun.wordpress.com/2011/03/18/splomr/}{\textbf{Grafiken}}
+\item
+  \ldots{} \href{https://github.com/Japhilko/RInterfaces}{\textbf{R kann
+  in Kombination mit anderen Programmen verwendet werden}} - z.B. zur
+  \href{https://github.com/Japhilko/RInterfaces/blob/master/slides/Datenimport.md}{\textbf{Verknüpfung
+  von Daten}}
+\item
+  \ldots{} R kann
+  \href{https://cran.r-project.org/web/packages/MplusAutomation/index.html}{\textbf{zur
+  Automatisierung}} verwendet werden
+\item
+  \ldots{} Breite und aktive Community -
+  \href{https://www.r-bloggers.com/}{\textbf{Man kann die Intelligenz
+  anderer Leute nutzen ;-)}}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{R kann in Kombination mit anderen Programmen genutzt
+werden\ldots{}}
+
+\includegraphics{figure/Rinterfaces.PNG}
+
+\begin{itemize}
+\tightlist
+\item
+  Schnittstelle zu:
+  \href{https://cran.r-project.org/web/packages/reticulate/vignettes/calling_python.html}{\textbf{Python}},
+  \href{https://www.springer.com/de/book/9781441900517}{\textbf{Excel}},
+  \href{https://www.ibm.com/support/knowledgecenter/en/SSFUEU_7.2.0/com.ibm.swg.ba.cognos.op_capmod_ig.7.2.0.doc/t_essentials_for_r_statistics.html}{\textbf{SPSS}},
+  \href{https://cran.r-project.org/web/packages/SASmixed/index.html}{\textbf{SAS}},
+  \href{https://cran.r-project.org/web/packages/RStata/index.html}{\textbf{Stata}}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{R für SPSS Nutzer}
+
+\begin{block}{Bob Muenchen -
+\href{https://science.nature.nps.gov/im/datamgmt/statistics/r/documents/r_for_sas_spss_users.pdf}{\textbf{R
+for SPSS and SAS Users }}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{http://www.rcommander.com/}{\textbf{R commander (Rcmdr)}}
+\end{itemize}
+
+\includegraphics{figure/Rcommanderex.PNG}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{\href{https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-excel-error-that-changed-history}{R
+sollte genutzt werden, weil andere Programme Fehler provozieren:}}
+
+\includegraphics{figure/RheinhartRogoff.PNG}
+
+\end{frame}
+
+\begin{frame}{\href{https://gallery.shinyapps.io/cran-gauge/}{\textbf{Die
+Beliebtheit von R-Paketen}}}
+
+\includegraphics{figure/CRANdownloads.PNG}
+
+\end{frame}
+
+\begin{frame}{Download R:}
+
+\url{http://www.r-project.org/}
+
+\includegraphics{figure/CRAN1picture.PNG}
+
+\end{frame}
+
+\begin{frame}{Open Source Programm R}
+
+\begin{block}{Das ist das Basis-R:}
+
+\includegraphics{figure/BasisR.PNG}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Graphical user interface}
+
+Viele Leute nutzen ein
+\href{https://en.wikipedia.org/wiki/Graphical_user_interface}{\textbf{Graphical
+User Interface}} (GUI) oder ein
+\href{https://en.wikipedia.org/wiki/Integrated_development_environment}{\textbf{Integrated
+Development Interface}} (IDE).
+
+Aus den folgenden Gründen:
+
+\begin{itemize}
+\tightlist
+\item
+  Syntax-Hervorhebung
+\item
+  Auto-Vervollständigung
+\item
+  Bessere Übersicht über Graphiken, Pakete, Dateien, \ldots{}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Various text editors / IDEs}
+
+\begin{itemize}
+\item
+  \href{https://projects.gnome.org/gedit/}{\textbf{Gedit}} with
+  R-specific Add-ons for Linux
+\item
+  \href{http://www.gnu.org/software/emacs/}{\textbf{Emacs}} and ESS
+  (Emacs speaks statistics)- An extensible, customizable, free/libre
+  text editor --- and more.
+\item
+  I use \href{https://www.rstudio.com/}{\textbf{Rstudio!}}
+\end{itemize}
+
+\includegraphics{figure/0_overall.jpg}
+
+\end{frame}
+
+\begin{frame}{RStudio}
+
+\includegraphics{figure/RstudioExample.PNG}
+
+\end{frame}
+
+\begin{frame}{Customizing RStudio}
+
+\begin{block}{Six
+\href{http://www.r-bloggers.com/top-6-reasons-you-need-to-be-using-rstudio/}{\textbf{reasons}}
+to use
+\href{https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio}{\textbf{Rstudio}}.}
+
+\includegraphics{figure/options_general.png}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{A1A Exercise - Preparation}
+
+\begin{itemize}
+\tightlist
+\item
+  Check if R is installed on your computer.
+\item
+  If not, download \href{r-project.org}{\textbf{R}} and install it.
+\item
+  Check if Rstudio is installed.
+\item
+  If not - \href{http://www.rstudio.com/}{\textbf{install}} Rstudio.
+\item
+  Start RStudio. Go to the console (lower left window) and write
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3}\OperatorTok{+}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  If there is not already an editor open in the upper left window, then
+  go to the file menu and open a new script. Check the date with
+  \texttt{date()} and the R version with \texttt{sessionInfo()}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{date}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sessionInfo}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}[fragile]{R ist eine objektorientierte Sprache.}
+
+\begin{block}{Vektoren und Zuweisungen}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\textless{}-} ist der Zuweisungsoperator
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{) }\CommentTok{# create an object with the numbers 1 and 2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Auf dieses Objekt kann eine Funktion angewendet werden:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(b) }\CommentTok{# computes the mean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.5
+\end{verbatim}
+
+Mit den folgenden Funktionen können wir etwas über die Eigenschaften des
+Objekts erfahren:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(b) }\CommentTok{# b has the length 2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\end{block}
+
+\begin{block}{Objektstruktur}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(b) }\CommentTok{# b is a numeric vector}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  num [1:2] 1 2
+\end{verbatim}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Funktionen in base-Paket}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Function & Meaning & Example\tabularnewline
+\midrule
+\endhead
+str() & Object structure & str(b)\tabularnewline
+max() & Maximum & max(b)\tabularnewline
+min() & Minimum & min(b)\tabularnewline
+sd() & Standard deviation & sd(b)\tabularnewline
+var() & Variance & var(b)\tabularnewline
+mean() & Mean & mean(b)\tabularnewline
+median() & Median & median(b)\tabularnewline
+\bottomrule
+\end{longtable}
+
+Diese Funktionen benötigen nur ein Argument.
+
+\end{frame}
+
+\begin{frame}[fragile]{Funktionen mit mehr Argumenten}
+
+\begin{block}{Andere Funktionen benötigen mehr Argumente:}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Argument & Bedeutung & Beispiel\tabularnewline
+\midrule
+\endhead
+quantile() & 90 \% Quantile & quantile(b,.9)\tabularnewline
+sample() & Draw a sample & sample(b,1)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{quantile}\NormalTok{(b,.}\DecValTok{9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 90% 
+## 1.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sample}\NormalTok{(b,}\DecValTok{1}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\end{block}
+
+\begin{block}{Beispiele - Funktionen mit mehr als einem Argument}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{max}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{min}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sd}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7071068
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{var}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5
+\end{verbatim}
+
+\end{block}
+
+\begin{block}{Funktionen mit einem Argument}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{median}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.5
+\end{verbatim}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{\href{http://cran.r-project.org/doc/manuals/R-intro.html}{\textbf{Überblick
+Funktionen}}}
+
+\url{http://cran.r-project.org/doc/manuals/R-intro.html}
+
+\includegraphics{figure/UebersichtBefehle.PNG}
+
+\end{frame}
+
+\begin{frame}[fragile]{A1B Übung - Zuweisungen und Funktionen}
+
+Erstellen Sie einen Vektor \texttt{b} mit den Zahlen von 1 bis 5 und
+berechnen Sie\ldots{}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  den Mittelwert
+\item
+  die Varianz
+\item
+  die Standardabweichung
+\item
+  die Quadratwurzel aus dem Mittelwert
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{\href{https://stats.idre.ucla.edu/r/seminars/intro/}{\textbf{Wo
+man Routinen findet}}}
+
+\begin{itemize}
+\tightlist
+\item
+  Viele Funktionen sind in Basis-R enthalten.
+\item
+  Viele spezifische Funktionen sind in zusätzliche Bibliotheken
+  integriert.
+\item
+  R kann modular durch sogenannte Pakete oder Bibliotheken erweitert
+  werden.
+\item
+  Die wichtigsten Pakete, die auf CRAN gehostet werden (13087 at Do Okt
+  04)
+\item
+  Weitere Pakete finden Sie z.B. unter
+  \href{www.bioconductor.org}{\textbf{Bioleiter}}
+\end{itemize}
+
+\begin{block}{Übersicht R-Pakete}
+
+\includegraphics{figure/Packages.PNG}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Installation von Paketen}
+
+\begin{itemize}
+\tightlist
+\item
+  Die Anführungszeichen um den Paketnamen herum sind für den Befehl
+  \texttt{install.packages} notwendig.
+\item
+  Sie sind optional für den Befehl \texttt{library}.
+\item
+  Man kann auch \texttt{require} anstelle von \texttt{library}
+  verwenden.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"lme4"}\NormalTok{)}
+
+\KeywordTok{library}\NormalTok{(lme4)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}{Installation von Paketen mit RStudio}
+
+\includegraphics{figure/PaketeRstudio.PNG}
+
+\end{frame}
+
+\begin{frame}{Bestehende Pakete und Installation}
+
+\includegraphics{figure/packages3.PNG}
+
+\end{frame}
+
+\begin{frame}[fragile]{Übersicht über viele nützliche Pakete:}
+
+\begin{itemize}
+\tightlist
+\item
+  Luhmann -
+  \href{http://www.beltz.de/fileadmin/beltz/downloads/OnlinematerialienPVU/28090_Luhmann/Verwendete\%20Pakete.pdf}{\textbf{Table
+  with many useful packages}}
+\end{itemize}
+
+\begin{block}{Weitere interessante Pakete:}
+
+\begin{itemize}
+\item
+  Paket für Import/Export -
+  \href{http://cran.r-project.org/web/packages/foreign/foreign.pdf}{\textbf{\texttt{foreign}}}
+\item
+  \href{http://iase-web.org/documents/papers/icots8/ICOTS8_4J1_TILLE.pdf}{\textbf{\texttt{sampling}-Paket
+  für die Stichprobenziehung}}
+\item
+  \texttt{xtable} Paket zur Integration von LateX in R
+  (\href{http://cran.r-project.org/web/packages/xtable/vignettes/xtableGallery.pdf}{\textbf{xtable
+  Galerie}})
+\item
+  \href{http://cran.r-project.org/web/packages/dummies/dummies.pdf}{\textbf{\texttt{dummies}
+  - Paket zur Erstellung von Dummies}}
+\item
+  \href{http://cran.r-project.org/web/packages/mvtnorm/index.html}{\textbf{Paket
+  \texttt{mvtnorm} um eine multivariate Normalverteilung zu erhalten. }}
+\item
+  \href{http://www.r-bloggers.com/tag/maptools/}{\textbf{Paket
+  \texttt{maptools} um Karten zu erzeugen}}
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Pakete aus verschiedenen Quellen installieren}
+
+\begin{block}{Pakete vom CRAN Server installieren}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"lme4"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\begin{block}{Pakete vom Bioconductor Server installieren}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{source}\NormalTok{(}\StringTok{"https://bioconductor.org/biocLite.R"}\NormalTok{)}
+\KeywordTok{biocLite}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"GenomicFeatures"}\NormalTok{, }\StringTok{"AnnotationDbi"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\begin{block}{Pakete von Github installieren}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(devtools)}
+
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"hadley/ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Wie bekomme ich einen Überblick?}
+
+\begin{itemize}
+\item
+  Entdecke Pakete, die kürzlich auf den
+  \href{https://mran.microsoft.com/packages/}{\textbf{CRAN}} Server
+  hochgeladen wurden
+\item
+  Nutze eine Shiny Web-App, die
+  \href{https://gallery.shinyapps.io/cran-gauge/}{\textbf{Pakete
+  anzeigt, die kürzlich von CRAN}} heruntergeladen wurden.
+\item
+  Werfe einen Blick auf eine
+  \href{https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages}{\textbf{Quick-Liste
+  nützlicher Pakete}}
+\item
+  \ldots{}., oder auf eine Liste mit den
+  \href{http://www.computerworld.com/article/2921176/business-intelligence/great-r-packages-for-data-import-wrangling-visualization.html}{\textbf{besten
+  Paketen für die Datenverarbeitung und -analyse}},\ldots{}..
+\item
+  \ldots{}., oder schaue unter
+  \href{https://www.r-bloggers.com/the-50-most-used-r-packages/}{\textbf{die
+  50 meistgenutzten Pakete}}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{CRAN Task Views}
+
+\begin{itemize}
+\tightlist
+\item
+  Bezüglich mancher Themen gibt es einen Überblick über alle wichtigen
+  Pakete - (\href{https://cran.r-project.org/web/views/}{\textbf{CRAN
+  Task Views}})
+\item
+  Momentan gibt es 35 Task Views.
+\item
+  Alle Pakete einer Task-View können mit folgendem Befehl installiert
+  werden:
+  \href{https://mran.microsoft.com/rpackages/}{\textbf{command:}}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ctv"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"ctv"}\NormalTok{)}
+\KeywordTok{install.views}\NormalTok{(}\StringTok{"Bayesian"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{figure/CRANtaskViews.PNG}
+
+\end{frame}
+
+\begin{frame}{A1C Übung - zusätzliche Pakete}
+
+Geht auf \url{https://cran.r-project.org/} und sucht nach
+Paketen\ldots{}
+
+\begin{itemize}
+\tightlist
+\item
+  die sich für die deskriptive Datenanalyse eignen.
+\item
+  mit denen man fremde Datensätze einlesen kann (z.B. SPSS data)
+\item
+  mit denen man Lasso Regressionen rechnen kann
+\item
+  mit denen man große Datenmengen bearbeiten kann
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Links zum Weiterlesen:}
+
+\begin{itemize}
+\item
+  \href{http://www.r-bloggers.com/why-you-should-learn-r-first-for-data-science/}{\textbf{Warum
+  man R zuerst lerneen sollte wenn man Data Science machen möchte}}
+\item
+  RStudio hat den
+  \href{http://www.r-bloggers.com/rstudio-infoworld-2015-technology-of-the-year-award-recipient/}{\textbf{Infoworld
+  2015 Technology of the Year Award.}} bekommen
+\item
+  \href{http://www.fastcolabs.com/3030063/why\%20the\%20r\%20programming\%20language\%20is\%20good\%20for\%20business}{\textbf{Warum
+  R gut für Unternehmen ist}}
+\item
+  Schaut auf
+  \href{http://www.r-bloggers.com/why-use-r/}{\textbf{R-bloggers}} 
+\item
+  Vergleich zwischen
+  \href{http://www.dataschool.io/python-or-r-for-data-science/}{\textbf{python
+  und R}}
+\item
+  R und Stata -
+  \href{http://economistry.com/2013/11/r-impact-evaluation-r-stata-side-side/}{\textbf{Side-by-side}}
+\item
+  \href{https://awesome-r.com/}{\textbf{AWESOME R}}
+\item
+  \href{https://support.bioconductor.org/p/33781/}{\textbf{1000 R
+  tutorials/Links}}
+\item
+  \href{https://www.youtube.com/playlist?list=PLcgz5kNZFCkzSyBG3H-rUaPHoBXgijHfC}{\textbf{Zwei
+  Minuten Videos auf Github}}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Shiny App - Einführung in R}
+
+\url{http://www.intro-stats.com/}
+
+\includegraphics{figure/intror_shiny.PNG}
+
+\end{frame}
+
+\end{document}

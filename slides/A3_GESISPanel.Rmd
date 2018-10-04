@@ -21,6 +21,9 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,warning = F,message = F)
 GESIS <- T
+athome <- !GESIS
+
+
 library(magrittr)
 library(kableExtra)
 library(dplyr)
@@ -47,7 +50,7 @@ install.packages("flextable")
 
 ## Download data
 
-- Übersichtsseite: [**GESIS Panel Campus File**](https://www.gesis.org/gesis-panel/data/gesis-panel-campus-file/)
+- Übersichtsseite: [**GESIS Panel Campus File**](https://www.gesis.org/gesis-panel/data/)
 - Registrierung notwendig
 
 
@@ -242,10 +245,18 @@ ind_study <- match(studies,studies_dat$Studycode)
 studies_df <- data.frame(Name=as.character(studies_dat$Studytitle[ind_study]),
                          Code=studies)
 studies_df <- studies_df[complete.cases(studies_df),]
+```
+
+```{r,eval=F,echo=F}
 kable(studies_df)
 ```
 
 
+```{r,eval=F,ech=F}
+DT::datatable(studies_df)
+```
+
+![](figure/GPstudies_CampusFile.PNG)
 
 ## Die Missing Codes im GESIS Panel
 

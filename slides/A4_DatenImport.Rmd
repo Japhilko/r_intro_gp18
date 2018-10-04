@@ -19,10 +19,20 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = F,message = F)
+GESIS <- T
+athome <- !GESIS
+```
+
+## Datenimport
+
+
+```{r,eval=GESIS,echo=F}
+setwd("J:/Work/GESISPanel_DATA/01_post_processing/campus_file/b_2014/")
+dat <- readstata13::read.dta13("campus_file_b_2014_20170307.dta")
+datf <- readstata13::read.dta13("campus_file_b_2014_20170307.dta",convert.factors = F)
 ```
 
 
-## Datenimport
 
 ![](figure/Datenimport.PNG)
 
@@ -206,18 +216,26 @@ library(readstata13)
 ```
 
 
-```{r,eval=T}
+```{r,eval=F}
 datf <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
                   convert.factors = F)
+```
+
+```{r}
 head(datf$bbzc007a)
 ```
 
+
 ### Zum Vergleich - Import ohne dieses Argument
 
-```{r,eval=T}
+```{r,eval=F}
 dat <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
+```
+
+```{r}
 head(dat$bbzc007a)
 ```
+
 
 
 ### Das Argument `convert.factors = F`
@@ -251,7 +269,7 @@ att_dat$names[att_dat$var.labels=="Zufriedenheit Leben in Wohnort"]
 ```
 
 
-## Verschaffen Sie sich einen ersten Überblick über die Daten
+## Sich einen ersten Überblick verschaffen 
 
 ```{r,eval=F}
 View(datf)
