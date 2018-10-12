@@ -76,9 +76,15 @@ for (i in 1:length(presparts)){
 
 setwd(rcode_path)
 
-purl("../slides/C2_hierarchMods.Rmd",documentation = 2)
-purl("../slides/D1_webScrapping.Rmd",documentation = 2)
-purl("../slides/D2_dataCleaning.Rmd",documentation = 2)
+#purl("../slides/C2_hierarchMods.Rmd",documentation = 2)
+#purl("../slides/D1_webScrapping.Rmd",documentation = 2)
+#purl("../slides/D2_dataCleaning.Rmd",documentation = 2)
+
+setwd(slide_path)
+
+rmarkdown::render("B1_DatenVerarbeitung.Rmd", "md_document")
+rmarkdown::render("A4_DatenImport.Rmd", "md_document")
+
 
 #-------------------------------------------------#
 # Install necessary packages
@@ -86,6 +92,7 @@ purl("../slides/D2_dataCleaning.Rmd",documentation = 2)
 
 
 install.packages("lme4")
+
 
 #-------------------------------------------------#
 # Links
