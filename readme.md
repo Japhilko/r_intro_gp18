@@ -18,17 +18,18 @@ output:
 
 ## A1 Hallo Welt 
 
-- [pdf](https://github.com/Japhilko/r_intro_gp18/blob/master/slides/Intro.pdf)
-- Auf [Github](https://github.com/Japhilko/r_intro_gp18/blob/master/slides/Intro.md) im Browser anschauen 
+- Die [pdf](https://github.com/Japhilko/r_intro_gp18/blob/master/slides/A1_HalloWelt.pdf) Folien herunterladen.
+- Auf [Github](https://github.com/Japhilko/r_intro_gp18/blob/master/slides/A1_HalloWelt.md) im Browser anschauen. 
 
 ## A2 Hilfe bekommen 
 
-- [pdf](slides/A2_HilfeBekommen.pdf) 
-- [Github](slides/A2_HilfeBekommen.md)
+- In den Folien ([pdf](https://github.com/Japhilko/r_intro_gp18/blob/master/slides/A2_HilfeBekommen.pdf);
+[Github](https://github.com/Japhilko/r_intro_gp18/blob/master/slides/A2_HilfeBekommen.md)  )
+werden die wichtigsten Möglichkeiten aufgelistet, Hilfe zu bekommen.
 
 ## A3 GESIS Panel 
 
-- [pdf](slides/A3_GESISPanel.pdf) 
+- [pdf](https://github.com/Japhilko/r_intro_gp18/blob/master/slides/A3_GESISPanel.pdf) 
 - [Github](slides/A3_GESISPanel.md)
 
 ## A4 Daten Import 

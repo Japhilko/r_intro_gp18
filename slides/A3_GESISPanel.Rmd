@@ -335,4 +335,6 @@ lname <- att_dat$var.labels[which(att_dat$names==xname)]
 
 ##  A3A Aufgabe - Download der GESIS Panel Daten
 
-- Die `**14.dta` Datei des GESIS Panel Campus file herunterladen.
+- Suche bei einer Suchmaschine nach GESIS Panel Campus file oder
+- gehe auf die Seiten des GESIS Datenbestandskatalogs und
+- lade die `**14.dta` Datei des GESIS Panel Campus file herunter.

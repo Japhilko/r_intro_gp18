@@ -28,17 +28,18 @@ coursepath <-""
 
 ## A1 Hallo Welt 
 
-- [pdf](`r paste0(coursepath,"slides/Intro.pdf")`)
-- Auf [Github](`r paste0(coursepath,"slides/Intro.md")`) im Browser anschauen 
+- Die [pdf](`r paste0(coursepath,"slides/A1_HalloWelt.pdf")`) Folien herunterladen.
+- Auf [Github](`r paste0(coursepath,"slides/A1_HalloWelt.md")`) im Browser anschauen. 
 
 ## A2 Hilfe bekommen 
 
-- [pdf](slides/A2_HilfeBekommen.pdf) 
-- [Github](slides/A2_HilfeBekommen.md)
+- In den Folien ([pdf](`r paste0(coursepath,"slides/A2_HilfeBekommen.pdf")`);
+[Github](`r paste0(coursepath,"slides/A2_HilfeBekommen.md")`)  )
+werden die wichtigsten Möglichkeiten aufgelistet, Hilfe zu bekommen.
 
 ## A3 GESIS Panel 
 
-- [pdf](slides/A3_GESISPanel.pdf) 
+- [pdf](`r paste0(coursepath,"slides/A3_GESISPanel.pdf")`) 
 - [Github](slides/A3_GESISPanel.md)
 
 ## A4 Daten Import 
