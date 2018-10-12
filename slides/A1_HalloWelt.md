@@ -21,9 +21,7 @@ output:
     keep_md: yes
 ---
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(echo = T)
-```
+
 
 ## Disclaimer/ Informationen vorab
 
@@ -121,10 +119,7 @@ http://blog.revolutionanalytics.com/popularity/
 
 ## R für SPSS Nutzer
 
-```{r,eval=F,echo=F}
-install.packages("Rcmdr")
-library("Rcmdr")
-```
+
 
 ### Bob Muenchen - [**R for SPSS and SAS Users **](https://science.nature.nps.gov/im/datamgmt/statistics/r/documents/r_for_sas_spss_users.pdf)
 
@@ -291,17 +286,20 @@ http://www.rstudio.com/ide/docs/using/customizing
 - If not - [**install**](http://www.rstudio.com/) Rstudio.
 - Start RStudio. Go to the console (lower left window) and write
 
-```{r,eval=F}
+
+```r
 3+2
 ```
 
 - If there is not already an editor open in the upper left window, then go to the file menu and open a new script. Check the date with `date()` and the R version with `sessionInfo()`.
 
-```{R,eval=F}
+
+```r
 date()
 ```
 
-```{R,eval=F}
+
+```r
 sessionInfo()
 ```
 
@@ -311,27 +309,43 @@ sessionInfo()
 
 -  `<-` ist der Zuweisungsoperator
 
-```{r}
+
+```r
 b <- c(1,2) # create an object with the numbers 1 and 2
 ```
 
 -  Auf dieses Objekt kann eine Funktion angewendet werden:
 
-```{r}
+
+```r
 mean(b) # computes the mean
+```
+
+```
+## [1] 1.5
 ```
 
 Mit den folgenden Funktionen können wir etwas über die Eigenschaften des Objekts erfahren:
 
-```{r}
+
+```r
 length(b) # b has the length 2
+```
+
+```
+## [1] 2
 ```
 
 
 ### Objektstruktur
 
-```{r}
+
+```r
 str(b) # b is a numeric vector
+```
+
+```
+##  num [1:2] 1 2
 ```
 
 
@@ -360,25 +374,76 @@ Diese Funktionen benötigen nur ein Argument.
 
  
 
-```{r}
+
+```r
 quantile(b,.9)
+```
+
+```
+## 90% 
+## 1.9
+```
+
+```r
 sample(b,1) 
+```
+
+```
+## [1] 2
 ```
 
 ### Beispiele - Funktionen mit mehr als einem Argument
 
-```{r}
+
+```r
 max(b)
+```
+
+```
+## [1] 2
+```
+
+```r
 min(b)
+```
+
+```
+## [1] 1
+```
+
+```r
 sd(b)
+```
+
+```
+## [1] 0.7071068
+```
+
+```r
 var(b)
+```
+
+```
+## [1] 0.5
 ```
 
 ### Funktionen mit einem Argument
 
-```{r}
+
+```r
 mean(b)
+```
+
+```
+## [1] 1.5
+```
+
+```r
 median(b)
+```
+
+```
+## [1] 1.5
 ```
 
 
@@ -403,20 +468,13 @@ Erstellen Sie einen Vektor `b` mit den Zahlen von 1 bis 5 und berechnen Sie....
 
 ## [**Wo man Routinen findet**](https://stats.idre.ucla.edu/r/seminars/intro/)
 
-```{r,eval=T,echo=F}
-# http://blog.revolutionanalytics.com/2015/06/how-many-packages-are-there-really-on-cran.html
-CRANmirror <- "http://cran.revolutionanalytics.com"
-cran <- contrib.url(repos = CRANmirror, 
-                      type = "source")
-info <- available.packages(contriburl = cran, type = "source")
-# nrow(info)
-```
+
 
 
 - Viele Funktionen sind in Basis-R enthalten. 
 - Viele spezifische Funktionen sind in zusätzliche Bibliotheken integriert.
 - R kann modular durch sogenannte Pakete oder Bibliotheken erweitert werden.
-- Die wichtigsten Pakete, die auf CRAN gehostet werden (`r nrow(info)` at `r format(Sys.time(), "%a %b %d")`)
+- Die wichtigsten Pakete, die auf CRAN gehostet werden (13134 at Fr Okt 12)
 - Weitere Pakete finden Sie z.B. unter [**bioconductor**](www.bioconductor.org)
 
 ### Übersicht R-Pakete
@@ -429,7 +487,8 @@ info <- available.packages(contriburl = cran, type = "source")
 - Sie sind optional für den Befehl `library`.
 - Man kann auch `require` anstelle von `library` verwenden.
 
-```{r,eval=F}
+
+```r
 install.packages("lme4")
 
 library(lme4)
@@ -468,13 +527,15 @@ library(lme4)
 
 ### Pakete vom CRAN Server installieren
 
-```{r,eval=F}
+
+```r
 install.packages("lme4")
 ```
 
 ### Pakete vom Bioconductor Server installieren
 
-```{r,eval=F}
+
+```r
 source("https://bioconductor.org/biocLite.R")
 biocLite(c("GenomicFeatures", "AnnotationDbi"))
 ```
@@ -483,7 +544,8 @@ biocLite(c("GenomicFeatures", "AnnotationDbi"))
 
 ### Pakete von Github installieren
 
-```{r,eval=F}
+
+```r
 install.packages("devtools")
 library(devtools)
 
@@ -512,7 +574,8 @@ install_github("hadley/ggplot2")
 - Momentan gibt es 35 Task Views.
 - Alle Pakete einer Task-View können mit folgendem Befehl installiert werden: [**command:**](https://mran.microsoft.com/rpackages/)
 
-```{r,eval=F}
+
+```r
 install.packages("ctv")
 library("ctv")
 install.views("Bayesian")

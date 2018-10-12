@@ -8,9 +8,19 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F)
 GESIS <- T
+reallinks <- 
 ```
 
 # Erster Tag
+
+```{r,echo=F,eval=reallinks}
+coursepath <-"https://github.com/Japhilko/geocourse/blob/master/"
+```
+
+```{r,echo=F,eval=orlinks}
+coursepath <-""
+```
+
 
 ## A1 Hallo Welt 
 
