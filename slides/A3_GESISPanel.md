@@ -460,6 +460,13 @@ https://rpubs.com/Japhilko82/VarsGesisPanel
 
 ![](figure/cdb_bbak102a.PNG)
 
+
+## Eine Übersicht über das GESIS Panel (Campus File)
+
+- [**Dashboard zum Überblick**](http://rpubs.com/Japhilko82/overview_gp)
+
+![](figure/Dashboard_gesispanel.PNG)
+
 ##  A3A Aufgabe - Download der GESIS Panel Daten
 
 - Suche bei einer Suchmaschine nach GESIS Panel Campus file oder

@@ -84,6 +84,8 @@ setwd(slide_path)
 
 rmarkdown::render("B1_DatenVerarbeitung.Rmd", "md_document")
 rmarkdown::render("A4_DatenImport.Rmd", "md_document")
+rmarkdown::render("A3_GESISPanel.Rmd", "md_document")
+rmarkdown::render("A3_GESISPanel.Rmd", "pdf_presentation")
 
 
 #-------------------------------------------------#

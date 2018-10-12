@@ -8,38 +8,34 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
-library(gpdataprocessing)
-wave <- "ee"
-datpreppath_g <- "J:/Work/GESISPanel_DATA/01_post_processing/c01/_#awave#__#year#/_#wave#/"
-
-datpreppath <- getrightpath(datpreppath_g,wave)
 ```
 
-Column {data-width=650}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Chart A
+### Die Studien im GESIS Panel
 
 ```{r}
-
+library(DT)
+dashboard_dat_path <- "J:/Work/GESISPanel/04_persoenliche_ordner/kolb/GesisPanelMonitor/"
+setwd(dashboard_dat_path)
+load("studdat.RData")
+DT::datatable(studdat)
 ```
 
-Column {data-width=350}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
+
+### Der Campus Use File
+
+```{r}
+load(paste0(dashboard_dat_path,"cmp_file.RData"))
+DT::datatable(cmp_file)
+```
+
+
+
+<!--
 ### Codebook data
-
-```{r}
-cdb_path <- paste0(datpreppath,"03_codebook/data")
-setwd(cdb_path)
-dirnamen <- dir()
-file2read <- dirnamen[agrep("_Codebook+Scheme_",dirnamen)]
-file2read <- file2read[agrep(".dta",file2read)]
-cdb_dat <- readstata13::read.dta13(file2read)
-```
-
-### Die akteullen Wellendaten
-
-```{r}
-```
-
+-->

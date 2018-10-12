@@ -3,12 +3,6 @@ title: "A3 The GESIS Panel data"
 author: "Jan-Philipp Kolb"
 date: "06 August 2018"
 output:
-  slidy_presentation:
-    keep_md: yes
-  pdf_document:
-    toc: yes
-  html_document:
-    keep_md: yes
   beamer_presentation:
     colortheme: beaver
     fonttheme: structurebold
@@ -16,6 +10,12 @@ output:
     fig_caption: no
     keep_tex: yes
     theme: CambridgeUS
+  pdf_document:
+    toc: yes
+  html_document:
+    keep_md: yes
+  slidy_presentation:
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -332,6 +332,13 @@ lname <- att_dat$var.labels[which(att_dat$names==xname)]
 - Das Codebuch kann man [**hier**](https://www.gesis.org/gesis-panel/documentation/) bekommen.
 
 ![](figure/cdb_bbak102a.PNG)
+
+
+## Eine Übersicht über das GESIS Panel (Campus File)
+
+- [**Dashboard zum Überblick**](http://rpubs.com/Japhilko82/overview_gp)
+
+![](figure/Dashboard_gesispanel.PNG)
 
 ##  A3A Aufgabe - Download der GESIS Panel Daten
 
