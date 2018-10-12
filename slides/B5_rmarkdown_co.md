@@ -17,7 +17,7 @@ Erste Daten eintragen
 
     date()
 
-    ## [1] "Fri Oct 12 10:11:02 2018"
+    ## [1] "Fri Oct 12 10:17:18 2018"
 
 Eine Folie mit Formel
 ---------------------

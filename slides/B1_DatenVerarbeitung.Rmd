@@ -148,7 +148,7 @@ head(dat[,1]) # sich nur die erste Spalte anzeigen lassen
 ```
 
 
-## Indizierung eines `data.frame` II
+## Weitere Möglichkeiten zur Indizierung eines `data.frame`
 
 
 ```{r,eval=F}
@@ -156,7 +156,7 @@ dat[1:2,] # getting the first two rows
 ```
 
 ```{r,echo=F}
-head(dat[1:2,]) # getting the first two rows
+head(dat[1:2,1:10]) # getting the first two rows
 ```
 
 
