@@ -2,30 +2,34 @@
 title: "Einführung in die Nutzung von R und Rstudio"
 author: "Jan-Philipp Kolb"
 date: "15 und 16 Oktober 2018"
-output: pdf_document
+output:
+  html_document:
+    keep_md: true
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F)
 GESIS <- T
-reallinks <- 
+reallinks <- T
+orlinks <- !reallinks
 ```
 
 # Erster Tag
 
 ```{r,echo=F,eval=reallinks}
-coursepath <-"https://github.com/Japhilko/geocourse/blob/master/"
+
+coursepath <-"https://github.com/Japhilko/r_intro_gp18/blob/master/"
 ```
 
 ```{r,echo=F,eval=orlinks}
 coursepath <-""
 ```
 
-
 ## A1 Hallo Welt 
 
-- [pdf](slides/A1_HalloWelt.pdf)
-- [Github](slides/A1_HalloWelt.md)
+- [pdf](`r paste0(coursepath,"slides/Intro.pdf")`)
+- Auf [Github](`r paste0(coursepath,"slides/Intro.md")`) im Browser anschauen 
 
 ## A2 Hilfe bekommen 
 
