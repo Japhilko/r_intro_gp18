@@ -1,48 +1,25 @@
----
-title: "A1 Erste Schritte mit R"
-author: "Jan-Philipp Kolb"
-date: "15 Oktober 2018"
-output:
-  slidy_presentation:
-    keep_md: yes
-  html_document:
-    keep_md: yes
-  beamer_presentation:
-    colortheme: beaver
-    fig_caption: no
-    fonttheme: structurebold
-    highlight: tango
-    keep_tex: yes
-    theme: CambridgeUS
-  pdf_document:
-    toc: yes
-  ioslides_presentation:
-    highlight: tango
-    keep_md: yes
----
+Disclaimer/ Informationen vorab
+-------------------------------
 
+Normalerweise gibt es groÃŸe Unterschiede in den Kenntnissen und
+FÃ¤higkeiten der Teilnehmer - bitte gebt Bescheid, wenn es zu schnell
+oder zu langsam geht oder etwas unklar geblieben ist.
 
-
-## Disclaimer/ Informationen vorab
-
-Normalerweise gibt es große Unterschiede in den Kenntnissen und Fähigkeiten der Teilnehmer - bitte gebt Bescheid, wenn es zu schnell oder zu langsam geht oder etwas unklar geblieben ist.
-
-- Wenn es Fragen gibt - immer fragen
-- In diesem Kurs gibt es viele [**Übungen**](http://web.math.ku.dk/~helle/R-intro/exercises.pdf), denn das Programmieren lernt man am Ende nur allein.
-- Ich habe viele [**Beispiele**](https://www.showmeshiny.com/) - probiert sie aus 
-- R macht mehr Spaß zusammen - arbeitet zusammen!
-
+-   Wenn es Fragen gibt - immer fragen
+-   In diesem Kurs gibt es viele
+    [**Ãœbungen**](http://web.math.ku.dk/~helle/R-intro/exercises.pdf),
+    denn das Programmieren lernt man am Ende nur allein.
+-   Ich habe viele [**Beispiele**](https://www.showmeshiny.com/) -
+    probiert sie aus
+-   R macht mehr SpaÃŸ zusammen - arbeitet zusammen!
 
 <!--
-## Überblick - Vorteile von R
+## Ãœberblick - Vorteile von R
 
 ![http://bigdatahadooppro.com/tag/advantages-of-using-r/](figure/Importance-of-Learning-R.jpg)
 
 
 -->
-
-
-
 <!--
 https://www.quora.com/What-is-R-programming-language
 
@@ -55,25 +32,31 @@ https://www.quora.com/What-is-R-programming-language
 
 
 -->
-
-## Gründe R zu nutzen...
-
+GrÃ¼nde R zu nutzen...
+----------------------
 
 <!--
 Outstanding Graphs
 -->
+-   ... R ist eine [**quelloffene
+    Sprache**](https://stackoverflow.com/questions/1546583/what-is-the-definition-of-an-open-source-programming-language)
 
-- ... R ist eine [**quelloffene Sprache**](https://stackoverflow.com/questions/1546583/what-is-the-definition-of-an-open-source-programming-language)
+-   ... hervorragende
+    [**Grafiken**](http://matthewlincoln.net/2014/12/20/adjacency-matrix-plots-with-r-and-ggplot2.html),
+    [**Grafiken**](https://www.r-bloggers.com/3d-plots-with-ggplot2-and-plotly%20/),
+    [**Grafiken**](https://procomun.wordpress.com/2011/03/18/splomr/)
 
-- ... hervorragende [**Grafiken**](http://matthewlincoln.net/2014/12/20/adjacency-matrix-plots-with-r-and-ggplot2.html), [**Grafiken**](https://www.r-bloggers.com/3d-plots-with-ggplot2-and-plotly /), [**Grafiken**](https://procomun.wordpress.com/2011/03/18/splomr/)
+-   ... [**R kann in Kombination mit anderen Programmen verwendet
+    werden**](https://github.com/Japhilko/RInterfaces) - z.B. zur
+    [**VerknÃ¼pfung von
+    Daten**](https://github.com/Japhilko/RInterfaces/blob/master/slides/Datenimport.md)
 
-- ... [**R kann in Kombination mit anderen Programmen verwendet werden**](https://github.com/Japhilko/RInterfaces) - z.B. zur [**Verknüpfung von Daten**](https://github.com/Japhilko/RInterfaces/blob/master/slides/Datenimport.md)
+-   ... R kann [**zur
+    Automatisierung**](https://cran.r-project.org/web/packages/MplusAutomation/index.html)
+    verwendet werden
 
-- ... R kann [**zur Automatisierung**](https://cran.r-project.org/web/packages/MplusAutomation/index.html) verwendet werden
-
- - ... Breite und aktive Community - [**Man kann die Intelligenz anderer Leute nutzen ;-)**](https://www.r-bloggers.com/)
-
-
+-   ... Breite und aktive Community - [**Man kann die Intelligenz
+    anderer Leute nutzen ;-)**](https://www.r-bloggers.com/)
 
 <!--
 ## Vorteile von R
@@ -84,23 +67,24 @@ Outstanding Graphs
 
 - R ist eine [**Scriptsprache**](https://en.wikipedia.org/wiki/Scripting_language)
 
-- R wird immer [**populärer**](https://twitter.com/josiahjdavis/status/559778930476220418)
+- R wird immer [**populÃ¤rer**](https://twitter.com/josiahjdavis/status/559778930476220418)
 - [**Good**](http://www.sr.bham.ac.uk/~ajrs/R/r-gallery.html) possibilities for [**visualization**](http://research.stowers.org/mcm/efg/R/) 
 
 -->
-
-
 <!--
 http://blog.revolutionanalytics.com/popularity/
 -->
+R kann in Kombination mit anderen Programmen genutzt werden...
+--------------------------------------------------------------
 
+![Schnittstellen zu R\*\*](figure/Rinterfaces.PNG)
 
-
-## R kann in Kombination mit anderen Programmen genutzt werden... 
-
-![Schnittstellen zu R**](figure/Rinterfaces.PNG)
-
-- Schnittstelle zu: [**Python**](https://cran.r-project.org/web/packages/reticulate/vignettes/calling_python.html), [**Excel**](https://www.springer.com/de/book/9781441900517), [**SPSS**](https://www.ibm.com/support/knowledgecenter/en/SSFUEU_7.2.0/com.ibm.swg.ba.cognos.op_capmod_ig.7.2.0.doc/t_essentials_for_r_statistics.html), [**SAS**](https://cran.r-project.org/web/packages/SASmixed/index.html), [**Stata**](https://cran.r-project.org/web/packages/RStata/index.html)  
+-   Schnittstelle zu:
+    [**Python**](https://cran.r-project.org/web/packages/reticulate/vignettes/calling_python.html),
+    [**Excel**](https://www.springer.com/de/book/9781441900517),
+    [**SPSS**](https://www.ibm.com/support/knowledgecenter/en/SSFUEU_7.2.0/com.ibm.swg.ba.cognos.op_capmod_ig.7.2.0.doc/t_essentials_for_r_statistics.html),
+    [**SAS**](https://cran.r-project.org/web/packages/SASmixed/index.html),
+    [**Stata**](https://cran.r-project.org/web/packages/RStata/index.html)
 
 <!--
 - [**Calling Python from R**](https://cran.r-project.org/web/packages/reticulate/vignettes/calling_python.html)
@@ -115,27 +99,22 @@ http://blog.revolutionanalytics.com/popularity/
 
 - [**Getting Started in R Stata Notes on Exploring Data**](https://www.princeton.edu/~otorres/RStata.pdf)
 -->
-
-
-## R für SPSS Nutzer
-
-
+R fÃ¼r SPSS Nutzer
+------------------
 
 ### Bob Muenchen - [**R for SPSS and SAS Users **](https://science.nature.nps.gov/im/datamgmt/statistics/r/documents/r_for_sas_spss_users.pdf)
 
-- [**R commander (Rcmdr)**](http://www.rcommander.com/)
-
+-   [**R commander (Rcmdr)**](http://www.rcommander.com/)
 
 ![Der Rcommander](figure/Rcommanderex.PNG)
 
 <!--
 ![](http://www.rcommander.com/images/stories/RcmdrBASE.png)
 -->
-
-## [R sollte genutzt werden, weil andere Programme Fehler provozieren:](https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-excel-error-that-changed-history)
+[R sollte genutzt werden, weil andere Programme Fehler provozieren:](https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-excel-error-that-changed-history)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ![](figure/RheinhartRogoff.PNG)
-
 
 <!--
 Reinhart, Rogoff and the Excel Error that changed history
@@ -154,15 +133,13 @@ https://www.nytimes.com/2013/04/19/opinion/krugman-the-excel-depression.html
 
 ![[Abandon all hope, ye who enter dates in Excel](http://uc3.cdlib.org/2014/04/09/abandon-all-hope-ye-who-enter-dates-in-excel/)](figure/Abandon.PNG)
 -->
-
 <!--
 ### [**Problems with Excel**](http://www.biomedcentral.com/1471-2105/5/80)
 
 ![Mistaken Identifiers in Excel](figure/ExcelProblems.PNG)
 -->
-
-
-## [**Die Beliebtheit von R-Paketen**](https://gallery.shinyapps.io/cran-gauge/)
+[**Die Beliebtheit von R-Paketen**](https://gallery.shinyapps.io/cran-gauge/)
+-----------------------------------------------------------------------------
 
 ![Downloads vom CRAN Server](figure/CRANdownloads.PNG)
 
@@ -176,15 +153,12 @@ https://www.nytimes.com/2013/04/19/opinion/krugman-the-excel-depression.html
 
 -[**where is R activity the most concentrated**](http://blog.revolutionanalytics.com/2014/04/a-world-map-of-r-user-activity.html)
 -->
-
-
 <!--
 ### [**R user around the world**](http://revolution-computing.typepad.com/)
 
 ![R users around world](figure/rusersaroundworld.png)
 
 -->
-
 <!--
 ## Expectations and requirements
 
@@ -205,43 +179,49 @@ Things we can`t afford:
 - Communicate basic data analytic concepts
 - This course can not replace practicing and exercise.
 -->
-
-## Download R:
+Download R:
+-----------
 
 <http://www.r-project.org/>
 
 ![The CRAN website](figure/CRAN1picture.PNG)
 
-
-## Open Source Programm R
-
+Open Source Programm R
+----------------------
 
 ### Das ist das Basis-R:
 
 ![](figure/BasisR.PNG)
 
+Graphical user interface
+------------------------
 
-## Graphical user interface
+Viele Leute nutzen ein [**Graphical User
+Interface**](https://en.wikipedia.org/wiki/Graphical_user_interface)
+(GUI) oder ein [**Integrated Development
+Interface**](https://en.wikipedia.org/wiki/Integrated_development_environment)
+(IDE).
 
-Viele Leute nutzen ein  [**Graphical User Interface**](https://en.wikipedia.org/wiki/Graphical_user_interface) (GUI) oder ein [**Integrated Development Interface**](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE).
+Aus den folgenden GrÃ¼nden:
 
-Aus den folgenden Gründen:
+-   Syntax-Hervorhebung
+-   Auto-VervollstÃ¤ndigung
+-   Bessere Ãœbersicht Ã¼ber Graphiken, Pakete, Dateien, ...
 
-- Syntax-Hervorhebung
-- Auto-Vervollständigung
-- Bessere Übersicht über Graphiken, Pakete, Dateien, ...
+Various text editors / IDEs
+---------------------------
 
-## Various text editors / IDEs
+-   [**Gedit**](https://projects.gnome.org/gedit/) with R-specific
+    Add-ons for Linux
 
-- [**Gedit**](https://projects.gnome.org/gedit/) with R-specific Add-ons for Linux
+-   [**Emacs**](http://www.gnu.org/software/emacs/) and ESS (Emacs
+    speaks statistics)- An extensible, customizable, free/libre text
+    editor â€” and more.
 
-- [**Emacs**](http://www.gnu.org/software/emacs/) and ESS (Emacs speaks statistics)- An extensible, customizable, free/libre text editor — and more.
+-   I use [**Rstudio!**](https://www.rstudio.com/)
 
-- I use [**Rstudio!**](https://www.rstudio.com/)
-
-![[Overview Rstudio](http://www.milanor.net/blog/wp-content/uploads/2013/07/0_overall.jpg)](figure/0_overall.jpg)
-
-
+![[Overview
+Rstudio](http://www.milanor.net/blog/wp-content/uploads/2013/07/0_overall.jpg)](figure/0_overall.jpg)
 
 <!--
 ## Download course files
@@ -251,20 +231,17 @@ All files (slides, r-code,...) are available on  [gitlab](https://github.com/Jap
 
 [How to use gitlab?](https://guides.github.com/activities/hello-world/)
 -->
-
-
-## RStudio
+RStudio
+-------
 
 ![](figure/RstudioExample.PNG)
 
-
-## Customizing RStudio
+Customizing RStudio
+-------------------
 
 ### Six [**reasons**](http://www.r-bloggers.com/top-6-reasons-you-need-to-be-using-rstudio/) to use [**Rstudio**](https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio).
 
-
 ![](figure/options_general.png)
-
 
 <!--
 - [**Customize Rstudio**](https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio)
@@ -276,351 +253,371 @@ All files (slides, r-code,...) are available on  [gitlab](https://github.com/Jap
 
 http://www.rstudio.com/ide/docs/using/customizing
 -->
+A1A Exercise - Preparation
+--------------------------
 
+-   Check if R is installed on your computer.
+-   If not, download [**R**](r-project.org) and install it.
+-   Check if Rstudio is installed.
+-   If not - [**install**](http://www.rstudio.com/) Rstudio.
+-   Start RStudio. Go to the console (lower left window) and write
 
-## A1A Exercise - Preparation
+<!-- -->
 
-- Check if R is installed on your computer.
-- If not, download [**R**](r-project.org) and install it.
-- Check if Rstudio is installed.
-- If not - [**install**](http://www.rstudio.com/) Rstudio.
-- Start RStudio. Go to the console (lower left window) and write
+    3+2
 
+-   If there is not already an editor open in the upper left window,
+    then go to the file menu and open a new script. Check the date with
+    `date()` and the R version with `sessionInfo()`.
 
-```r
-3+2
-```
+<!-- -->
 
-- If there is not already an editor open in the upper left window, then go to the file menu and open a new script. Check the date with `date()` and the R version with `sessionInfo()`.
+    date()
 
+    sessionInfo()
 
-```r
-date()
-```
-
-
-```r
-sessionInfo()
-```
-
-## R ist eine objektorientierte Sprache.
+R ist eine objektorientierte Sprache.
+-------------------------------------
 
 ### Vektoren und Zuweisungen
 
--  `<-` ist der Zuweisungsoperator
+-   `<-` ist der Zuweisungsoperator
 
+<!-- -->
 
-```r
-b <- c(1,2) # create an object with the numbers 1 and 2
-```
+    b <- c(1,2) # create an object with the numbers 1 and 2
 
--  Auf dieses Objekt kann eine Funktion angewendet werden:
+-   Auf dieses Objekt kann eine Funktion angewendet werden:
 
+<!-- -->
 
-```r
-mean(b) # computes the mean
-```
+    mean(b) # computes the mean
 
-```
-## [1] 1.5
-```
+    ## [1] 1.5
 
-Mit den folgenden Funktionen können wir etwas über die Eigenschaften des Objekts erfahren:
+Mit den folgenden Funktionen kÃ¶nnen wir etwas Ã¼ber die Eigenschaften
+des Objekts erfahren:
 
+    length(b) # b has the length 2
 
-```r
-length(b) # b has the length 2
-```
-
-```
-## [1] 2
-```
-
+    ## [1] 2
 
 ### Objektstruktur
 
+    str(b) # b is a numeric vector
 
-```r
-str(b) # b is a numeric vector
-```
+    ##  num [1:2] 1 2
 
-```
-##  num [1:2] 1 2
-```
+Funktionen in base-Paket
+------------------------
 
+<table>
+<thead>
+<tr class="header">
+<th align="left">Function</th>
+<th align="left">Meaning</th>
+<th align="left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">str()</td>
+<td align="left">Object structure</td>
+<td align="left">str(b)</td>
+</tr>
+<tr class="even">
+<td align="left">max()</td>
+<td align="left">Maximum</td>
+<td align="left">max(b)</td>
+</tr>
+<tr class="odd">
+<td align="left">min()</td>
+<td align="left">Minimum</td>
+<td align="left">min(b)</td>
+</tr>
+<tr class="even">
+<td align="left">sd()</td>
+<td align="left">Standard deviation</td>
+<td align="left">sd(b)</td>
+</tr>
+<tr class="odd">
+<td align="left">var()</td>
+<td align="left">Variance</td>
+<td align="left">var(b)</td>
+</tr>
+<tr class="even">
+<td align="left">mean()</td>
+<td align="left">Mean</td>
+<td align="left">mean(b)</td>
+</tr>
+<tr class="odd">
+<td align="left">median()</td>
+<td align="left">Median</td>
+<td align="left">median(b)</td>
+</tr>
+</tbody>
+</table>
 
-## Funktionen in base-Paket
+Diese Funktionen benÃ¶tigen nur ein Argument.
 
-|Function |Meaning            |Example   |
-|:--------|:------------------|:---------|
-|str()    |Object structure   |str(b)    |
-|max()    |Maximum            |max(b)    |
-|min()    |Minimum            |min(b)    |
-|sd()     |Standard deviation |sd(b)     |
-|var()    |Variance           |var(b)    |
-|mean()   |Mean               |mean(b)   |
-|median() |Median             |median(b) |
+Funktionen mit mehr Argumenten
+------------------------------
 
-Diese Funktionen benötigen nur ein Argument.
+### Andere Funktionen benÃ¶tigen mehr Argumente:
 
-## Funktionen mit mehr Argumenten
+<table>
+<thead>
+<tr class="header">
+<th align="left">Argument</th>
+<th align="left">Bedeutung</th>
+<th align="left">Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">quantile()</td>
+<td align="left">90 % Quantile</td>
+<td align="left">quantile(b,.9)</td>
+</tr>
+<tr class="even">
+<td align="left">sample()</td>
+<td align="left">Draw a sample</td>
+<td align="left">sample(b,1)</td>
+</tr>
+</tbody>
+</table>
 
-### Andere Funktionen benötigen mehr Argumente:
+    quantile(b,.9)
 
-|Argument   |Bedeutung         |Beispiel       |
-|:----------|:-----------------|:--------------|
-|quantile() |90 % Quantile     |quantile(b,.9) |
-|sample()   |Draw a sample     |sample(b,1)    |
+    ## 90% 
+    ## 1.9
 
- 
+    sample(b,1) 
 
-
-```r
-quantile(b,.9)
-```
-
-```
-## 90% 
-## 1.9
-```
-
-```r
-sample(b,1) 
-```
-
-```
-## [1] 2
-```
+    ## [1] 1
 
 ### Beispiele - Funktionen mit mehr als einem Argument
 
+    max(b)
 
-```r
-max(b)
-```
+    ## [1] 2
 
-```
-## [1] 2
-```
+    min(b)
 
-```r
-min(b)
-```
+    ## [1] 1
 
-```
-## [1] 1
-```
+    sd(b)
 
-```r
-sd(b)
-```
+    ## [1] 0.7071068
 
-```
-## [1] 0.7071068
-```
+    var(b)
 
-```r
-var(b)
-```
-
-```
-## [1] 0.5
-```
+    ## [1] 0.5
 
 ### Funktionen mit einem Argument
 
+    mean(b)
 
-```r
-mean(b)
-```
+    ## [1] 1.5
 
-```
-## [1] 1.5
-```
+    median(b)
 
-```r
-median(b)
-```
+    ## [1] 1.5
 
-```
-## [1] 1.5
-```
-
-
-## [**Überblick Funktionen**](http://cran.r-project.org/doc/manuals/R-intro.html)
+[**Ãœberblick Funktionen**](http://cran.r-project.org/doc/manuals/R-intro.html)
+-------------------------------------------------------------------------------
 
 <http://cran.r-project.org/doc/manuals/R-intro.html>
 
 ![](figure/UebersichtBefehle.PNG)
 
+A1B Ãœbung - Zuweisungen und Funktionen
+---------------------------------------
 
-## A1B Übung - Zuweisungen und Funktionen
+Erstellen Sie einen Vektor `b` mit den Zahlen von 1 bis 5 und berechnen
+Sie....
 
-Erstellen Sie einen Vektor `b` mit den Zahlen von 1 bis 5 und berechnen Sie....
+1.  den Mittelwert
 
-1. den Mittelwert
+2.  die Varianz
 
-2. die Varianz
+3.  die Standardabweichung
 
-3. die Standardabweichung
+4.  die Quadratwurzel aus dem Mittelwert
 
-4. die Quadratwurzel aus dem Mittelwert
+[**Wo man Routinen findet**](https://stats.idre.ucla.edu/r/seminars/intro/)
+---------------------------------------------------------------------------
 
-## [**Wo man Routinen findet**](https://stats.idre.ucla.edu/r/seminars/intro/)
+-   Viele Funktionen sind in Basis-R enthalten.
+-   Viele spezifische Funktionen sind in zusÃ¤tzliche Bibliotheken
+    integriert.
+-   R kann modular durch sogenannte Pakete oder Bibliotheken erweitert
+    werden.
+-   Die wichtigsten Pakete, die auf CRAN gehostet werden (13134 at Fr
+    Okt 12)
+-   Weitere Pakete finden Sie z.B. unter
+    [**bioconductor**](www.bioconductor.org)
 
-
-
-
-- Viele Funktionen sind in Basis-R enthalten. 
-- Viele spezifische Funktionen sind in zusätzliche Bibliotheken integriert.
-- R kann modular durch sogenannte Pakete oder Bibliotheken erweitert werden.
-- Die wichtigsten Pakete, die auf CRAN gehostet werden (13134 at Fr Okt 12)
-- Weitere Pakete finden Sie z.B. unter [**bioconductor**](www.bioconductor.org)
-
-### Übersicht R-Pakete
+### Ãœbersicht R-Pakete
 
 ![Overview R-packages](figure/Packages.PNG)
 
-## Installation von Paketen
+Installation von Paketen
+------------------------
 
-- Die Anführungszeichen um den Paketnamen herum sind für den Befehl `install.packages` notwendig.
-- Sie sind optional für den Befehl `library`.
-- Man kann auch `require` anstelle von `library` verwenden.
+-   Die AnfÃ¼hrungszeichen um den Paketnamen herum sind fÃ¼r den Befehl
+    `install.packages` notwendig.
+-   Sie sind optional fÃ¼r den Befehl `library`.
+-   Man kann auch `require` anstelle von `library` verwenden.
 
+<!-- -->
 
-```r
-install.packages("lme4")
+    install.packages("lme4")
 
-library(lme4)
-```
+    library(lme4)
 
-## Installation von Paketen mit RStudio
+Installation von Paketen mit RStudio
+------------------------------------
 
 ![Package installation with Rstudio](figure/PaketeRstudio.PNG)
 
-
-## Bestehende Pakete und Installation
+Bestehende Pakete und Installation
+----------------------------------
 
 ![Existing packages](figure/packages3.PNG)
 
+Ãœbersicht Ã¼ber viele nÃ¼tzliche Pakete:
+-----------------------------------------
 
-## Übersicht über viele nützliche Pakete:
-
-- Luhmann - [**Table with many useful packages**](http://www.beltz.de/fileadmin/beltz/downloads/OnlinematerialienPVU/28090_Luhmann/Verwendete%20Pakete.pdf)
+-   Luhmann - [**Table with many useful
+    packages**](http://www.beltz.de/fileadmin/beltz/downloads/OnlinematerialienPVU/28090_Luhmann/Verwendete%20Pakete.pdf)
 
 ### Weitere interessante Pakete:
 
-- Paket für Import/Export - [**`foreign`**](http://cran.r-project.org/web/packages/foreign/foreign.pdf)
+-   Paket fÃ¼r Import/Export -
+    [**`foreign`**](http://cran.r-project.org/web/packages/foreign/foreign.pdf)
 
-- [**`sampling`-Paket für die Stichprobenziehung**](http://iase-web.org/documents/papers/icots8/ICOTS8_4J1_TILLE.pdf)
+-   [**`sampling`-Paket fÃ¼r die
+    Stichprobenziehung**](http://iase-web.org/documents/papers/icots8/ICOTS8_4J1_TILLE.pdf)
 
-- `xtable` Paket zur Integration von LateX in R ([**xtable Galerie**](http://cran.r-project.org/web/packages/xtable/vignettes/xtableGallery.pdf))
+-   `xtable` Paket zur Integration von LateX in R ([**xtable
+    Galerie**](http://cran.r-project.org/web/packages/xtable/vignettes/xtableGallery.pdf))
 
-- [**`dummies` - Paket zur Erstellung von Dummies**](http://cran.r-project.org/web/packages/dummies/dummies.pdf)
+-   [**`dummies` - Paket zur Erstellung von
+    Dummies**](http://cran.r-project.org/web/packages/dummies/dummies.pdf)
 
-- [**Paket `mvtnorm` um eine multivariate Normalverteilung zu erhalten. **](http://cran.r-project.org/web/packages/mvtnorm/index.html)
+-   [**Paket `mvtnorm` um eine multivariate Normalverteilung zu
+    erhalten.
+    **](http://cran.r-project.org/web/packages/mvtnorm/index.html)
 
-- [**Paket `maptools` um Karten zu erzeugen**](http://www.r-bloggers.com/tag/maptools/)
+-   [**Paket `maptools` um Karten zu
+    erzeugen**](http://www.r-bloggers.com/tag/maptools/)
 
-
-## Pakete aus verschiedenen Quellen installieren
+Pakete aus verschiedenen Quellen installieren
+---------------------------------------------
 
 ### Pakete vom CRAN Server installieren
 
-
-```r
-install.packages("lme4")
-```
+    install.packages("lme4")
 
 ### Pakete vom Bioconductor Server installieren
 
-
-```r
-source("https://bioconductor.org/biocLite.R")
-biocLite(c("GenomicFeatures", "AnnotationDbi"))
-```
-
-
+    source("https://bioconductor.org/biocLite.R")
+    biocLite(c("GenomicFeatures", "AnnotationDbi"))
 
 ### Pakete von Github installieren
 
+    install.packages("devtools")
+    library(devtools)
 
-```r
-install.packages("devtools")
-library(devtools)
+    install_github("hadley/ggplot2")
 
-install_github("hadley/ggplot2")
-```
+Wie bekomme ich einen Ãœberblick?
+---------------------------------
 
+-   Entdecke Pakete, die kÃ¼rzlich auf den
+    [**CRAN**](https://mran.microsoft.com/packages/) Server hochgeladen
+    wurden
 
+-   Nutze eine Shiny Web-App, die [**Pakete anzeigt, die kÃ¼rzlich von
+    CRAN**](https://gallery.shinyapps.io/cran-gauge/) heruntergeladen
+    wurden.
 
-## Wie bekomme ich einen Überblick?
+-   Werfe einen Blick auf eine [**Quick-Liste nÃ¼tzlicher
+    Pakete**](https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages)
 
-- Entdecke Pakete, die kürzlich auf den [**CRAN**](https://mran.microsoft.com/packages/) Server hochgeladen wurden
+-   ...., oder auf eine Liste mit den [**besten Paketen fÃ¼r die
+    Datenverarbeitung und
+    -analyse**](http://www.computerworld.com/article/2921176/business-intelligence/great-r-packages-for-data-import-wrangling-visualization.html),.....
 
-- Nutze eine Shiny Web-App, die [**Pakete anzeigt, die kürzlich von CRAN**](https://gallery.shinyapps.io/cran-gauge/) heruntergeladen wurden.
+-   ...., oder schaue unter [**die 50 meistgenutzten
+    Pakete**](https://www.r-bloggers.com/the-50-most-used-r-packages/)
 
-- Werfe einen Blick auf eine [**Quick-Liste nützlicher Pakete**](https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages)
+CRAN Task Views
+---------------
 
-- ...., oder auf eine Liste mit den [**besten Paketen für die Datenverarbeitung und -analyse**](http://www.computerworld.com/article/2921176/business-intelligence/great-r-packages-for-data-import-wrangling-visualization.html),.....
+-   BezÃ¼glich mancher Themen gibt es einen Ãœberblick Ã¼ber alle
+    wichtigen Pakete - ([**CRAN Task
+    Views**](https://cran.r-project.org/web/views/))
+-   Momentan gibt es 35 Task Views.
+-   Alle Pakete einer Task-View kÃ¶nnen mit folgendem Befehl installiert
+    werden: [**command:**](https://mran.microsoft.com/rpackages/)
 
-- ...., oder schaue unter [**die 50 meistgenutzten Pakete**](https://www.r-bloggers.com/the-50-most-used-r-packages/)
+<!-- -->
 
-
-
-## CRAN Task Views		
-		
-- Bezüglich mancher Themen gibt es einen Überblick über alle wichtigen Pakete - ([**CRAN Task Views**](https://cran.r-project.org/web/views/))
-- Momentan gibt es 35 Task Views.
-- Alle Pakete einer Task-View können mit folgendem Befehl installiert werden: [**command:**](https://mran.microsoft.com/rpackages/)
-
-
-```r
-install.packages("ctv")
-library("ctv")
-install.views("Bayesian")
-```
+    install.packages("ctv")
+    library("ctv")
+    install.views("Bayesian")
 
 ![](figure/CRANtaskViews.PNG)
 
-## A1C Übung -  zusätzliche Pakete
+A1C Ãœbung - zusÃ¤tzliche Pakete
+--------------------------------
 
 Geht auf <https://cran.r-project.org/> und sucht nach Paketen...
 
-- die sich für die deskriptive Datenanalyse eignen.
-- mit denen man fremde Datensätze einlesen kann (z.B. SPSS data)
-- mit denen man Lasso Regressionen rechnen kann
-- mit denen man große Datenmengen bearbeiten kann
+-   die sich fÃ¼r die deskriptive Datenanalyse eignen.
+-   mit denen man fremde DatensÃ¤tze einlesen kann (z.B. SPSS data)
+-   mit denen man Lasso Regressionen rechnen kann
+-   mit denen man groÃŸe Datenmengen bearbeiten kann
 
-## Links zum Weiterlesen:
+Links zum Weiterlesen:
+----------------------
 
+-   [**Warum man R zuerst lerneen sollte wenn man Data Science machen
+    mÃ¶chte**](http://www.r-bloggers.com/why-you-should-learn-r-first-for-data-science/)
 
-- [**Warum man R zuerst lerneen sollte wenn man Data Science machen möchte**](http://www.r-bloggers.com/why-you-should-learn-r-first-for-data-science/)
+-   RStudio hat den [**Infoworld 2015 Technology of the Year
+    Award.**](http://www.r-bloggers.com/rstudio-infoworld-2015-technology-of-the-year-award-recipient/)
+    bekommen
 
-- RStudio hat den [**Infoworld 2015 Technology of the Year Award.**](http://www.r-bloggers.com/rstudio-infoworld-2015-technology-of-the-year-award-recipient/) bekommen
+-   [**Warum R gut fÃ¼r Unternehmen
+    ist**](http://www.fastcolabs.com/3030063/why%20the%20r%20programming%20language%20is%20good%20for%20business)
 
-- [**Warum R gut für Unternehmen ist**](http://www.fastcolabs.com/3030063/why the r programming language is good for business) 
+-   Schaut auf [**R-bloggers**](http://www.r-bloggers.com/why-use-r/)
+    <!--
+    - [Intro R](http://www.ats.ucla.edu/stat/r/seminars/intro.htm)
+    - [Intro R II](http://www.ats.ucla.edu/stat/r/sk/)
+    -->
 
-- Schaut auf [**R-bloggers**](http://www.r-bloggers.com/why-use-r/)
-<!--
-- [Intro R](http://www.ats.ucla.edu/stat/r/seminars/intro.htm)
-- [Intro R II](http://www.ats.ucla.edu/stat/r/sk/)
--->
+-   Vergleich zwischen [**python und
+    R**](http://www.dataschool.io/python-or-r-for-data-science/)
 
-- Vergleich zwischen [**python und R**](http://www.dataschool.io/python-or-r-for-data-science/)
+-   R und Stata -
+    [**Side-by-side**](http://economistry.com/2013/11/r-impact-evaluation-r-stata-side-side/)
 
-- R und Stata - [**Side-by-side**](http://economistry.com/2013/11/r-impact-evaluation-r-stata-side-side/)
+-   [**AWESOME R**](https://awesome-r.com/)
 
-- [**AWESOME R**](https://awesome-r.com/)
+-   [**1000 R
+    tutorials/Links**](https://support.bioconductor.org/p/33781/)
 
-- [**1000 R tutorials/Links**](https://support.bioconductor.org/p/33781/)
+-   [**Zwei Minuten Videos auf
+    Github**](https://www.youtube.com/playlist?list=PLcgz5kNZFCkzSyBG3H-rUaPHoBXgijHfC)
 
-- [**Zwei Minuten Videos auf Github**](https://www.youtube.com/playlist?list=PLcgz5kNZFCkzSyBG3H-rUaPHoBXgijHfC)
+Shiny App - EinfÃ¼hrung in R
+----------------------------
 
-
-## Shiny App - Einführung in R
-
-http://www.intro-stats.com/
+<http://www.intro-stats.com/>
 
 ![](figure/intror_shiny.PNG)
 

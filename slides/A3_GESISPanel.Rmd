@@ -3,6 +3,12 @@ title: "A3 The GESIS Panel data"
 author: "Jan-Philipp Kolb"
 date: "06 August 2018"
 output:
+  slidy_presentation:
+    keep_md: yes
+  pdf_document:
+    toc: yes
+  html_document:
+    keep_md: yes
   beamer_presentation:
     colortheme: beaver
     fonttheme: structurebold
@@ -10,12 +16,6 @@ output:
     fig_caption: no
     keep_tex: yes
     theme: CambridgeUS
-  pdf_document:
-    toc: yes
-  html_document:
-    keep_md: yes
-  slidy_presentation:
-    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
