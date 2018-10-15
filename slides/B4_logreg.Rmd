@@ -19,8 +19,8 @@ output:
 
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,warning=F,message=F,eval=T)
-athome <- F
+knitr::opts_chunk$set(echo = TRUE,warning=F,message=F,eval=T, fig.height=4)
+athome <- T
 GESIS <- !athome
 ```
 
@@ -121,7 +121,7 @@ table(children)
 ## Conditional Density Plot (GESIS Panel)
 
 ```{r}
-cdplot(children ~ age, data = dat)
+cdplot(children ~ age)
 ```
 
 
@@ -134,7 +134,7 @@ cdplot(children ~ age, data = dat)
 
 ### Ein `glm` spezifizieren
 
-- Formul Objekt 
+- Formel-Objekt 
 - die Klasse (binomial, gaussian, gamma) 
 - mit einer Link Funktion (logit, probit, cauchit, log, cloglog)
 
@@ -184,11 +184,14 @@ library(faraway)
 ```
 
 
-- Die Koeffizienten können nicht so einfach wie "die Kinder im Haushalt in der Altersgruppe 0" interpretiert werden. 
-Wir müssen den inversen Logit verwenden, um etwas auszusagen.
+- Die Koeffizienten können nicht so einfach interpretiert werden 
+<!--
+wie "die Kinder im Haushalt in der Altersgruppe 0" interpretiert werden. 
+-->
+- Wir müssen den inversen Logit verwenden, um etwas auszusagen.
 
-Werte für die Log-odds von `r sum_glm1$coefficients[1,1]`  sind das Gleiche, wie die Wahrscheinlichkeit: 
-`r ilogit(sum_glm1$coefficients[1,1])`.
+Werte für die Log-odds von `r sum_glm1$coefficients[2,1]`  sind das Gleiche, wie die Wahrscheinlichkeit: 
+`r ilogit(sum_glm1$coefficients[2,1])`.
 
 ```{r}
 faraway::ilogit(sum_glm1$coefficients[1,1])
@@ -264,7 +267,7 @@ ilogit(0.3935251)
 anova(glm_1, test="Chisq")
 ```
 
-
+  
 ## Die Devianz
 
 <!--
@@ -274,6 +277,18 @@ https://www.tu-chemnitz.de/hsw/psychologie/professuren/method/homepages/ts/metho
 ### Abweichung vom Idealwert
 
 - Zweimal die Differenz zwischen der maximalen Log-Likelihood $\ell^{(M)}$ und dem Wert für das angepasste Modell
+
+- Je niedriger die Devianz, desto besser.
+
+```{r,eval=F,echo=F}
+glm_1 <- glm(children ~ age, 
+                    family = binomial())
+glm_0 <- glm(children ~ 1, 
+                    family = binomial())
+sum_glm0 <- summary(glm_0)
+sum_glm1 <- summary(glm_1)
+```
+
 
 
 <!--

@@ -26,13 +26,13 @@ showSolution=F
 ```{r,echo=F,eval=F}
 library("readstata13")
 dat <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
-dat <- dat[1:100,]
+# dat <- dat[1:100,]
 save(dat,file="../data/ZA5666_v1-0-0_medium.RData")
 
 datf <- read.dta13("../data/ZA5666_v1-0-0_Stata14.dta",
                    convert.factors = F)
 
-datf <- datf[1:100,]
+# datf <- datf[1:100,]
 save(datf,file="../data/ZA5666_v1-0-0_medium_fac.RData")
 ```
 
@@ -294,7 +294,10 @@ tail(duration,n=10)
 
 ## B1A Aufgabe  - eine Funktion erweitern
 
-- Erweitert die Funktion so, dass sie auch dann ihren Zweck erfüllt, wenn die Value Labels ausgegeben werden (Item nonresponse, Missing by filter, etc.).
+### Erweitert die Funktion so, 
+
+- dass auch die anderen Missingwerte als NA umkodiert werden
+- dass sie auch dann ihren Zweck erfüllt, wenn die Value Labels ausgegeben werden (Item nonresponse, Missing by filter, etc.).
 
 
 ## Der Befehl `complete.cases()`
@@ -569,7 +572,7 @@ head(recode(dat$a11c020a,"'Eher unzufrieden'='A';else='B'"))
 ## B1B Aufgabe  - Value Labels neu kodieren
 
 - Übersetze die Deutschen Werte Labels der Variablen `bbzc022a` ins Englische (Man kann dafür https://www.deepl.com/ verwenden).
-- Kodiere die GESIS-Panel-Variable, die amn als englisches Value Label erhält.
+- Benenne die Ausprägungen der Variable so um, dass sie die englischen Value Label enthält.
 
 
 
@@ -687,7 +690,7 @@ commands
 - Mit, `i <- 1`, schreibe eine `while()`-Schleife loop die die ungeraden Zahlen von 1 bis 7 ausgibt.
 
 
-## The `apply` family
+## Die `apply` Familie
 
 ```{r}
 (ApplyDat <- cbind(1:4,runif(4),rnorm(4))) # Example data set
@@ -714,9 +717,9 @@ apply(X = ApplyDat,MARGIN = 1,FUN = range)
 
 - Wenn `MARGIN=2` wird die Funktion `mean` auf die Spalten angewendet,
 
-- Instead of `mean` you could also use `var`, `sd` or `length`.
+- Anstatt `mean` kann man auch `var`, `sd` oder `length` verwenden.
 
-## The command `tapply()`
+## Der Befehl `tapply()`
 
 ```{r}
 ApplyDat <- data.frame(Income=rnorm(5,1400,200),
@@ -724,14 +727,14 @@ ApplyDat <- data.frame(Income=rnorm(5,1400,200),
 ```
 
 
-### Example command `tapply()`
+### Beispiel Befehl `tapply()`
 
 ```{r}
 tapply(ApplyDat$Income,
        ApplyDat$Sex,function(x)x)
 ```
 
-- Other commands can also be used..... also self-scripted commands
+- Andere Befehle können auch verwendet werden..... auch selbst geschriebene 
 
 
 ## B1E Übung  - `tapply()` Befehl verwenden
@@ -837,10 +840,45 @@ cor(iris[,1:4], method = "spearman")
 ```
 
 
+## Eine zweidimensionale Kreuztabelle erstellen
+
+### Bedeutung Variablen
+
+```{r,eval=F}
+att_dat <- attributes(dat)
+att_dat$var.labels[which(colnames(dat)=="a11c025a")]
+att_dat$var.labels[which(colnames(dat)=="a11c024a")]
+```
+
+- a11c025a - Lebensstandard junge Generation
+- a11c024a - Vertrauen: Vorsichtig sein bei Fremden
+
+### Tabelle erstellen
+
+```{r}
+tab <- table(dat$a11c025a,dat$a11c024a)
+```
+
+## Tabelle anschauen
+
+### Variablen
+
+- a11c025a - Lebensstandard junge Generation
+- a11c024a - Vertrauen: Vorsichtig sein bei Fremden
+
+### Tabelle
+
+1[](figure/Tabelle_a11_jung.PNG)
+
 ## Beziehung zwischen kategorialen Variablen
 
 - `chisq.test()`prüft, ob zwei kategoriale Merkmale stochastisch unabhängig sind.
 - Der Test wird gegen die Nullhypothese der Gleichverteilung durchgeführt.
+
+```{r}
+chisq.test(tab)
+```
+
 
 
 <!--
