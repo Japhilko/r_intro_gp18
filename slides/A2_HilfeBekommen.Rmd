@@ -100,7 +100,7 @@ demo(nlm)
 apropos("lm")
 ```
 
-- diese Funktion kann auch in Kombination mit [**regulären Ausdrücken**](https://de.wikipedia.org/wiki/Regul%C3%A4rer_Ausdruck) verwendet werden...
+- Funktion kann auch mit [**regulären Ausdrücken**](https://de.wikipedia.org/wiki/Regul%C3%A4rer_Ausdruck) verwendet werden...
 
 
 ```{r,eval=F}
@@ -174,8 +174,10 @@ R-project + "was ich schon immer wissen wollte"
 
 ## Aufgabe A2A [**Hilfe bekommen**](http://web.math.ku.dk/~helle/R-intro/exercises.pdf)
 
+### LABORATORY FOR APPLIED STATISTICS: Intro to R - [**Exercises**](http://web.math.ku.dk/~helle/R-intro/exercises.pdf) für diese Aufgabe
+
+
 - Versuchen Sie den Befehl `?which.min`. Dies öffnet eine Hilfeseite im unteren rechten Fenster von RStudio. Was macht die Funktion?
 
 - Sie müssen den Namen der Funktion kennen, um die Hilfeseite wie oben beschrieben zu öffnen. Manchmal (oft, sogar) kennen Sie den Namen der R-Funktionen nicht; dann kann Ihnen eine [**Suchmaschine**](https://duckduckgo.com/) helfen. Versuchen Sie zum Beispiel, den Text `R minimum vector` zu suchen.
 
-[**Quelle für diese Aufgabe**](http://web.math.ku.dk/~helle/R-intro/übungen.pdf)

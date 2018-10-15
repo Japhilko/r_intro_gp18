@@ -3,10 +3,6 @@ title: "A1 Erste Schritte mit R"
 author: "Jan-Philipp Kolb"
 date: "15 Oktober 2018"
 output:
-  slidy_presentation:
-    keep_md: yes
-  html_document:
-    keep_md: yes
   beamer_presentation:
     colortheme: beaver
     fig_caption: no
@@ -14,6 +10,10 @@ output:
     highlight: tango
     keep_tex: yes
     theme: CambridgeUS
+  html_document:
+    keep_md: yes
+  slidy_presentation:
+    keep_md: yes
   pdf_document:
     toc: yes
   ioslides_presentation:
@@ -25,12 +25,19 @@ output:
 knitr::opts_chunk$set(echo = T)
 ```
 
+## Kleine Vorstellungsrunde
+
+- Wo kommt Ihr her?
+- Wo arbeitet und studiert Ihr?
+- Habt Ihr Erfahrungen mit Programmiersprachen / Statistiksoftware? Wenn ja welche?
+- Was sind Eure Erwartungen für diesen Kurs? 
+
 ## Disclaimer/ Informationen vorab
 
-Normalerweise gibt es große Unterschiede in den Kenntnissen und Fähigkeiten der Teilnehmer - bitte gebt Bescheid, wenn es zu schnell oder zu langsam geht oder etwas unklar geblieben ist.
+Normalerweise gibt es große Unterschiede bei Vorkenntnissen und Fähigkeiten - bitte gebt Bescheid, wenn es zu schnell oder zu langsam geht oder etwas unklar geblieben ist.
 
 - Wenn es Fragen gibt - immer fragen
-- In diesem Kurs gibt es viele [**Übungen**](http://web.math.ku.dk/~helle/R-intro/exercises.pdf), denn das Programmieren lernt man am Ende nur allein.
+- In diesem Kurs gibt es viele [**Übungen**](http://web.math.ku.dk/~helle/R-intro/exercises.pdf), denn das Programmieren / die Nutzung von R lernt man am Ende nur allein.
 - Ich habe viele [**Beispiele**](https://www.showmeshiny.com/) - probiert sie aus 
 - R macht mehr Spaß zusammen - arbeitet zusammen!
 
@@ -283,19 +290,19 @@ http://www.rstudio.com/ide/docs/using/customizing
 -->
 
 
-## A1A Exercise - Preparation
+## A1A Übung - Vorbereitung
 
-- Check if R is installed on your computer.
-- If not, download [**R**](r-project.org) and install it.
-- Check if Rstudio is installed.
-- If not - [**install**](http://www.rstudio.com/) Rstudio.
-- Start RStudio. Go to the console (lower left window) and write
+- Schaue, ob R auf dem Computer installiert ist
+- Wenn nicht, lade [**R**](r-project.org) herunter und installiere es.
+- Prüfe ob Rstudio installiert ist.
+- Wenn nicht - [**installiere**](http://www.rstudio.com/) Rstudio.
+- Starte RStudio. Gehe in die Konsole (meistens Fenster unten links) und tippe
 
 ```{r,eval=F}
 3+2
 ```
 
-- If there is not already an editor open in the upper left window, then go to the file menu and open a new script. Check the date with `date()` and the R version with `sessionInfo()`.
+- Wenn noch kein Skript geöffnet im oberen linken Teil von Rstudio geöffnet ist, gehe zum Menü und öffne ein neues Skript. Checks das Datum mit `date()` und die R version mit `sessionInfo()`.
 
 ```{R,eval=F}
 date()
@@ -321,12 +328,11 @@ b <- c(1,2) # create an object with the numbers 1 and 2
 mean(b) # computes the mean
 ```
 
-Mit den folgenden Funktionen können wir etwas über die Eigenschaften des Objekts erfahren:
+Mit diesen Funktionen können wir etwas über die Eigenschaften des Objekts erfahren:
 
 ```{r}
 length(b) # b has the length 2
 ```
-
 
 ### Objektstruktur
 
@@ -365,7 +371,15 @@ quantile(b,.9)
 sample(b,1) 
 ```
 
-### Beispiele - Funktionen mit mehr als einem Argument
+## Funktionen mit einem Argument
+
+```{r}
+mean(b)
+median(b)
+```
+
+
+## Beispiele - Funktionen mit mehr als einem Argument
 
 ```{r}
 max(b)
@@ -374,12 +388,6 @@ sd(b)
 var(b)
 ```
 
-### Funktionen mit einem Argument
-
-```{r}
-mean(b)
-median(b)
-```
 
 
 ## [**Überblick Funktionen**](http://cran.r-project.org/doc/manuals/R-intro.html)
@@ -419,7 +427,7 @@ info <- available.packages(contriburl = cran, type = "source")
 - Die wichtigsten Pakete, die auf CRAN gehostet werden (`r nrow(info)` at `r format(Sys.time(), "%a %b %d")`)
 - Weitere Pakete finden Sie z.B. unter [**bioconductor**](www.bioconductor.org)
 
-### Übersicht R-Pakete
+## Übersicht R-Pakete
 
 ![Overview R-packages](figure/Packages.PNG)
 

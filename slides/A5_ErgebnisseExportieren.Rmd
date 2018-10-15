@@ -21,6 +21,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = F,message = F)
 ```
 
+## Erstellen eines Beispieldatensatzes
+
+
 <!--
 Ideen für dieses Kapitel:
 
@@ -32,8 +35,6 @@ Ideen für dieses Kapitel:
 
 -->
 
-
-## Erstellen eines Beispieldatensatzes
 
 ```{r}
 A <- c(1,2,3,4)

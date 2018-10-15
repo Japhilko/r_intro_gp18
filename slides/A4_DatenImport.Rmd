@@ -277,7 +277,7 @@ View(datf)
 
 ![Rstudio Viewer](figure/firstoverview.PNG)
 
-- Das gleiche können Sie in RStudio erhalten, wenn Sie auf das Datensatzsymbol im Umgebungsmenü klicken.
+- Das gleiche kann man mit RStudio erreichen, wenn man auf das Datensatzsymbol im Umgebungsmenü klicken.
 
 
 <!--

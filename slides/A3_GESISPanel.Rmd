@@ -1,5 +1,5 @@
 ---
-title: "A3 The GESIS Panel data"
+title: "A3 Die GESIS Panel Daten"
 author: "Jan-Philipp Kolb"
 date: "06 August 2018"
 output:
@@ -20,15 +20,18 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,warning = F,message = F)
-GESIS <- T
+GESIS <- F
 athome <- !GESIS
-
 
 library(magrittr)
 library(kableExtra)
 library(dplyr)
+```
+
+```{r,eval=F,echo=F}
 library(flextable)
 ```
+
 
 ```{r,eval=F}
 install.packages("kableExtra")
@@ -336,7 +339,7 @@ lname <- att_dat$var.labels[which(att_dat$names==xname)]
 
 ## Eine Übersicht über das GESIS Panel (Campus File)
 
-- [**Dashboard zum Überblick**](http://rpubs.com/Japhilko82/overview_gp)
+### [**Dashboard zum Überblick**](http://rpubs.com/Japhilko82/overview_gp)
 
 ![](figure/Dashboard_gesispanel.PNG)
 
