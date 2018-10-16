@@ -429,3 +429,15 @@ install.packages("stargazer")
 library(stargazer)
 
 stargazer(m1)
+
+
+#####
+# rmarkdown und co
+
+install.packages("flexdashboard")
+
+dat <- xlsx::read.xlsx2("BSPdat.xlsx",1)
+
+dat[,1][dat[,1]==""] <- NA
+
+
