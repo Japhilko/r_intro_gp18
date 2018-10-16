@@ -51,13 +51,13 @@ datf <- readstata13::read.dta13(paste0(gpdata_path,"/data/ZA5666_v1-0-0_Stata14.
 
 - Sehr intuitiv geschriebenes Buch 
 - Sehr detailliertes Skript von [**Laura A. Thompson**](http://statweb.stanford.edu/~owen/courses/306a/Splusdiscrete2.pdf)
-- Das Buch behandelt grundsätzlich die kategoriale Datenanalyse.
+- Das Buch behandelt die kategoriale Datenanalyse ganz grundsätzlich.
 
 ## Faraway Bücher zum Thema Regression
 
 ![](figure/extendinglinearmodel.PNG)
 
--  Logistische Regression eingängi erklärt
+-  Logistische Regression eingängig erklärt
 -  Beispiel mit R-Code
     - Faraway - [**Extending the linear model with R**](http://www.maths.bath.ac.uk/~jjf23/ELM/scripts2/index.html)
     - Faraway - [**Practical Regression and Anova using R**](https://cran.r-project.org/doc/contrib/Faraway-PRA.pdf)
@@ -106,7 +106,7 @@ table(age)
 
 ## GP Variable a11d094a: Kinder unter 16 Jahre
 
-Gibt es in Ihrem Haushalt Kinder unter 16 Jahren?
+Leben in Ihrem Haushalt Kinder unter 16 Jahren?
 
 - 1 Ja
 - 2 Nein
@@ -227,7 +227,7 @@ ggplot(aes(x=age, y=fit_prob))  +
   geom_line(aes(x=age, y=fit_prob))
 ```
 
-es steigt in einer Sigmoid-Kurve an, nicht mit einer konstanten Rate
+Es resultiert eine Sigmoid-Kurve, anstatt einer Gerade mit konstanter Steigungsrate wie bei der linearen Regression.
 
 ![](figure/sigmoid.PNG)
 
@@ -238,13 +238,13 @@ http://www.shizukalab.com/toolkits/plotting-logistic-regression-in-r
 
 ## Logistische Regressionsformel
 
-Logistische Modelle haben Regressionsformeln. Diese Formel ist:
+### Das Modell als Formel:
 
 Log-Odds( Children) =  `r sum_glm1$coefficients[1,1]` + `r sum_glm1$coefficients[2,1]`(Age) + Fehler
 
-Wir können die Alterswerte in die Formel einsetzen um die vorhergesagten Log-Odds für unterschiedliches Alter zu bekommen.
+- Wir können Werte in die Formel einsetzen um die vorhergesagten Log-Odds für unterschiedliche Altersklassen zu bekommen.
 
-Log-Odds für die Altersgruppe 5
+### Beispiel: Log-Odds für die Altersgruppe 5
 
 ```{r,echo=F}
 res1 <- sum_glm1$coefficients[1,1] + sum_glm1$coefficients[2,1]*5

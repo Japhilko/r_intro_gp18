@@ -739,13 +739,13 @@ tapply(ApplyDat$Income,
 
 ## B1E Übung  - `tapply()` Befehl verwenden
 
-- Finde heraus, welche Variable Informationen über das Alter enthält.
+- Finde heraus, welche Variable Informationen über die Altersgruppe enthält.
 
 ```{r,echo=showSolution,eval=showSolution}
 dat <- readstata13::read.dta13("../data/ZA5666_v1-0-0_Stata14.dta")
 ```
 
-- Berechne die durchschnittliche Dauer für die Beantwortung des Fragebogens nach Geschlecht (Variable `bfzq020a`).
+- Berechne die durchschnittliche Dauer (Variable `bfzq020a`) für die Beantwortung des Fragebogens nach Altersgruppe.
 
 
 ```{r,echo=showSolution,eval=showSolution}
